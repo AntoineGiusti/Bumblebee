@@ -1,11 +1,14 @@
 package fr.eni.VenteEnchere.ihm;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
 import fr.eni.VenteEnchere.bo.Utilisateur;
@@ -28,7 +31,8 @@ public class MonProfilServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		
 		MonProfilModel model = (MonProfilModel)request.getSession().getAttribute("model");
 		
@@ -48,19 +52,19 @@ public class MonProfilServlet extends HttpServlet {
 //			model.setUtilisateur(utilisateur);			
 //			
 //			model.getLstUser().add(utilisateur);
-//			
-//			
-			manager.ajouterUtilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, String confirmation);
+
+			
+			manager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 			
 //			manager.supprimerUtilisateur(utilisateur);
 //			
 //			manager.modifierUtilisateur(utilisateur);
 //			
-		
+		}
 	
 	
-	request.getRequestDispatcher(WEB-INF/monProfil.jsp).forward(request, response);
-	
+			request.getRequestDispatcher("WEB-INF/monProfil.jsp").forward(request, response);
+		}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
