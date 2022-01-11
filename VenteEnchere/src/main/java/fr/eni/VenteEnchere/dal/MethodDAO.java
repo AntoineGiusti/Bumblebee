@@ -1,4 +1,4 @@
-package fr.eni.VenteEnchere.dao;
+package fr.eni.VenteEnchere.dal;
 
 import java.util.List;
 

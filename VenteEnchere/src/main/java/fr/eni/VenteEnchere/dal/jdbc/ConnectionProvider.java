@@ -1,4 +1,4 @@
-package fr.eni.VenteEnchere.jdbc;
+package fr.eni.VenteEnchere.dal.jdbc;
 
 import java.sql.Connection;
 import java.sql.SQLException;
