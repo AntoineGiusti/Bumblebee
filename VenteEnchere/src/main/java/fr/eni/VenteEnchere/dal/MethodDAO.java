@@ -8,7 +8,7 @@ import fr.eni.VenteEnchere.bo.Utilisateur;
 public interface MethodDAO {
 
 	/** Method utilisateur **/
-	public void insertUser(Utilisateur utilisateur);
+	public void insertUser(Utilisateur utilisateur) throws DALException;
 	public void updateUser(Utilisateur utilisateur);
 	public void deleteUser (Utilisateur utilisateur);
 	public List<Utilisateur> getAll ();

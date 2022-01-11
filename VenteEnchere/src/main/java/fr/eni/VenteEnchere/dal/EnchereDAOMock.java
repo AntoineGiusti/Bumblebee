@@ -13,8 +13,13 @@ public class EnchereDAOMock implements MethodDAO {
 	List<Utilisateur> lstUser = new ArrayList<Utilisateur>();
 
 	@Override
-	public void insertUser(Utilisateur utilisateur) {
-		lstUser.add(utilisateur);
+	public void insertUser(Utilisateur utilisateur)throws DALException {
+		try {
+			lstUser.add(utilisateur);
+		} catch (Exception e) {
+			throw new DALException(e.getMessage());
+		}
+		
 
 	}
 
