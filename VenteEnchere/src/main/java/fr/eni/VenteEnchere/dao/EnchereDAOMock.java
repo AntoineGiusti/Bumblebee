@@ -20,9 +20,11 @@ public class EnchereDAOMock implements MethodDAO {
 
 	@Override
 	public void updateUser(Utilisateur utilisateur) {
-		Utilisateur userUpdate = new Utilisateur();
-		lstUser.add(userUpdate);
-
+		for (Utilisateur user : lstUser) {
+			if (user.getNoUtilisateur()== utilisateur.getNoUtilisateur()) {
+				user=utilisateur;
+			}
+		}
 	}
 
 	@Override
@@ -50,8 +52,11 @@ public class EnchereDAOMock implements MethodDAO {
 
 	@Override
 	public void updateArticle(ArticleVendu articleVendu) {
-		ArticleVendu articleUpdate = new ArticleVendu();
-		lstArticle.add(articleUpdate);
+		for (ArticleVendu articles : lstArticle) {
+			if (articles.getNoArticle()== articleVendu.getNoArticle()) {
+				articles=articleVendu;
+			}
+		}
 
 	}
 
