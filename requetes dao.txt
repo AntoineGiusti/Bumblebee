@@ -1,0 +1,18 @@
+Utilisateur
+
+Insert user
+update user
+delete user
+
+SELECT BY PSEUDO
+
+Articles
+
+INSERT Article
+UPDATE ARTICLE (dont modif nom, modif dates, modif prix apres enchere...)
+DELETE ARTICLE	(retrait de la BDD si pas vendu)
+//RETRAIT ARTICLE (retrait de la BDD a la vente apres Livraison)
+SELECT * BY MOT_CLE
+SELECT * BY MOT_CLE && BY CATEGORIE
+SELECT * BY CATEGORIE
+SELECT ALL 
