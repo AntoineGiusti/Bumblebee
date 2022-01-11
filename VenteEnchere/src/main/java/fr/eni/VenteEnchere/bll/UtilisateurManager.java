@@ -5,7 +5,8 @@ package fr.eni.VenteEnchere.bll;
 
 import fr.eni.VenteEnchere.bo.Utilisateur;
 import fr.eni.VenteEnchere.dal.DALException;
-import fr.eni.VenteEnchere.dao.DAOFact;
+import fr.eni.VenteEnchere.dal.DAOFact;
+
 
 
 
@@ -56,11 +57,11 @@ public class UtilisateurManager {
 		utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 
 		try {
-			DAOFact.getInstance().insertUser(utilisateur);
-		} catch (DALException e) {
-			e.printStackTrace();
-			throw new BLLException(e);
-		}
+            DAOFact.getInstance().insertUser(utilisateur);
+        } catch (DALException e) {
+            e.printStackTrace();
+            throw new BLLException(e);
+        }
 
 	}
 	

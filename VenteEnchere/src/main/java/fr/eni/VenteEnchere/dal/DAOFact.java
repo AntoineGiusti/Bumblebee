@@ -1,4 +1,4 @@
-package fr.eni.VenteEnchere.dao;
+package fr.eni.VenteEnchere.dal;
 
 public class DAOFact {
 	public static MethodDAO getInstance() {

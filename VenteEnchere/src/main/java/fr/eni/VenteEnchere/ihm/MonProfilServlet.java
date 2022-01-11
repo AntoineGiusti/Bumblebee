@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
 import fr.eni.VenteEnchere.bo.Utilisateur;
-import fr.eni.ecole.bll.ParticipantManager;
-import fr.eni.ecole.bll.ParticipantManagerSingleton;
-import fr.eni.ecole.bo.Participant;
+
 
 /**
  * Servlet implementation class UtilisateurServlet
@@ -35,7 +33,6 @@ public class MonProfilServlet extends HttpServlet {
 		MonProfilModel model = (MonProfilModel)request.getSession().getAttribute("model");
 		
 		if(request.getParameter("valider")!=null) {
-			Integer noUtilisateur = request.getParameter("noUtilisateur");
 			String pseudo = request.getParameter("pseudo");
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
@@ -48,23 +45,21 @@ public class MonProfilServlet extends HttpServlet {
 			String confirmation = request.getParameter("confirmation");
 	
 			
-			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmation);
+//			model.setUtilisateur(utilisateur);			
+//			
+//			model.getLstUser().add(utilisateur);
+//			
+//			
+			manager.ajouterUtilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, String confirmation);
 			
-			model.setUtilisateur(utilisateur);			
-			
-			model.getLstUser().add(utilisateur);
-			
-			
-			manager.ajouterUtilisateur(utilisateur);
-			
-			manager.supprimerUtilisateur(utilisateur);
-			
-			manager.modifierUtilisateur(utilisateur);
-			
-		}
-	}
+//			manager.supprimerUtilisateur(utilisateur);
+//			
+//			manager.modifierUtilisateur(utilisateur);
+//			
+		
 	
-	request.getRequestDispatcher(WEB).forward(request, response);
+	
+	request.getRequestDispatcher(WEB-INF/monProfil.jsp).forward(request, response);
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

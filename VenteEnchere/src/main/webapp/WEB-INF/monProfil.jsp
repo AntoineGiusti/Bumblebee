@@ -41,8 +41,6 @@
 <input type = "submit" name="Créer" value="creer"/>
 <br>
 
-
-
 <br>
 <input type = "submit" name="Annuler" value="annuler"/>
 <br>

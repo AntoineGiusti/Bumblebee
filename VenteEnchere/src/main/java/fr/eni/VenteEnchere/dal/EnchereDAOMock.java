@@ -1,4 +1,4 @@
-package fr.eni.VenteEnchere.dao;
+package fr.eni.VenteEnchere.dal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +13,23 @@ public class EnchereDAOMock implements MethodDAO {
 	List<Utilisateur> lstUser = new ArrayList<Utilisateur>();
 
 	@Override
-	public void insertUser(Utilisateur utilisateur) {
-		lstUser.add(utilisateur);
+	public void insertUser(Utilisateur utilisateur)throws DALException {
+		try {
+			lstUser.add(utilisateur);
+		} catch (Exception e) {
+			throw new DALException(e.getMessage());
+		}
+		
 
 	}
 
 	@Override
 	public void updateUser(Utilisateur utilisateur) {
-		Utilisateur userUpdate = new Utilisateur();
-		lstUser.add(userUpdate);
-
+		for (Utilisateur user : lstUser) {
+			if (user.getNoUtilisateur()== utilisateur.getNoUtilisateur()) {
+				user=utilisateur;
+			}
+		}
 	}
 
 	@Override
@@ -50,8 +57,11 @@ public class EnchereDAOMock implements MethodDAO {
 
 	@Override
 	public void updateArticle(ArticleVendu articleVendu) {
-		ArticleVendu articleUpdate = new ArticleVendu();
-		lstArticle.add(articleUpdate);
+		for (ArticleVendu articles : lstArticle) {
+			if (articles.getNoArticle()== articleVendu.getNoArticle()) {
+				articles=articleVendu;
+			}
+		}
 
 	}
 
