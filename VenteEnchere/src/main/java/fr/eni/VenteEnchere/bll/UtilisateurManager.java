@@ -4,6 +4,7 @@
 package fr.eni.VenteEnchere.bll;
 
 import fr.eni.VenteEnchere.bo.Utilisateur;
+import fr.eni.VenteEnchere.dal.DALException;
 import fr.eni.VenteEnchere.dao.DAOFact;
 
 
