@@ -24,6 +24,17 @@ public class ArticleVendu {
 	private Categorie categorie;
 	private Retrait retrait;
 	
+	
+	
+	public ArticleVendu(String nomArticle, String description, String miseAPrix, String prixVente, String etatVente) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
+	}
+
 	/**
 	 * 
 	 */
@@ -68,23 +79,7 @@ public class ArticleVendu {
 	 * @param categorie
 	 * @param retrait
 	 */
-	public ArticleVendu(Integer noArticle, String nomArticle, String description, String dateDebutEncheres,
-			String dateFinEncheres, String miseAPrix, String prixVente, String etatVente, Utilisateur user,
-			List<Enchere> lstEncheres, Categorie categorie, Retrait retrait) {
-		super();
-		this.noArticle = noArticle;
-		this.nomArticle = nomArticle;
-		this.description = description;
-		this.dateDebutEncheres = dateDebutEncheres;
-		this.dateFinEncheres = dateFinEncheres;
-		this.miseAPrix = miseAPrix;
-		this.prixVente = prixVente;
-		this.etatVente = etatVente;
-		this.user = user;
-		this.lstEncheres = lstEncheres;
-		this.categorie = categorie;
-		this.retrait = retrait;
-	}
+	
 
 	/**
 	 * @return the noArticle

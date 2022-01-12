@@ -22,6 +22,14 @@ public class Utilisateur {
 	
 	
 	
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String motDePasse) {
+		super();
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.motDePasse = motDePasse;
+	}
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville) {
 		super();
@@ -147,6 +155,7 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 		this.administrateur = administrateur;
 	}
+	
 	public Integer getNoUtilisateur() {
 		return noUtilisateur;
 	}

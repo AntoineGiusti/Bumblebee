@@ -1,6 +1,5 @@
 package fr.eni.VenteEnchere.dal.jdbc;
 
-import java.lang.reflect.Executable;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -10,8 +9,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.VenteEnchere.bo.Ameublement;
 import fr.eni.VenteEnchere.bo.ArticleVendu;
+import fr.eni.VenteEnchere.bo.Informatique;
+import fr.eni.VenteEnchere.bo.SportEtLoisir;
 import fr.eni.VenteEnchere.bo.Utilisateur;
+import fr.eni.VenteEnchere.bo.Vetement;
 import fr.eni.VenteEnchere.dal.DALException;
 import fr.eni.VenteEnchere.dal.MethodDAO;
 
@@ -83,9 +86,10 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 		while (rs.next()) {
 			String pseudo = rs.getString("pseudo");
 			String nom = rs.getString("nom");
-			String prenom = rs.getString("nom");			
+			String prenom = rs.getString("prenom");			
 			String email = rs.getString("email");
 			String motDePasse = rs.getString("mot de passe");
+			lstUsers.add(new Utilisateur(pseudo, nom, prenom, email, motDePasse));
 			
 		}
 			
@@ -161,6 +165,43 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 			throw new DALException("Impossible d'inserer");
 		}
 	}
+	@Override
+	public List<ArticleVendu> getAllArticle() throws DALException{
+		List<ArticleVendu> lstArticles = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			
+			Statement stmt = cnx.createStatement();
+			ResultSet rs = stmt.executeQuery(SELECT_ALL_ARTICLES_VENDUS);
+			
+			while (rs.next()) {
+				String nomArticle = rs.getString("nom article");
+				String description= rs.getString("description");
+				String miseAPrix = rs.getString("mise a Prix");
+				String prixVente = rs.getString("prix de vente");			
+				String etatVente = rs.getString("etat");
+				String categorie = rs.getString("categorie").trim();
+				ArticleVendu articleVendu=null;
+				
+				if (categorie.equalsIgnoreCase("sport")||categorie.equalsIgnoreCase("loisir")) {
+					String sport = rs.getString("sport et loisir");				
+					articleVendu = new SportEtLoisir(nomArticle, description, miseAPrix, prixVente, etatVente, sport);}
+				if (categorie.equalsIgnoreCase("ameublement")){
+					String ameublement = rs.getString("ameublement");
+					articleVendu =new Ameublement(nomArticle, description, miseAPrix, prixVente, etatVente, ameublement);}
+				if (categorie.equalsIgnoreCase("informatique")) {
+					String informatique = rs.getString("informatique");
+					articleVendu = new Informatique(nomArticle, description, miseAPrix, prixVente, etatVente, informatique);}
+				if (categorie.equalsIgnoreCase("vetement")) {
+					String vetement = rs.getString("vetement");
+					articleVendu = new Vetement(nomArticle, description, miseAPrix, prixVente, etatVente, vetement);}
+					
+				}
+			} catch (Exception e) {
+				throw new DALException("Impossible de lire la base de donnee");
+			}		
+		
+		return lstArticles;
+	}
 
 	@Override
 	public void updateArticle(ArticleVendu articleVendu) {
@@ -174,10 +215,6 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 		
 	}
 
-	@Override
-	public List<ArticleVendu> getAllArticle() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }
