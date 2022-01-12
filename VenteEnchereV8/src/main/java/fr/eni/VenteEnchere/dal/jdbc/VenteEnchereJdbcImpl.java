@@ -15,7 +15,7 @@ import fr.eni.VenteEnchere.dal.MethodDAO;
 public class VenteEnchereJdbcImpl implements MethodDAO{ 
 	
 	/**Method utilisateurs **/
-	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS noUtilisateur, pseudo, nom, prenom,email, telephone,"
+	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS pseudo, nom, prenom,email, telephone,"
 			+ "rue, codePostal, ville, motDePasse, credit, administrateur";
 	private final String UPDATE_UTILISATEUR = "UPDATE INTO UTILISATEURS SET nom =?, prenom =?,email =?, telephone =?,"
 			+ "	rue =? , codePostal =?, ville =?, motDePasse =? WHERE pseudo =?";
@@ -41,19 +41,25 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	public void insertUser(Utilisateur utilisateur) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pStmt = cnx.prepareStatement(INSERT_UTILISATEUR);
-			pStmt.setInt(1, utilisateur.getNoUtilisateur());
-			pStmt.setString(2, utilisateur.getPseudo());
-			pStmt.setString(3, utilisateur.getNom());
-			pStmt.setString(4, utilisateur.getPrenom());
-			pStmt.setString(5, utilisateur.getEmail());
-			pStmt.setString(6, utilisateur.getTelephone());
-			pStmt.setString(7, utilisateur.getRue());
-			pStmt.setString(8, utilisateur.getCodePostal());
-			pStmt.setString(9, utilisateur.getVille());
-			pStmt.setString(10, utilisateur.getMotDePasse());
-			pStmt.setInt(11, utilisateur.getCredit());
-			pStmt.setBoolean(12, utilisateur.isAdministrateur());
+			
+			pStmt.setString(1, utilisateur.getPseudo());
+			pStmt.setString(2, utilisateur.getNom());
+			pStmt.setString(3, utilisateur.getPrenom());
+			pStmt.setString(4, utilisateur.getEmail());
+			pStmt.setString(5, utilisateur.getTelephone());
+			pStmt.setString(6, utilisateur.getRue());
+			pStmt.setString(7, utilisateur.getCodePostal());
+			pStmt.setString(8, utilisateur.getVille());
+			pStmt.setString(90, utilisateur.getMotDePasse());
+			pStmt.setInt(10, utilisateur.getCredit());
+			pStmt.setBoolean(11, utilisateur.isAdministrateur());
 			pStmt.executeUpdate();
+			
+			ResultSet rs = pStmt.getGeneratedKeys();
+			if(rs.next()) {
+				int id = rs.getInt(1);
+				utilisateur.setNoUtilisateur(id);
+			}
 			
 			
 		} catch (Exception e) {

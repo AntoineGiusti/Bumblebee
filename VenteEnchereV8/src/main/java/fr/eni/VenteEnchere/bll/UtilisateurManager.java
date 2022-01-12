@@ -57,9 +57,11 @@ public class UtilisateurManager {
 			throw be;
 		}
 		
+		boolean administrateur = false;
 	
-		utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+		utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, administrateur);
 
+		System.out.println("ca passe encore");
 		try {
             DAOFact.getInstance().insertUser(utilisateur);
         } catch (DALException e) {

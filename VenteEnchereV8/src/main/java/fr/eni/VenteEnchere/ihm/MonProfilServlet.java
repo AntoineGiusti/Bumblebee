@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.VenteEnchere.bll.BLLException;
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
+import fr.eni.VenteEnchere.bo.Utilisateur;
 
 
 /**
  * Servlet implementation class UtilisateurServlet
  */
-@WebServlet("/UtilisateurServlet")
+@WebServlet("/MonProfilServlet")
 public class MonProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -46,9 +47,10 @@ public class MonProfilServlet extends HttpServlet {
 			String  ville= request.getParameter("ville");
 			String motDePasse = request.getParameter("motDePasse");
 			String confirmation = request.getParameter("confirmation");
-	
 			
-//			model.setUtilisateur(utilisateur);			
+			Utilisateur candidat = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+
+			model.setUtilisateur(candidat);			
 //			
 //			model.getLstUser().add(utilisateur);
 
@@ -58,9 +60,12 @@ public class MonProfilServlet extends HttpServlet {
 
 						rue, codePostal, ville, motDePasse, confirmation);
 
+				System.out.println("ca passe");
+				
 			} catch (BLLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
 			}
 			
 //			manager.supprimerUtilisateur(utilisateur);
