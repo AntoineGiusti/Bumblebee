@@ -3,6 +3,8 @@
  */
 package fr.eni.VenteEnchere.bll;
 
+import java.util.List;
+
 import fr.eni.VenteEnchere.bo.Utilisateur;
 import fr.eni.VenteEnchere.dal.DALException;
 import fr.eni.VenteEnchere.dal.DAOFact;
@@ -67,6 +69,16 @@ public class UtilisateurManager {
 
 	}
 	
+	private List<Utilisateur> listeUtilisateurs() throws BLLException{
+		try {
+			return DAOFact.getInstance().getAll();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			 throw new BLLException(e);
+		}
+		
+	}
 	
 	
 	
