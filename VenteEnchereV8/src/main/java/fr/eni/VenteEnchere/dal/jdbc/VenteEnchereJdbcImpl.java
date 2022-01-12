@@ -1,5 +1,6 @@
 package fr.eni.VenteEnchere.dal.jdbc;
 
+import java.lang.reflect.Executable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,9 +19,9 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	/**Method utilisateurs **/
 	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone,"
 			+ "rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-	private final String UPDATE_UTILISATEUR = "UPDATE INTO UTILISATEURS SET nom =?, prenom =?,email =?, telephone =?,"
+	private final String UPDATE_UTILISATEUR = "UPDATE INTO UTILISATEURS SET pseudo=?, nom =?, prenom =?,email =?, telephone =?, rue =?, code_postal =? , ville=?"
 			+ "	rue =? , codePostal =?, ville =?, motDePasse =? WHERE pseudo =?";
-	private final String DELETE_UTILISATEUR = "DELETE FROm UTILISATEUR WHERE pseudo = ? ";
+	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEUR WHERE pseudo = ? ";
 	
 	private final String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
 	
@@ -80,6 +81,8 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 		
 		while (rs.next()) {
 			String pseudo = rs.getString("pseudo");
+			String nom = rs.getString("nom");
+			String prenom = rs.getString("nom");			
 			String email = rs.getString("email");
 			String motDePasse = rs.getString("mot de passe");
 			
@@ -92,14 +95,38 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	return lstUsers;
 	}
 	@Override
-	public void updateUser(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
+	public void updateUser(Utilisateur utilisateur) throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			PreparedStatement pStmt = cnx.prepareStatement(UPDATE_UTILISATEUR);
+			pStmt.setString(1, utilisateur.getPseudo());
+			pStmt.setString(2,utilisateur.getNom());
+			pStmt.setString(3,utilisateur.getPrenom());
+			pStmt.setString(4,utilisateur.getEmail());
+			pStmt.setString(5,utilisateur.getTelephone());
+			pStmt.setString(6,utilisateur.getRue());
+			pStmt.setString(7,utilisateur.getCodePostal());	
+			pStmt.setString(8,utilisateur.getVille());			
+			pStmt.executeUpdate();
+			
+		} catch (Exception e) {
+			throw new DALException("impossible de modifier l'utilisaeur");
+		}
+		
 		
 	}
 
 	@Override
-	public void deleteUser(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
+	public void deleteUser(Utilisateur utilisateur)throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			PreparedStatement pStmt = cnx.prepareStatement(DELETE_UTILISATEUR);
+			pStmt.setString(1,utilisateur.getPseudo());
+			pStmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			throw new DALException("Impossible de supprimer cet utilisateur");
+		}
+		
 		
 	}
 
