@@ -9,14 +9,14 @@ public interface MethodDAO {
 
 	/** Method utilisateur **/
 	public void insertUser(Utilisateur utilisateur) throws DALException;
-	public void updateUser(Utilisateur utilisateur);
-	public void deleteUser (Utilisateur utilisateur);
-	public List<Utilisateur> getAll ();
+	public void updateUser(Utilisateur utilisateur)throws DALException;
+	public void deleteUser (Utilisateur utilisateur)throws DALException;
+	public List<Utilisateur> getAll () throws DALException;
 		
 	/** Method Article**/
-	public void insertArticle(ArticleVendu articleVendu);
-	public void updateArticle (ArticleVendu articleVendu);
-	public void deleteArticle(ArticleVendu articleVendu);
+	public void insertArticle(ArticleVendu articleVendu)throws DALException;
+	public void updateArticle (ArticleVendu articleVendu)throws DALException;
+	public void deleteArticle(ArticleVendu articleVendu)throws DALException;
 	public List<ArticleVendu> getAllArticle ();
 	
 }
