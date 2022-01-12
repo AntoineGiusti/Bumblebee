@@ -1,7 +1,5 @@
 package fr.eni.VenteEnchere.bll;
 
-import fr.eni.VenteEnchere.bo.Utilisateur;
-
 public class testBLL {
 
 	

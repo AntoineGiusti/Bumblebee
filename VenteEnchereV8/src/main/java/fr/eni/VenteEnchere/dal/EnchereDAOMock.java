@@ -10,12 +10,13 @@ public class EnchereDAOMock implements MethodDAO {
 	
 	/** Methode pour les utilisateurs **/
 	
-	List<Utilisateur> lstUser = new ArrayList<Utilisateur>();
+	public static List<Utilisateur> lstUser = new ArrayList<Utilisateur>();
 
 	@Override
 	public void insertUser(Utilisateur utilisateur)throws DALException {
 		try {
 			lstUser.add(utilisateur);
+			//System.out.println(lstUser);
 		} catch (Exception e) {
 			throw new DALException(e.getMessage());
 		}
