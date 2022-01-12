@@ -14,7 +14,7 @@ import java.sql.Date;
 public class Enchere {
 
 	private Date dateEnchere;
-	private Integer montant_enchere;
+	private Integer montantEnchere;
 	private ArticleVendu articleVendu;
 	private Utilisateur utilisateur;
 	
@@ -29,7 +29,7 @@ public class Enchere {
 	public Enchere(Date dateEnchere, Integer montant_enchere, ArticleVendu articleVendu, Utilisateur utilisateur) {
 		super();
 		this.dateEnchere = dateEnchere;
-		this.montant_enchere = montant_enchere;
+		this.montantEnchere = montant_enchere;
 		this.articleVendu = articleVendu;
 		this.utilisateur = utilisateur;
 	}
@@ -41,7 +41,7 @@ public class Enchere {
 	public Enchere(Date dateEnchere, Integer montant_enchere) {
 		super();
 		this.dateEnchere = dateEnchere;
-		this.montant_enchere = montant_enchere;
+		this.montantEnchere = montant_enchere;
 	}
 	
 
@@ -56,7 +56,7 @@ public class Enchere {
 	
 	@Override
 	public String toString() {
-		return "Enchere [dateEnchere=" + dateEnchere + ", montant_enchere=" + montant_enchere + ", articleVendu="
+		return "Enchere [dateEnchere=" + dateEnchere + ", montant_enchere=" + montantEnchere + ", articleVendu="
 				+ articleVendu + ", utilisateur=" + utilisateur + "]";
 	}
 
@@ -80,13 +80,13 @@ public class Enchere {
 	 * @return the montant_enchere
 	 */
 	public Integer getMontant_enchere() {
-		return montant_enchere;
+		return montantEnchere;
 	}
 	/**
 	 * @param montant_enchere the montant_enchere to set
 	 */
 	public void setMontant_enchere(Integer montant_enchere) {
-		this.montant_enchere = montant_enchere;
+		this.montantEnchere = montant_enchere;
 	}
 	/**
 	 * @return the articleVendu

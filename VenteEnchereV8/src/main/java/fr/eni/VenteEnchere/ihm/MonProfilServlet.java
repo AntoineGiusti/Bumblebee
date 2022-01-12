@@ -55,7 +55,11 @@ public class MonProfilServlet extends HttpServlet {
 			
 			try {
 				manager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, 
+<<<<<<< HEAD
 						rue, codePostal, ville, motDePasse, confirmation);
+=======
+						rue, codePostal, ville, motDePasse);
+>>>>>>> 85db8b5c8b67cd754d1a4f3ac8a2db6cfb8fd41e
 			} catch (BLLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
