@@ -1,10 +1,10 @@
 package fr.eni.VenteEnchere.dal.jdbc;
 
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,33 +71,26 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	}
 	
 //	@Override
-	public List<Utilisateur> getAll()throws DALException {
-//		List<Utilisateur> lstUsers = new ArrayList<>();
-//		try (Connection cnx = ConnectionProvider.getConnection()){
-//			
-//			Statement stmt = cnx.createStatement();
-//			ResultSet rs = stmt.executeQuery(SELECT_ALL_UTILISATEURS);
-//			
-//			while (rs.next()){
-//				Integer noUtilsateur = rs.getInt("numero utilisateur");
-//				String pseudo = rs.getString("pseudo");
-//				String nom = rs.getString("pseudo");
-//				String prenom = rs.getString("pseudo");
-//				String email = rs.getString("pseudo");
-//				String  = rs.getString("pseudo");
-//				String pseudo = rs.getString("pseudo");
-//				
-//				
-//			}
-//			
-//			
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-		return null;}
-//	}
-	
-
+	public List<Utilisateur> getAll() throws DALException {
+		List<Utilisateur> lstUsers = new ArrayList<Utilisateur>();
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			
+		Statement stmt = cnx.createStatement();
+		ResultSet rs = stmt.executeQuery(SELECT_ALL_UTILISATEURS);
+		
+		while (rs.next()) {
+			String pseudo = rs.getString("pseudo");
+			String email = rs.getString("email");
+			String motDePasse = rs.getString("mot de passe");
+			
+		}
+			
+			
+		} catch (Exception e) {
+			throw new DALException("Impossible de lire la base de donnee");
+		}				
+	return lstUsers;
+	}
 	@Override
 	public void updateUser(Utilisateur utilisateur) {
 		// TODO Auto-generated method stub
