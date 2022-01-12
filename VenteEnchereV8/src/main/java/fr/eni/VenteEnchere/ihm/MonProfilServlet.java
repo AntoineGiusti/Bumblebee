@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.VenteEnchere.bll.BLLException;
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
 
 
@@ -52,8 +53,13 @@ public class MonProfilServlet extends HttpServlet {
 //			model.getLstUser().add(utilisateur);
 
 			
-			manager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, 
-					rue, codePostal, ville, motDePasse);
+			try {
+				manager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, 
+						rue, codePostal, ville, motDePasse, confirmation);
+			} catch (BLLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 //			manager.supprimerUtilisateur(utilisateur);
 //			

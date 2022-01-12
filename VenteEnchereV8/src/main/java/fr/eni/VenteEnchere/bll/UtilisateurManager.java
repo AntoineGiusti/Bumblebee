@@ -31,7 +31,7 @@ public class UtilisateurManager {
 	///////////////////////////////////////////////////
 	
 	public void ajouterUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse) throws BLLException {
+			String rue, String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
 		
 		Utilisateur utilisateur = null;
 		
