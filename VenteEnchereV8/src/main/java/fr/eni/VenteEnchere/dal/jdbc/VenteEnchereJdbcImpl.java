@@ -2,6 +2,7 @@ package fr.eni.VenteEnchere.dal.jdbc;
 
 import java.lang.reflect.Executable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,8 +27,8 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	private final String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
 	
 	/** Method Articles **/
-	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS noUtilisateur, pseudo, nom, prenom,email, telephone,"
-			+ "rue, codePostal, ville, motDePasse, credit, administrateur";
+	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS nom_article, description, date_debut_encheres,date_fin_encheres, prix_initial,"
+			+ "prix_vente, no_uilisateur, no_catégorie VALUES (?,?,?,?,?,?,?,?)";
 	private final String UPDATE_ARTICLES_VENDUS = "UPDATE INTO ARTICLES_VENDUS SET nom =?, prenom =?,email =?, telephone =?,"
 			+ "	rue =? , codePostal =?, ville =?, motDePasse =? WHERE pseudo =?";
 	private final String DELETE_ARTICLES_VENDUS = "DELETE FROm ARTICLES_VENDUS WHERE pseudo = ? ";
@@ -135,9 +136,30 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	/**Method articles**/
 	
 	@Override
-	public void insertArticle(ArticleVendu articleVendu) {
-		// TODO Auto-generated method stub
-		
+	public void insertArticle(ArticleVendu articleVendu)  throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ARTICLES_VENDUS, PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			pStmt.setString(1, articleVendu.getNonArticle());
+			pStmt.setString(2, articleVendu.getDescription());
+			pStmt.setDate(3,Date.valueOf(articleVendu.getDateDebutEncheres()) );
+			pStmt.setDate(4,Date.valueOf( articleVendu.getDateFinEncheres()));
+			pStmt.setString(5, articleVendu.getMiseAPrix());
+			pStmt.setString(6, articleVendu.getPrixVente());
+			pStmt.setString(7, articleVendu.getEtatVente());			
+			pStmt.executeUpdate();
+			
+			ResultSet rs = pStmt.getGeneratedKeys();
+			if(rs.next()) {
+				int id = rs.getInt(1);
+				articleVendu.setNoArticle(id);
+			
+		}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			throw new DALException("Impossible d'inserer");
+		}
 	}
 
 	@Override
