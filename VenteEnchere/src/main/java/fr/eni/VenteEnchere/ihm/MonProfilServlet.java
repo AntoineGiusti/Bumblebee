@@ -1,14 +1,13 @@
 package fr.eni.VenteEnchere.ihm;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
 import fr.eni.VenteEnchere.bo.Utilisateur;
@@ -20,6 +19,7 @@ import fr.eni.VenteEnchere.bo.Utilisateur;
 @WebServlet("/UtilisateurServlet")
 public class MonProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	private static UtilisateurManager manager = UtilisateurManager.getInstance();
     /**
      * Default constructor. 
@@ -54,7 +54,8 @@ public class MonProfilServlet extends HttpServlet {
 //			model.getLstUser().add(utilisateur);
 
 			
-			manager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+			manager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, 
+					rue, codePostal, ville, motDePasse);
 			
 //			manager.supprimerUtilisateur(utilisateur);
 //			
@@ -68,7 +69,8 @@ public class MonProfilServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

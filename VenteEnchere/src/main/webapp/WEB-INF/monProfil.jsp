@@ -15,25 +15,25 @@
 <h2>Mon profil</h2>
 
 <form action="MonProfilServlet" method="POST">
-<p>Pseudo: <input type="text" name="pseudo" value="${model.participant.pseudo}"/>
+<p>Pseudo: <input type="text" name="pseudo" value="${model.utilisateur.pseudo}"/>
 <br>
-<p>Nom: <input type="text" name="nom" value="${model.participant.nom}"/>
+<p>Nom: <input type="text" name="nom" value="${model.utilisateur.nom}"/>
 <br>
-<p>Prenom: <input type="text" name="prenom" value="${model.participant.prenom}"/>
+<p>Prenom: <input type="text" name="prenom" value="${model.utilisateur.prenom}"/>
 <br>
-<p>Email: <input type="text" name="email" value="${model.participant.email}"/>
+<p>Email: <input type="text" name="email" value="${model.utilisateur.email}"/>
 <br>
-<p>Téléphone: <input type="text" name="telephone" value="${model.participant.telephone}"/>
+<p>Téléphone: <input type="text" name="telephone" value="${model.utilisateur.telephone}"/>
 <br>
-<p>Rue: <input type="text" name="rue" value="${model.participant.rue}"/>
+<p>Rue: <input type="text" name="rue" value="${model.utilisateur.rue}"/>
 <br>
-<p>Code postal <input type="text" name="codePostal" value="${model.participant.codePostal}"/>
+<p>Code postal <input type="text" name="codePostal" value="${model.utilisateur.codePostal}"/>
 <br>
-<p>Ville <input type="text" name="ville" value="${model.participant.ville}"/>
+<p>Ville <input type="text" name="ville" value="${model.utilisateur.ville}"/>
 <br>
-<p>Mot de passe <input type="text" name="motDePasse" value="${model.participant.motDePasse}"/>
+<p>Mot de passe <input type="text" name="motDePasse" value="${model.utilisateur.motDePasse}"/>
 <br>
-<p>Confirmation <input type="text" name="confirmation" value="${model.participant.confirmation}"/>
+<p>Confirmation <input type="text" name="confirmation" value="${model.utilisateur.confirmation}"/>
 <br>
 
 
