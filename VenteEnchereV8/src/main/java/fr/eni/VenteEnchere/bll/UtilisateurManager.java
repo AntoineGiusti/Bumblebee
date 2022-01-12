@@ -69,7 +69,7 @@ public class UtilisateurManager {
 
 	}
 	
-	private List<Utilisateur> listeUtilisateurs() throws BLLException{
+	public List<Utilisateur> listeUtilisateurs() throws BLLException{
 		try {
 			return DAOFact.getInstance().getAll();
 		} catch (DALException e) {
