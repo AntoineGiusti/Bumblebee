@@ -68,7 +68,7 @@ public class MonProfilServlet extends HttpServlet {
 //			manager.modifierUtilisateur(utilisateur);
 //			
 		}
-	
+			request.setAttribute("model", model);
 	
 			request.getRequestDispatcher("WEB-INF/monProfil.jsp").forward(request, response);
 		}
