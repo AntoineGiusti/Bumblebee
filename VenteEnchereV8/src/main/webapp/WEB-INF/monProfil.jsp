@@ -32,10 +32,8 @@
 <br>
 <p>Mot de passe <input type="text" name="motDePasse" value="${model.utilisateur.motDePasse}"/>
 <br>
-<p>Confirmation <input type="text" name="confirmation" value="${model.utilisateur.confirmation}"/>
+<p>Confirmation <input type="text" name="confirmation"/>
 <br>
-
-
 <br>
 <input type = "submit" name="Créer" value="creer"/>
 <br>
