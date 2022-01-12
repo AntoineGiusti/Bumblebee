@@ -34,7 +34,9 @@ public class MonProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		MonProfilModel model = (MonProfilModel)request.getSession().getAttribute("model");
+		MonProfilModel model = new MonProfilModel();
+		
+//		MonProfilModel model = (MonProfilModel)request.getSession().getAttribute("model");
 		
 		if(request.getParameter("valider")!=null) {
 			String pseudo = request.getParameter("pseudo");

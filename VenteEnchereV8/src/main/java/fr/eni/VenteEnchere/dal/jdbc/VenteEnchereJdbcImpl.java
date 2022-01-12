@@ -4,6 +4,7 @@ import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,8 @@ import fr.eni.VenteEnchere.dal.MethodDAO;
 public class VenteEnchereJdbcImpl implements MethodDAO{ 
 	
 	/**Method utilisateurs **/
-	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS pseudo, nom, prenom,email, telephone,"
-			+ "rue, codePostal, ville, motDePasse, credit, administrateur";
+	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone,"
+			+ "rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 	private final String UPDATE_UTILISATEUR = "UPDATE INTO UTILISATEURS SET nom =?, prenom =?,email =?, telephone =?,"
 			+ "	rue =? , codePostal =?, ville =?, motDePasse =? WHERE pseudo =?";
 	private final String DELETE_UTILISATEUR = "DELETE FROm UTILISATEUR WHERE pseudo = ? ";
@@ -40,7 +41,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	@Override
 	public void insertUser(Utilisateur utilisateur) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection()){
-			PreparedStatement pStmt = cnx.prepareStatement(INSERT_UTILISATEUR);
+			PreparedStatement pStmt = cnx.prepareStatement(INSERT_UTILISATEUR, PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			pStmt.setString(1, utilisateur.getPseudo());
 			pStmt.setString(2, utilisateur.getNom());
@@ -50,7 +51,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 			pStmt.setString(6, utilisateur.getRue());
 			pStmt.setString(7, utilisateur.getCodePostal());
 			pStmt.setString(8, utilisateur.getVille());
-			pStmt.setString(90, utilisateur.getMotDePasse());
+			pStmt.setString(9, utilisateur.getMotDePasse());
 			pStmt.setInt(10, utilisateur.getCredit());
 			pStmt.setBoolean(11, utilisateur.isAdministrateur());
 			pStmt.executeUpdate();
@@ -62,7 +63,8 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 			}
 			
 			
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new DALException("Impossible d'inserer");
 		}
 		

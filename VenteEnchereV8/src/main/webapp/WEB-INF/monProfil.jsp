@@ -35,7 +35,7 @@
 <p>Confirmation <input type="text" name="confirmation"/>
 <br>
 <br>
-<input type = "submit" name="Créer" value="creer"/>
+<input type = "submit" name="valider" value="creer"/>
 <br>
 
 <br>

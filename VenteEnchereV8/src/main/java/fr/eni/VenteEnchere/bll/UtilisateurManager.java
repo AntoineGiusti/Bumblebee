@@ -61,9 +61,10 @@ public class UtilisateurManager {
 	
 		utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, administrateur);
 
-		System.out.println("ca passe encore");
+		
 		try {
             DAOFact.getInstance().insertUser(utilisateur);
+            System.out.println("ca passe encore");
         } catch (DALException e) {
             e.printStackTrace();
             throw new BLLException(e);
