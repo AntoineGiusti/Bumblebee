@@ -46,6 +46,8 @@ public class UtilisateurManager {
 		verificationCodePostal(codePostal, be);
 		verificationVille(ville, be);
 		verificationMotDePasse(motDePasse, be);
+		verificationConfirmation(confirmation, motDePasse, be);
+		
 		
 		
 
@@ -64,6 +66,9 @@ public class UtilisateurManager {
         }
 
 	}
+	
+	
+	
 	
 	////////////////////methode de verification////////////////
 	
@@ -124,5 +129,10 @@ public class UtilisateurManager {
 		}
 	}
 	
+	private void verificationConfirmation(String confirmation ,String motDePasse, BLLException be) {
+		if(!confirmation.equals(motDePasse)) {
+			be.ajouterErreur(new ParameterException("La confirmation doit etre identique au mot de passe"));
+		}
+	}
 	
 }
