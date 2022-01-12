@@ -50,9 +50,6 @@ public class UtilisateurManager {
 		verificationMotDePasse(motDePasse, be);
 		verificationConfirmation(confirmation, motDePasse, be);
 		
-		
-		
-
 		if (be.hasErreur()) {
 			throw be;
 		}
@@ -72,6 +69,8 @@ public class UtilisateurManager {
 
 	}
 	
+	///////////////////////////
+	
 	public List<Utilisateur> listeUtilisateurs() throws BLLException{
 		try {
 			return DAOFact.getInstance().getAll();
@@ -82,7 +81,21 @@ public class UtilisateurManager {
 		}
 		
 	}
+	//////////////////////////
 	
+	public boolean verifLog (String pseudo, String motDePAsse) throws DALException {
+		
+		boolean logable = false;
+		
+		for (Utilisateur p : DAOFact.getInstance().getAll()) {
+			
+			if (p.getPseudo().equals(pseudo) && p.getMotDePasse().equals(motDePAsse)) {
+				logable = true;
+			}
+			
+		}
+		return logable;
+	}
 	
 	
 	////////////////////methode de verification////////////////
