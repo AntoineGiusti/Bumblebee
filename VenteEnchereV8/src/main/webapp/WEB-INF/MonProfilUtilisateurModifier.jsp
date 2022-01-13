@@ -9,7 +9,7 @@
 <body>
 	<h2>Modifier Mon profil</h2>
 	<form action="CreationProfilServlet" method="POST">
-		<p>Pseudo: <input type="text" name="pseudo" value="${model.utilisateur.pseudo}"/>
+		<p>Pseudo: <input type="text" name="pseudo" value="${utilisateur.pseudo}"/>
 		<br>
 		<p>Nom: <input type="text" name="nom" value="${model.utilisateur.nom}"/>
 		<br>

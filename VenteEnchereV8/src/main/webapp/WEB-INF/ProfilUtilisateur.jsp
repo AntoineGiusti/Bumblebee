@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Mon Profil</title>
 </head>
 <body>
 	<h1>ENI_Enchères</h1>

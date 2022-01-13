@@ -29,7 +29,7 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nextScreen = "WEB-INF/MonPofilUtilisateurModifier.jsp";
+		String nextScreen = "WEB-INF/MonProfilUtilisateurModifier.jsp";
 		
 CreationProfilModel model = new CreationProfilModel();
 		

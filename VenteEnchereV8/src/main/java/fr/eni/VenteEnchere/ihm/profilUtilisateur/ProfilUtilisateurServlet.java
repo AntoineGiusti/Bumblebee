@@ -34,19 +34,17 @@ public class ProfilUtilisateurServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProfilUtilisateurModel model = new ProfilUtilisateurModel();
 		
+		String nextScreen = "WEB-INF/ProfilUtilisateur.jsp";
+		
 		if(request.getParameter("modifier")!=null) {
 		
-			try {
-				manager.modifierUtilisateur(model.getUtilisateur());
-			} catch (BLLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			nextScreen = "ProfilUtilisateurModifierServlet";
+			
 		}
 		
 		request.setAttribute("model", model);
 		
-		request.getRequestDispatcher("WEB-INF/ProfilUtilisateur.jsp").forward(request, response);
+		request.getRequestDispatcher(nextScreen).forward(request, response);
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -152,13 +152,14 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 				boolean administrateur = rs.getBoolean("administrateur");
 				
 				if (administrateur = true) {
-					lstUsers.add(new Utilisateur(noUtilisateur,pseudo, nom, prenom, email,telephone,rue,codePostale,ville, motDePasse, credit,administrateur));;
+					lstUsers.add(new Utilisateur(noUtilisateur,pseudo, nom, prenom, email, telephone, rue, codePostale,ville, motDePasse, credit, administrateur));
 				}else lstUsers.add(new Utilisateur(noUtilisateur,pseudo, nom, prenom, email,telephone,rue,codePostale,ville, motDePasse, credit));
 				
 
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DALException("Impossible de lire la base de donnee");
 		}
 		return lstUsers;
