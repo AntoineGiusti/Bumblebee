@@ -109,6 +109,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		return utilisateur;
 	}
 
+	@SuppressWarnings({ "unlikely-arg-type", "null" })
 	@Override
 	public List<Utilisateur> getAll() throws DALException {
 		List<Utilisateur> lstUsers = new ArrayList<Utilisateur>();
@@ -118,12 +119,23 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			ResultSet rs = stmt.executeQuery(SELECT_ALL_UTILISATEURS);
 
 			while (rs.next()) {
+				Integer noUtilisateur = rs.getInt("no_utilisateur");
 				String pseudo = rs.getString("pseudo");
 				String nom = rs.getString("nom");
 				String prenom = rs.getString("prenom");
 				String email = rs.getString("email");
+				String telephone = rs.getString("telephone");
+				String rue = rs.getString("rue");
+				String codePostale = rs.getString("code_postale");
+				String ville = rs.getString("ville");				
 				String motDePasse = rs.getString("mot_de_passe");
-				lstUsers.add(new Utilisateur(pseudo, nom, prenom, email, motDePasse));
+				Integer credit = rs.getInt("credit");
+				boolean administrateur = rs.getBoolean("administrateur");
+				
+				if (administrateur = true) {
+					lstUsers.add(new Utilisateur(noUtilisateur,pseudo, nom, prenom, email,telephone,rue,codePostale,ville, motDePasse, credit,administrateur));;
+				}else lstUsers.add(new Utilisateur(noUtilisateur,pseudo, nom, prenom, email,telephone,rue,codePostale,ville, motDePasse, credit));
+				
 
 			}
 
