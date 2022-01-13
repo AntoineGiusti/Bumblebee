@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Mon Profil</title>
+<title>Creer Mon Profil</title>
 </head>
 <h1>ENI-Enchères</h1>
 <body>
 <h2>Mon profil</h2>
-<form action="MonProfilServlet" method="POST">
+<form action="CreationProfilServlet" method="POST">
 <p>Pseudo: <input type="text" name="pseudo" value="${model.utilisateur.pseudo}"/>
 <br>
 <p>Nom: <input type="text" name="nom" value="${model.utilisateur.nom}"/>

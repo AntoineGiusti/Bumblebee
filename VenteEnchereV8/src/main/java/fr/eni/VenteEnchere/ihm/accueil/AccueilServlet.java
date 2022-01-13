@@ -34,7 +34,6 @@ public class AccueilServlet extends HttpServlet {
 			nextScreen ="ConnexionServlet";
 			}
 		
-//		request.setAttribute("model", model);
 		request.getRequestDispatcher(nextScreen).forward(request, response);
 	}
 	/**

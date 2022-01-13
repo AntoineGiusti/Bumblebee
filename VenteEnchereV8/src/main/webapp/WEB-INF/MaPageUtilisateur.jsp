@@ -7,6 +7,10 @@
 <title>Ma page utilisateur</title>
 </head>
 <body>
+<a href="enchereServlet">Enchéres</a>
+<a href="vendreArticleServlet">vendre un article</a>
+<a href="ProfilUtilisateurServlet">mon profil</a>
+<a href="AccueilServlet">deconnexion</a>
 <h1>Ma page utilisateur</h1>
 </body>
 </html>
