@@ -60,8 +60,6 @@ public class CreationProfilServlet extends HttpServlet {
 				manager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, 
 
 						rue, codePostal, ville, motDePasse, confirmation);
-
-				System.out.println("ca passe");
 				
 				request.setAttribute("model", model);
 				

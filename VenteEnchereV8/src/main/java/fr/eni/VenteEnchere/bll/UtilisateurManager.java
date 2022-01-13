@@ -98,6 +98,32 @@ public class UtilisateurManager {
 		return logable;
 	}
 	
+	public void modifierUtilisateur(Utilisateur utilisateur) throws BLLException {
+		BLLException be = new BLLException();
+		
+		verificationPseudo(utilisateur.getPseudo(), be);
+		verificationNom(utilisateur.getNom(), be);
+		verificationPrenom(utilisateur.getPrenom(), be);
+		verificationEmail(utilisateur.getEmail(), be);
+		verificationTelephone(utilisateur.getTelephone(), be);
+		verificationRue(utilisateur.getRue(), be);
+		verificationCodePostal(utilisateur.getCodePostal(), be);
+		verificationVille(utilisateur.getVille(), be);
+		
+		if (be.hasErreur()) {
+			throw be;
+		}
+		
+		try {
+            DAOFact.getInstance().updateUser(utilisateur);
+
+        } catch (DALException e) {
+            e.printStackTrace();
+            throw new BLLException(e);
+        }
+
+	}
+	
 	
 	////////////////////methode de verification////////////////
 	
