@@ -1,9 +1,11 @@
 package fr.eni.VenteEnchere.dal;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.VenteEnchere.bo.ArticleVendu;
+import fr.eni.VenteEnchere.bo.Enchere;
 import fr.eni.VenteEnchere.bo.Utilisateur;
 
 public class EnchereDAOMock implements MethodDAO {
@@ -78,6 +80,19 @@ public class EnchereDAOMock implements MethodDAO {
 
 	@Override
 	public Utilisateur selectByPseudo(String pseudo) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertEnchere(Date dateEnchere, Integer montant_enchere, ArticleVendu articleVendu,
+			Utilisateur utilisateur) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Enchere> getAllEnchere() throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
