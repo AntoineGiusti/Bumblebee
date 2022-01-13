@@ -25,6 +25,8 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 			+ "rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 	private final String UPDATE_UTILISATEUR = "UPDATE INTO UTILISATEURS SET pseudo=?, nom =?, prenom =?,email =?, telephone =?, rue =?, code_postal =? , ville=?"
 			+ "	rue =? , codePostal =?, ville =?, motDePasse =? WHERE pseudo =?";
+	private final String SELECT_BY_PSEUDO =" SELECT * FROM UTILISATEURS WHERE pseudo= ?";
+	
 	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEUR WHERE pseudo = ? ";
 	
 	private final String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
@@ -75,7 +77,27 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 		
 	}
 	
-//	@Override
+	@Override
+	public Utilisateur selectByPseudo(String pseudo) throws DALException {
+		Utilisateur utilisateur = null;
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement pStmt = cnx.prepareStatement(SELECT_BY_PSEUDO);
+			pStmt.setString(1, "pseudo");
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("nom");
+				String email = rs.getString("nom");
+				utilisateur.getPseudo();
+			}
+		} catch (Exception e) {
+			throw new DALException("Je ne trouve pas ce pseudo");
+		}
+		
+		return utilisateur;
+	}
+	
+	@Override
 	public List<Utilisateur> getAll() throws DALException {
 		List<Utilisateur> lstUsers = new ArrayList<Utilisateur>();
 		try (Connection cnx = ConnectionProvider.getConnection();){
@@ -107,10 +129,11 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 			pStmt.setString(2,utilisateur.getNom());
 			pStmt.setString(3,utilisateur.getPrenom());
 			pStmt.setString(4,utilisateur.getEmail());
-			pStmt.setString(5,utilisateur.getTelephone());
-			pStmt.setString(6,utilisateur.getRue());
-			pStmt.setString(7,utilisateur.getCodePostal());	
-			pStmt.setString(8,utilisateur.getVille());			
+			pStmt.setString(5,utilisateur.getMotDePasse());
+			pStmt.setString(6,utilisateur.getTelephone());
+			pStmt.setString(7,utilisateur.getRue());
+			pStmt.setString(8,utilisateur.getCodePostal());	
+			pStmt.setString(9,utilisateur.getVille());			
 			pStmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -218,14 +241,21 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 				throw new DALException("impossible de modifier l'article");
 			}
 			
-			
 		}
 		
 	
 
 	@Override
-	public void deleteArticle(ArticleVendu articleVendu) {
-		
+	public void deleteArticle(ArticleVendu articleVendu)throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			PreparedStatement pStmt = cnx.prepareStatement(DELETE_ARTICLES_VENDUS);
+			pStmt.setString(1,articleVendu.getNomArticle());
+			pStmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			throw new DALException("Impossible de supprimer cet article");
+		}
 		
 	}
 
