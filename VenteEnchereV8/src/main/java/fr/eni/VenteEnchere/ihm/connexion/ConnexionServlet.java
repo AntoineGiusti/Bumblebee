@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
 import fr.eni.VenteEnchere.bo.Utilisateur;
@@ -46,9 +47,11 @@ public class ConnexionServlet extends HttpServlet {
 			try {
 				Utilisateur utilisateurConnect = UtilisateurManager.getInstance().verifLog(pseudo, motDePasse);
 				
-				request.getSession().setAttribute("utilisateur", utilisateurConnect);
+				HttpSession session = request.getSession();
 				
+				session.setAttribute("utilisateur", utilisateurConnect);
 				
+						
 				if(utilisateurConnect != null){
 					System.out.println("login ok");
 					

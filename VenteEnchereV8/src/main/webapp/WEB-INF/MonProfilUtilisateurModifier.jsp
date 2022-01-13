@@ -25,10 +25,14 @@
 		<br>
 		<p>Ville <input type="text" name="ville" value="${model.utilisateur.ville}"/>
 		<br>
-		<p>Mot de passe <input type="text" name="motDePasse" value="${model.utilisateur.motDePasse}"/>
+		<p>Mot de passe actuel <input type="text" name="motDePasse" value="${model.utilisateur.motDePasse}"/>
+		<br>
+		<p>Nouveau mot de passe <input type="text" name="NouveauMotDePasse"/>
 		<br>
 		<p>Confirmation <input type="text" name="confirmation"/>
-		
+		<br>
+		<p>Crédits : ${utilisateur.credit}</p>
+		<br>
 		<input type = "submit" name="enregister" value="enregister"/>
 		
 		<input type = "submit" name="supprimer" value="Supprimer Compte"/>

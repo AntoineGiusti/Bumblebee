@@ -11,23 +11,21 @@
 	<br>
 	<br>
 	<form action="ProfilUtilisateurServlet" method= "POST">
-	<p>Pseudo: <input type="text" name="pseudo" value="${utilisateur.pseudo}"/>
+	<p>Pseudo : ${utilisateur.pseudo}</p>
 	<br>
-	<p>Nom: <input type="text" name="nom" value="${utilisateur.nom}"/>
+	<p>Nom : ${utilisateur.nom}</p>
 	<br>
-	<p>Prenom: <input type="text" name="prenom" value="${utilisateur.prenom}"/>
+	<p>Prenom : ${utilisateur.prenom}</p>
 	<br>
-	<p>Email: <input type="text" name="email" value="${utilisateur.email}"/>
+	<p>Email : ${utilisateur.email}</p>
 	<br>
-	<p>Téléphone: <input type="text" name="telephone" value="${utilisateur.telephone}"/>
+	<p>Téléphone : ${utilisateur.telephone}</p>
 	<br>
-	<p>Rue: <input type="text" name="rue" value="${utilisateur.rue}"/>
+	<p>Rue : ${utilisateur.rue}</p>
 	<br>
-	<p>Code postal <input type="text" name="codePostal" value="${utilisateur.codePostal}"/>
+	<p>Code postal : ${utilisateur.codePostal}</p>
 	<br>
-	<p>Ville <input type="text" name="ville" value="${utilisateur.ville}"/>
-	<br>
-	<p>Mot de passe <input type="text" name="motDePasse" value="${model.utilisateur.motDePasse}"/>
+	<p>Ville : ${utilisateur.ville}</p>
 	<br>
 	
 	<input type = "submit" name="modifier" value="Modifier"/>
