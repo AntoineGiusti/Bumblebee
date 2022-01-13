@@ -8,12 +8,15 @@
 </head>
 <body>
 	<form action="ConnexionServlet" method= "POST">
-		<label for="pseudo">pseudo</label>
+		<label for="pseudo">Identifiant :</label>
 		<input type="text" name="pseudo" value="">
-		<label for="motDePasse">mot de passe</label>
+		<label for="motDePasse">Mot de passe :</label>
 		<input type="text" name="motDePasse" value="">
-		<input type="submit" name="connexion" value= "connexion">
-		<input type="submit" name="creer" value= "creer compte">
+		<input type="submit" name="connexion" value= "Connexion">
+		<input type="checkbox" id="memo" name="memo">
+		<label for="memo">Se souvenir de moi</label>
+		<a href="page.jsp">Mot de passe oublié</a>
+		<input type="submit" name="creer" value= "Créer un compte">
 	</form>
 
 

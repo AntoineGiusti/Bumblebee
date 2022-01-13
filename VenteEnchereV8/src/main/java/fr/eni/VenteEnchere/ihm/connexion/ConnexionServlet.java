@@ -37,20 +37,23 @@ public class ConnexionServlet extends HttpServlet {
 			
 			try {
 				boolean logOk = UtilisateurManager.getInstance().verifLog(pseudo, motDePasse);
+				
+				if(logOk){
+					System.out.println("login ok");
+					request.getRequestDispatcher("WEB-INF/MaPageUtilisateur.jsp").forward(request, response);
+				}		
 			} catch (DALException e) {
 				e.printStackTrace();
-			}
-			
-			
+			}	
 			
 		}
 		
+		else {
+			request.getRequestDispatcher("WEB-INF/Connexion.jsp").forward(request, response);
+		}
 		
-		
-		
-		
-		
-		request.getRequestDispatcher("WEB-INF/Connexion.jsp").forward(request, response);
+			
+
 	}
 
 	/**

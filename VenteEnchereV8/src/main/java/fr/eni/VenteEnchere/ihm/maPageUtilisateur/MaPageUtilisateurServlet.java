@@ -1,4 +1,4 @@
-package fr.eni.VenteEnchere.ihm.accueil;
+package fr.eni.VenteEnchere.ihm.maPageUtilisateur;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AccueilServlet
+ * Servlet implementation class MaPageUtilisateurServlet
  */
-@WebServlet("/AccueilServlet")
-public class AccueilServlet extends HttpServlet {
+@WebServlet("/MaPageUtilisateurServlet")
+public class MaPageUtilisateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccueilServlet() {
+    public MaPageUtilisateurServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,17 +26,13 @@ public class AccueilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 		
-		String nextScreen = "/WEB-INF/Accueil.jsp";
-		if(request.getParameter("connexion")!=null) {
-			
-			nextScreen ="ConnexionServlet";
-			}
 		
-//		request.setAttribute("model", model);
-		request.getRequestDispatcher(nextScreen).forward(request, response);
+		
+		
+		request.getRequestDispatcher("WEB-INF/MaPageUtilisateur.jsp").forward(request, response);
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
