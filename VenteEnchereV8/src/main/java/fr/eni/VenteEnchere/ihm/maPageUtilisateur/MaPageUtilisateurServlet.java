@@ -27,10 +27,30 @@ public class MaPageUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String nextScreen = "WEB-INF/MaPageUtilisateur.jsp";
+		
+		if(request.getParameter("encheres")!=null) {
+			
+			nextScreen ="MaPageUtilisateurServlet";
+			}
+		
+		if(request.getParameter("vendreArticle")!=null) {
+					
+			nextScreen ="MaPageUtilisateurServlet";
+				}
+		
+		if(request.getParameter("MonProfil")!=null) {
+			
+			nextScreen ="ProfilUtilisateurServlet";
+				}
+		
+		if(request.getParameter("deconnexion")!=null) {
+			
+			nextScreen ="AccueilServlet";
+				}
 		
 		
-		
-		request.getRequestDispatcher("WEB-INF/MaPageUtilisateur.jsp").forward(request, response);
+		request.getRequestDispatcher(nextScreen).forward(request, response);
 	}
 
 	/**
