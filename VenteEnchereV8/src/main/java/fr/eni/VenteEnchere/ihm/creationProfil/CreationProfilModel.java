@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.eni.VenteEnchere.ihm.monProfil;
+package fr.eni.VenteEnchere.ihm.creationProfil;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import fr.eni.VenteEnchere.bo.Utilisateur;
  * @author mmainguy2021
  *
  */
-public class MonProfilModel extends Utilisateur {
+public class CreationProfilModel extends Utilisateur {
 	
 	private Utilisateur utilisateur;
 	
@@ -20,7 +20,7 @@ public class MonProfilModel extends Utilisateur {
 	/**
 	 * 
 	 */
-	public MonProfilModel() {
+	public CreationProfilModel() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -28,7 +28,7 @@ public class MonProfilModel extends Utilisateur {
 	 * @param utilisateur
 	 * @param lstUser
 	 */
-	public MonProfilModel(Utilisateur utilisateur, List<Utilisateur> lstUser) {
+	public CreationProfilModel(Utilisateur utilisateur, List<Utilisateur> lstUser) {
 		super();
 		this.utilisateur = utilisateur;
 		this.lstUser = lstUser;

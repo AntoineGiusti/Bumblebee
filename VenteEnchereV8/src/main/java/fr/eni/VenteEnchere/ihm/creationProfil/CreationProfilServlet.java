@@ -1,4 +1,4 @@
-package fr.eni.VenteEnchere.ihm.monProfil;
+package fr.eni.VenteEnchere.ihm.creationProfil;
 
 import java.io.IOException;
 
@@ -17,14 +17,14 @@ import fr.eni.VenteEnchere.bo.Utilisateur;
  * Servlet implementation class UtilisateurServlet
  */
 @WebServlet("/MonProfilServlet")
-public class MonProfilServlet extends HttpServlet {
+public class CreationProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static UtilisateurManager manager = UtilisateurManager.getInstance();
     /**
      * Default constructor. 
      */
-    public MonProfilServlet() {
+    public CreationProfilServlet() {
         
     }
 
@@ -34,7 +34,7 @@ public class MonProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		MonProfilModel model = new MonProfilModel();
+		CreationProfilModel model = new CreationProfilModel();
 		
 //		MonProfilModel model = (MonProfilModel)request.getSession().getAttribute("model");
 		
