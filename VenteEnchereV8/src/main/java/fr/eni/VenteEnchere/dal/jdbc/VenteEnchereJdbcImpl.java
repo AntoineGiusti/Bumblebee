@@ -126,20 +126,21 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 				String email = rs.getString("email");
 				String telephone = rs.getString("telephone");
 				String rue = rs.getString("rue");
-				String codePostale = rs.getString("code_postale");
+				String codePostale = rs.getString("code_postal");
 				String ville = rs.getString("ville");				
 				String motDePasse = rs.getString("mot_de_passe");
 				Integer credit = rs.getInt("credit");
 				boolean administrateur = rs.getBoolean("administrateur");
 				
 				if (administrateur = true) {
-					lstUsers.add(new Utilisateur(noUtilisateur,pseudo, nom, prenom, email,telephone,rue,codePostale,ville, motDePasse, credit,administrateur));;
+					lstUsers.add(new Utilisateur(noUtilisateur,pseudo, nom, prenom, email, telephone, rue, codePostale,ville, motDePasse, credit, administrateur));
 				}else lstUsers.add(new Utilisateur(noUtilisateur,pseudo, nom, prenom, email,telephone,rue,codePostale,ville, motDePasse, credit));
 				
 
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DALException("Impossible de lire la base de donnee");
 		}
 		return lstUsers;

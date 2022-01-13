@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
+import fr.eni.VenteEnchere.bo.Utilisateur;
 import fr.eni.VenteEnchere.dal.DALException;
 
 /**
@@ -38,9 +39,11 @@ public class ConnexionServlet extends HttpServlet {
 			String motDePasse = request.getParameter("motDePasse");
 			
 			try {
-				boolean logOk = UtilisateurManager.getInstance().verifLog(pseudo, motDePasse);
+				Utilisateur utilisateurConnect = UtilisateurManager.getInstance().verifLog(pseudo, motDePasse);
 				
-				if(logOk){
+				request.getSession().setAttribute("utilisateur", utilisateurConnect);
+				
+				if(utilisateurConnect != null){
 					System.out.println("login ok");
 					
 					nextScreen = "MaPageUtilisateurServlet";

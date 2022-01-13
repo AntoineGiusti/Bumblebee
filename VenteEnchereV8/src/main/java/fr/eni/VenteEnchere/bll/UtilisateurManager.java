@@ -83,20 +83,22 @@ public class UtilisateurManager {
 	}
 	//////////////////////////
 	
-	public boolean verifLog (String pseudo, String motDePAsse) throws DALException {
+	public Utilisateur verifLog (String pseudo, String motDePAsse) throws DALException {
 		
-		boolean logable = false;
+		Utilisateur utilisateur = null;
 		
-		for (Utilisateur p : DAOFact.getInstance().getAll()) {
+		for (Utilisateur u : DAOFact.getInstance().getAll()) {
 			
-			if (p.getPseudo().equals(pseudo) && p.getMotDePasse().equals(motDePAsse)) {
-				logable = true;
+			if (u.getPseudo().equals(pseudo) && u.getMotDePasse().equals(motDePAsse)) {
+				utilisateur = u;
 				System.out.println("log manager ok");
 			}
 			
 		}
-		return logable;
+		return utilisateur;
 	}
+	
+	////////////////////////////////////////
 	
 	public void modifierUtilisateur(Utilisateur utilisateur) throws BLLException {
 		BLLException be = new BLLException();
