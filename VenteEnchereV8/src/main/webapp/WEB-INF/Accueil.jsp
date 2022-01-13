@@ -10,7 +10,7 @@
 <body>
 
 <h1>ENI-Enchères</h1>
-<a href="Connexion.jsp">S'inscrire - Se connecter</a>
+<a href="connexion">S'inscrire - Se connecter</a>
 
 <h3>Liste des enchères</h3>
 

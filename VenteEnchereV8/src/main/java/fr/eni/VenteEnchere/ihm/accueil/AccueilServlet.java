@@ -29,7 +29,7 @@ public class AccueilServlet extends HttpServlet {
 	
 		
 		String nextScreen = "/WEB-INF/Accueil.jsp";
-		if(request.getParameter("Connexion.jsp")!=null) {
+		if(request.getParameter("connexion")!=null) {
 			
 			nextScreen ="ConnexionServlet";
 			}
