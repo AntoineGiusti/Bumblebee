@@ -22,6 +22,11 @@ import fr.eni.VenteEnchere.bo.Vetement;
 import fr.eni.VenteEnchere.dal.DALException;
 import fr.eni.VenteEnchere.dal.MethodDAO;
 
+/**
+ * @author agiusti2021
+ *
+ */
+
 public class VenteEnchereJdbcImpl implements MethodDAO {
 
 	/** requete utilisateurs **/
@@ -49,10 +54,19 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 
 	private final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_enchere,date_enchere,montant_enchere,no_article_no_utilisateur) VALUES (?,?,?,?,?)";
 
-	private final String SELECT_ALL_ENCHERE = "SELECT * FROME ENCHERES";
+	private final String SELECT_ALL_ENCHERE = "SELECT * FROM ENCHERES "
+			+ "INNER JOIN UTILISATEURS ON ENCHERES.no_enchere = UTILISATEURS.no_utilisateur "
+			+ "INNER JOIN ARTICLES_VENDUS ON ENCHERES.no_enchere = ARTICLES_VENDUS.vente_utilisateur ";
+	
+	
 
 	/** Method utilisateurs **/
 
+	
+	
+	/**
+	 * method d'insertion des utilisateurs
+	 */
 	@Override
 	public void insertUser(Utilisateur utilisateur) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -83,7 +97,10 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		}
 
 	}
-
+	
+	/**
+	 * method de selection des données d'un utilisateur en passant par son pseudo
+	 */	
 	@Override
 	public Utilisateur selectByPseudo(String pseudo) throws DALException {
 		Utilisateur utilisateur = null;
@@ -109,7 +126,9 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		return utilisateur;
 	}
 
-	
+	/**
+	 * method pour voir la liste des utilisateurs
+	 */
 	@Override
 	public List<Utilisateur> getAll() throws DALException {
 		List<Utilisateur> lstUsers = new ArrayList<Utilisateur>();
@@ -322,7 +341,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 
 			Statement stmt = cnx.createStatement();
-			ResultSet rs = stmt.executeQuery(SELECT_ALL_ENCHERE);
+			ResultSet rs = stmt.executeQuery(SELECT_ALL_ENCHERE );
 
 			while (rs.next()) {
 
