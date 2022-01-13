@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -22,7 +21,6 @@ import fr.eni.VenteEnchere.bo.Utilisateur;
 import fr.eni.VenteEnchere.bo.Vetement;
 import fr.eni.VenteEnchere.dal.DALException;
 import fr.eni.VenteEnchere.dal.MethodDAO;
-import javassist.bytecode.analysis.Util;
 
 public class VenteEnchereJdbcImpl implements MethodDAO{ 
 	
@@ -281,7 +279,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	/** Method Encheres **/
 
 	@Override
-	public void insertEnchere(Date dateEnchere, Integer montant_enchere, ArticleVendu articleVendu,
+	public void insertEnchere(Date dateEnchere, Integer montantEnchere, ArticleVendu articleVendu,
 			Utilisateur utilisateur) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();){
 			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ENCHERE);
@@ -294,7 +292,9 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 			pStmt.setTimestamp(5,timeStampEnd);
 			pStmt.setString(6,articleVendu.getMiseAPrix());
 			pStmt.setString(7,articleVendu.getPrixVente());
-			pStmt.setString(8,articleVendu.getEtatVente());							
+			pStmt.setString(8,articleVendu.getEtatVente());	
+			Enchere enchere = new Enchere();
+			pStmt.setInt(9,enchere.getMontantEnchere() );
 			pStmt.executeUpdate();
 			
 		} catch (Exception e) {

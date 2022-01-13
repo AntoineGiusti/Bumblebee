@@ -26,10 +26,10 @@ public class Enchere {
 	 * @param articleVendu
 	 * @param utilisateur
 	 */
-	public Enchere(LocalDateTime dateEnchere, Integer montant_enchere, ArticleVendu articleVendu, Utilisateur utilisateur) {
+	public Enchere(LocalDateTime dateEnchere, Integer montantEnchere, ArticleVendu articleVendu, Utilisateur utilisateur) {
 		super();
 		this.dateEnchere = dateEnchere;
-		this.montantEnchere = montant_enchere;
+		this.montantEnchere = montantEnchere;
 		this.articleVendu = articleVendu;
 		this.utilisateur = utilisateur;
 	}
@@ -38,10 +38,10 @@ public class Enchere {
 	 * @param dateEnchere
 	 * @param montant_enchere
 	 */
-	public Enchere(LocalDateTime dateEnchere, Integer montant_enchere) {
+	public Enchere(LocalDateTime dateEnchere, Integer montantEnchere) {
 		super();
 		this.dateEnchere = dateEnchere;
-		this.montantEnchere = montant_enchere;
+		this.montantEnchere = montantEnchere;
 	}
 	
 
@@ -79,14 +79,14 @@ public class Enchere {
 	/**
 	 * @return the montant_enchere
 	 */
-	public Integer getMontant_enchere() {
+	public Integer getMontantEnchere() {
 		return montantEnchere;
 	}
 	/**
 	 * @param montant_enchere the montant_enchere to set
 	 */
-	public void setMontant_enchere(Integer montant_enchere) {
-		this.montantEnchere = montant_enchere;
+	public void setMontantEnchere(Integer montantEnchere) {
+		this.montantEnchere = montantEnchere;
 	}
 	/**
 	 * @return the articleVendu
