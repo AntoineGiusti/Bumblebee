@@ -24,10 +24,10 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone,"
 			+ "rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 	private final String UPDATE_UTILISATEUR = "UPDATE INTO UTILISATEURS SET pseudo=?, nom =?, prenom =?,email =?, telephone =?, rue =?, code_postal =? , ville=?"
-			+ "	rue =? , codePostal =?, ville =?, motDePasse =? WHERE pseudo =?";
+			+ "	rue =? , code_postal =?, ville =?, mot_de_passe =? WHERE pseudo =?";
 	private final String SELECT_BY_PSEUDO =" SELECT * FROM UTILISATEURS WHERE pseudo= ?";
 	
-	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEUR WHERE pseudo = ? ";
+	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE pseudo = ? ";
 	
 	private final String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
 	
@@ -35,7 +35,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS nom_article, description, date_debut_encheres,date_fin_encheres, prix_initial,"
 			+ "prix_vente, no_uilisateur, no_catégorie VALUES (?,?,?,?,?,?,?,?)";
 	private final String UPDATE_ARTICLES_VENDUS = "UPDATE INTO ARTICLES_VENDUS SET nom =?, prenom =?,email =?, telephone =?,"
-			+ "	rue =? , codePostal =?, ville =?, motDePasse =? WHERE pseudo =?";
+			+ "	rue =? , code_postal =?, ville =?, mot_de_passe =? WHERE pseudo =?";
 	private final String DELETE_ARTICLES_VENDUS = "DELETE FROm ARTICLES_VENDUS WHERE pseudo = ? ";
 	
 	private final String SELECT_ALL_ARTICLES_VENDUS = "SELECT * FROM ARTICLES_VENDUS";
@@ -115,7 +115,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 			String nom = rs.getString("nom");
 			String prenom = rs.getString("prenom");			
 			String email = rs.getString("email");
-			String motDePasse = rs.getString("mot de passe");
+			String motDePasse = rs.getString("mot_de_passe");
 			lstUsers.add(new Utilisateur(pseudo, nom, prenom, email, motDePasse));
 			
 		}
@@ -202,10 +202,10 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 			ResultSet rs = stmt.executeQuery(SELECT_ALL_ARTICLES_VENDUS);
 			
 			while (rs.next()) {
-				String nomArticle = rs.getString("nom article");
+				String nomArticle = rs.getString("nom_article");
 				String description= rs.getString("description");
-				String miseAPrix = rs.getString("mise a Prix");
-				String prixVente = rs.getString("prix de vente");			
+				String miseAPrix = rs.getString("mise_a_Prix");
+				String prixVente = rs.getString("prix_de_vente");			
 				String etatVente = rs.getString("etat");
 				String categorie = rs.getString("categorie").trim();
 				ArticleVendu articleVendu=null;
