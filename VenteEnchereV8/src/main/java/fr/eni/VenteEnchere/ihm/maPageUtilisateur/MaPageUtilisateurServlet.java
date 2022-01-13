@@ -1,4 +1,4 @@
-package fr.eni.VenteEnchere.ihm.connexion;
+package fr.eni.VenteEnchere.ihm.maPageUtilisateur;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.VenteEnchere.bll.UtilisateurManager;
-import fr.eni.VenteEnchere.dal.DALException;
-
 /**
- * Servlet implementation class ConnexionServlet
+ * Servlet implementation class MaPageUtilisateurServlet
  */
-@WebServlet("/ConnexionServlet")
-public class ConnexionServlet extends HttpServlet {
+@WebServlet("/MaPageUtilisateurServlet")
+public class MaPageUtilisateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConnexionServlet() {
+    public MaPageUtilisateurServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,30 +27,10 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (request.getParameter("connexion") != null) {
-			
-			String pseudo = request.getParameter("pseudo");
-			String motDePasse = request.getParameter("motDePasse");
-			
-			try {
-				boolean logOk = UtilisateurManager.getInstance().verifLog(pseudo, motDePasse);
-				
-				if(logOk){
-					System.out.println("login ok");
-					request.getRequestDispatcher("WEB-INF/MaPageUtilisateur.jsp").forward(request, response);
-				}		
-			} catch (DALException e) {
-				e.printStackTrace();
-			}	
-			
-		}
 		
-		else {
-			request.getRequestDispatcher("WEB-INF/Connexion.jsp").forward(request, response);
-		}
 		
-			
-
+		
+		request.getRequestDispatcher("WEB-INF/MaPageUtilisateur.jsp").forward(request, response);
 	}
 
 	/**

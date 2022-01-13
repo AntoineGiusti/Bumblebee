@@ -33,7 +33,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	
 	/** Method Articles **/
 	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS nom_article, description, date_debut_encheres,date_fin_encheres, prix_initial,"
-			+ "prix_vente, no_uilisateur, no_catégorie VALUES (?,?,?,?,?,?,?,?)";
+			+ "prix_vente, no_uilisateur, no_catï¿½gorie VALUES (?,?,?,?,?,?,?,?)";
 	private final String UPDATE_ARTICLES_VENDUS = "UPDATE INTO ARTICLES_VENDUS SET nom =?, prenom =?,email =?, telephone =?,"
 			+ "	rue =? , code_postal =?, ville =?, mot_de_passe =? WHERE pseudo =?";
 	private final String DELETE_ARTICLES_VENDUS = "DELETE FROm ARTICLES_VENDUS WHERE pseudo = ? ";

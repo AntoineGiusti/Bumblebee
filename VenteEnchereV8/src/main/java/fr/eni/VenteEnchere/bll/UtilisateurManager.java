@@ -91,6 +91,7 @@ public class UtilisateurManager {
 			
 			if (p.getPseudo().equals(pseudo) && p.getMotDePasse().equals(motDePAsse)) {
 				logable = true;
+				System.out.println("log manager ok");
 			}
 			
 		}
