@@ -5,14 +5,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-
 <title>Mon Profil</title>
 </head>
 <h1>ENI-Enchères</h1>
 <body>
-
 <h2>Mon profil</h2>
-
 <form action="MonProfilServlet" method="POST">
 <p>Pseudo: <input type="text" name="pseudo" value="${model.utilisateur.pseudo}"/>
 <br>
@@ -33,17 +30,11 @@
 <p>Mot de passe <input type="text" name="motDePasse" value="${model.utilisateur.motDePasse}"/>
 <br>
 <p>Confirmation <input type="text" name="confirmation"/>
-<br>
-<br>
-<input type = "submit" name="valider" value="Créer"/>
-<br>
 
-<br>
+<input type = "submit" name="valider" value="Créer"/>
+
 <input type = "submit" name="annuler" value="Annuler"/>
-<br>
 
 </form>
-
 </body>
-
 </html>

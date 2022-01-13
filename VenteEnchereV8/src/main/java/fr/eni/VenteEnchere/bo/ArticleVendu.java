@@ -3,7 +3,6 @@
  */
 package fr.eni.VenteEnchere.bo;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,9 +12,9 @@ import java.util.List;
 public class ArticleVendu {
 	
 	private Integer noArticle;
-	private String nonArticle;
+	private String nomArticle;
 	private String description;
-	private Date dateDebutEncheres;
+	private String dateDebutEncheres;
 	private String dateFinEncheres;
 	private String miseAPrix;
 	private String prixVente;
@@ -25,6 +24,17 @@ public class ArticleVendu {
 	private Categorie categorie;
 	private Retrait retrait;
 	
+	
+	
+	public ArticleVendu(String nomArticle, String description, String miseAPrix, String prixVente, String etatVente) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
+	}
+
 	/**
 	 * 
 	 */
@@ -42,11 +52,11 @@ public class ArticleVendu {
 	 * @param prixVente
 	 * @param etatVente
 	 */
-	public ArticleVendu(Integer noArticle, String nonArticle, String description, Date dateDebutEncheres,
+	public ArticleVendu(Integer noArticle, String nomArticle, String description, String dateDebutEncheres,
 			String dateFinEncheres, String miseAPrix, String prixVente, String etatVente) {
 		super();
 		this.noArticle = noArticle;
-		this.nonArticle = nonArticle;
+		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
@@ -69,23 +79,7 @@ public class ArticleVendu {
 	 * @param categorie
 	 * @param retrait
 	 */
-	public ArticleVendu(Integer noArticle, String nonArticle, String description, Date dateDebutEncheres,
-			String dateFinEncheres, String miseAPrix, String prixVente, String etatVente, Utilisateur user,
-			List<Enchere> lstEncheres, Categorie categorie, Retrait retrait) {
-		super();
-		this.noArticle = noArticle;
-		this.nonArticle = nonArticle;
-		this.description = description;
-		this.dateDebutEncheres = dateDebutEncheres;
-		this.dateFinEncheres = dateFinEncheres;
-		this.miseAPrix = miseAPrix;
-		this.prixVente = prixVente;
-		this.etatVente = etatVente;
-		this.user = user;
-		this.lstEncheres = lstEncheres;
-		this.categorie = categorie;
-		this.retrait = retrait;
-	}
+	
 
 	/**
 	 * @return the noArticle
@@ -105,14 +99,14 @@ public class ArticleVendu {
 	 * @return the nonArticle
 	 */
 	public String getNonArticle() {
-		return nonArticle;
+		return nomArticle;
 	}
 
 	/**
 	 * @param nonArticle the nonArticle to set
 	 */
-	public void setNonArticle(String nonArticle) {
-		this.nonArticle = nonArticle;
+	public void setNonArticle(String nomArticle) {
+		this.nomArticle = nomArticle;
 	}
 
 	/**
@@ -132,14 +126,14 @@ public class ArticleVendu {
 	/**
 	 * @return the dateDebutEncheres
 	 */
-	public Date getDateDebutEncheres() {
+	public String getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
 
 	/**
 	 * @param dateDebutEncheres the dateDebutEncheres to set
 	 */
-	public void setDateDebutEncheres(Date dateDebutEncheres) {
+	public void setDateDebutEncheres(String dateDebutEncheres) {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
 
@@ -261,7 +255,7 @@ public class ArticleVendu {
 		builder.append("ArticleVendu [noArticle=");
 		builder.append(noArticle);
 		builder.append(", nonArticle=");
-		builder.append(nonArticle);
+		builder.append(nomArticle);
 		builder.append(", description=");
 		builder.append(description);
 		builder.append(", dateDebutEncheres=");

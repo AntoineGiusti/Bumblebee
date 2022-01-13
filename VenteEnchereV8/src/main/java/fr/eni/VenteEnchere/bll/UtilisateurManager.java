@@ -50,24 +50,26 @@ public class UtilisateurManager {
 		verificationMotDePasse(motDePasse, be);
 		verificationConfirmation(confirmation, motDePasse, be);
 		
-		
-		
-
 		if (be.hasErreur()) {
 			throw be;
 		}
 		
+		boolean administrateur = false;
 	
-		utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+		utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, administrateur);
 
+		
 		try {
             DAOFact.getInstance().insertUser(utilisateur);
+            System.out.println("ca passe encore");
         } catch (DALException e) {
             e.printStackTrace();
             throw new BLLException(e);
         }
 
 	}
+	
+	///////////////////////////
 	
 	public List<Utilisateur> listeUtilisateurs() throws BLLException{
 		try {
@@ -79,7 +81,21 @@ public class UtilisateurManager {
 		}
 		
 	}
+	//////////////////////////
 	
+	public boolean verifLog (String pseudo, String motDePAsse) throws DALException {
+		
+		boolean logable = false;
+		
+		for (Utilisateur p : DAOFact.getInstance().getAll()) {
+			
+			if (p.getPseudo().equals(pseudo) && p.getMotDePasse().equals(motDePAsse)) {
+				logable = true;
+			}
+			
+		}
+		return logable;
+	}
 	
 	
 	////////////////////methode de verification////////////////

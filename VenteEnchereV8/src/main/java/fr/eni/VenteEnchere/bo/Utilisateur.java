@@ -14,7 +14,7 @@ public class Utilisateur {
 	private String codePostal ;
 	private String ville ;
 	private String motDePasse ;
-	private Integer credit ;
+	private Integer credit = 100;
 	private boolean administrateur ;
 	private List<ArticleVendu> lstArticles ;
 	private List<Enchere> lstEnchere ;
@@ -22,6 +22,30 @@ public class Utilisateur {
 	
 	
 	
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String motDePasse) {
+		super();
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.motDePasse = motDePasse;
+	}
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville) {
+		super();
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+	}
+	public Utilisateur(String pseudo) {
+		super();
+		this.pseudo = pseudo;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -105,6 +129,32 @@ public class Utilisateur {
 	}
 	
 	
+	/**
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @param motDePasse
+	 * @param administrateur
+	 */
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse, boolean administrateur) {
+		super();
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.motDePasse = motDePasse;
+		this.administrateur = administrateur;
+	}
 	
 	public Integer getNoUtilisateur() {
 		return noUtilisateur;

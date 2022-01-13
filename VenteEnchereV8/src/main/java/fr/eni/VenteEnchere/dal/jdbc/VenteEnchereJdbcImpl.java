@@ -1,31 +1,37 @@
 package fr.eni.VenteEnchere.dal.jdbc;
 
-import java.beans.Statement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.VenteEnchere.bo.Ameublement;
 import fr.eni.VenteEnchere.bo.ArticleVendu;
+import fr.eni.VenteEnchere.bo.Informatique;
+import fr.eni.VenteEnchere.bo.SportEtLoisir;
 import fr.eni.VenteEnchere.bo.Utilisateur;
+import fr.eni.VenteEnchere.bo.Vetement;
 import fr.eni.VenteEnchere.dal.DALException;
 import fr.eni.VenteEnchere.dal.MethodDAO;
 
 public class VenteEnchereJdbcImpl implements MethodDAO{ 
 	
 	/**Method utilisateurs **/
-	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS noUtilisateur, pseudo, nom, prenom,email, telephone,"
-			+ "rue, codePostal, ville, motDePasse, credit, administrateur";
-	private final String UPDATE_UTILISATEUR = "UPDATE INTO UTILISATEURS SET nom =?, prenom =?,email =?, telephone =?,"
+	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone,"
+			+ "rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+	private final String UPDATE_UTILISATEUR = "UPDATE INTO UTILISATEURS SET pseudo=?, nom =?, prenom =?,email =?, telephone =?, rue =?, code_postal =? , ville=?"
 			+ "	rue =? , codePostal =?, ville =?, motDePasse =? WHERE pseudo =?";
-	private final String DELETE_UTILISATEUR = "DELETE FROm UTILISATEUR WHERE pseudo = ? ";
+	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEUR WHERE pseudo = ? ";
 	
 	private final String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
 	
 	/** Method Articles **/
-	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS noUtilisateur, pseudo, nom, prenom,email, telephone,"
-			+ "rue, codePostal, ville, motDePasse, credit, administrateur";
+	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS nom_article, description, date_debut_encheres,date_fin_encheres, prix_initial,"
+			+ "prix_vente, no_uilisateur, no_catégorie VALUES (?,?,?,?,?,?,?,?)";
 	private final String UPDATE_ARTICLES_VENDUS = "UPDATE INTO ARTICLES_VENDUS SET nom =?, prenom =?,email =?, telephone =?,"
 			+ "	rue =? , codePostal =?, ville =?, motDePasse =? WHERE pseudo =?";
 	private final String DELETE_ARTICLES_VENDUS = "DELETE FROm ARTICLES_VENDUS WHERE pseudo = ? ";
@@ -40,65 +46,92 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	@Override
 	public void insertUser(Utilisateur utilisateur) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection()){
-			PreparedStatement pStmt = cnx.prepareStatement(INSERT_UTILISATEUR);
-			pStmt.setInt(1, utilisateur.getNoUtilisateur());
-			pStmt.setString(2, utilisateur.getPseudo());
-			pStmt.setString(3, utilisateur.getNom());
-			pStmt.setString(4, utilisateur.getPrenom());
-			pStmt.setString(5, utilisateur.getEmail());
-			pStmt.setString(6, utilisateur.getTelephone());
-			pStmt.setString(7, utilisateur.getRue());
-			pStmt.setString(8, utilisateur.getCodePostal());
-			pStmt.setString(9, utilisateur.getVille());
-			pStmt.setString(10, utilisateur.getMotDePasse());
-			pStmt.setInt(11, utilisateur.getCredit());
-			pStmt.setBoolean(12, utilisateur.isAdministrateur());
+			PreparedStatement pStmt = cnx.prepareStatement(INSERT_UTILISATEUR, PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			pStmt.setString(1, utilisateur.getPseudo());
+			pStmt.setString(2, utilisateur.getNom());
+			pStmt.setString(3, utilisateur.getPrenom());
+			pStmt.setString(4, utilisateur.getEmail());
+			pStmt.setString(5, utilisateur.getTelephone());
+			pStmt.setString(6, utilisateur.getRue());
+			pStmt.setString(7, utilisateur.getCodePostal());
+			pStmt.setString(8, utilisateur.getVille());
+			pStmt.setString(9, utilisateur.getMotDePasse());
+			pStmt.setInt(10, utilisateur.getCredit());
+			pStmt.setBoolean(11, utilisateur.isAdministrateur());
 			pStmt.executeUpdate();
 			
+			ResultSet rs = pStmt.getGeneratedKeys();
+			if(rs.next()) {
+				int id = rs.getInt(1);
+				utilisateur.setNoUtilisateur(id);
+			}
 			
-		} catch (Exception e) {
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new DALException("Impossible d'inserer");
 		}
 		
 	}
 	
 //	@Override
-	public List<Utilisateur> getAll()throws DALException {
-//		List<Utilisateur> lstUsers = new ArrayList<>();
-//		try (Connection cnx = ConnectionProvider.getConnection()){
-//			
-//			Statement stmt = cnx.createStatement();
-//			ResultSet rs = stmt.executeQuery(SELECT_ALL_UTILISATEURS);
-//			
-//			while (rs.next()){
-//				Integer noUtilsateur = rs.getInt("numero utilisateur");
-//				String pseudo = rs.getString("pseudo");
-//				String nom = rs.getString("pseudo");
-//				String prenom = rs.getString("pseudo");
-//				String email = rs.getString("pseudo");
-//				String  = rs.getString("pseudo");
-//				String pseudo = rs.getString("pseudo");
-//				
-//				
-//			}
-//			
-//			
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-		return null;}
-//	}
-	
-
+	public List<Utilisateur> getAll() throws DALException {
+		List<Utilisateur> lstUsers = new ArrayList<Utilisateur>();
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			
+		Statement stmt = cnx.createStatement();
+		ResultSet rs = stmt.executeQuery(SELECT_ALL_UTILISATEURS);
+		
+		while (rs.next()) {
+			String pseudo = rs.getString("pseudo");
+			String nom = rs.getString("nom");
+			String prenom = rs.getString("prenom");			
+			String email = rs.getString("email");
+			String motDePasse = rs.getString("mot de passe");
+			lstUsers.add(new Utilisateur(pseudo, nom, prenom, email, motDePasse));
+			
+		}
+			
+			
+		} catch (Exception e) {
+			throw new DALException("Impossible de lire la base de donnee");
+		}				
+	return lstUsers;
+	}
 	@Override
-	public void updateUser(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
+	public void updateUser(Utilisateur utilisateur) throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			PreparedStatement pStmt = cnx.prepareStatement(UPDATE_UTILISATEUR);
+			pStmt.setString(1, utilisateur.getPseudo());
+			pStmt.setString(2,utilisateur.getNom());
+			pStmt.setString(3,utilisateur.getPrenom());
+			pStmt.setString(4,utilisateur.getEmail());
+			pStmt.setString(5,utilisateur.getTelephone());
+			pStmt.setString(6,utilisateur.getRue());
+			pStmt.setString(7,utilisateur.getCodePostal());	
+			pStmt.setString(8,utilisateur.getVille());			
+			pStmt.executeUpdate();
+			
+		} catch (Exception e) {
+			throw new DALException("impossible de modifier l'utilisaeur");
+		}
+		
 		
 	}
 
 	@Override
-	public void deleteUser(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
+	public void deleteUser(Utilisateur utilisateur)throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			PreparedStatement pStmt = cnx.prepareStatement(DELETE_UTILISATEUR);
+			pStmt.setString(1,utilisateur.getPseudo());
+			pStmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			throw new DALException("Impossible de supprimer cet utilisateur");
+		}
+		
 		
 	}
 
@@ -107,9 +140,67 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	/**Method articles**/
 	
 	@Override
-	public void insertArticle(ArticleVendu articleVendu) {
-		// TODO Auto-generated method stub
+	public void insertArticle(ArticleVendu articleVendu)  throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ARTICLES_VENDUS, PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			pStmt.setString(1, articleVendu.getNonArticle());
+			pStmt.setString(2, articleVendu.getDescription());
+			pStmt.setDate(3,Date.valueOf(articleVendu.getDateDebutEncheres()) );
+			pStmt.setDate(4,Date.valueOf( articleVendu.getDateFinEncheres()));
+			pStmt.setString(5, articleVendu.getMiseAPrix());
+			pStmt.setString(6, articleVendu.getPrixVente());
+			pStmt.setString(7, articleVendu.getEtatVente());			
+			pStmt.executeUpdate();
+			
+			ResultSet rs = pStmt.getGeneratedKeys();
+			if(rs.next()) {
+				int id = rs.getInt(1);
+				articleVendu.setNoArticle(id);
+			
+		}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			throw new DALException("Impossible d'inserer");
+		}
+	}
+	@Override
+	public List<ArticleVendu> getAllArticle() throws DALException{
+		List<ArticleVendu> lstArticles = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			
+			Statement stmt = cnx.createStatement();
+			ResultSet rs = stmt.executeQuery(SELECT_ALL_ARTICLES_VENDUS);
+			
+			while (rs.next()) {
+				String nomArticle = rs.getString("nom article");
+				String description= rs.getString("description");
+				String miseAPrix = rs.getString("mise a Prix");
+				String prixVente = rs.getString("prix de vente");			
+				String etatVente = rs.getString("etat");
+				String categorie = rs.getString("categorie").trim();
+				ArticleVendu articleVendu=null;
+				
+				if (categorie.equalsIgnoreCase("sport")||categorie.equalsIgnoreCase("loisir")) {
+					String sport = rs.getString("sport et loisir");				
+					articleVendu = new SportEtLoisir(nomArticle, description, miseAPrix, prixVente, etatVente, sport);}
+				if (categorie.equalsIgnoreCase("ameublement")){
+					String ameublement = rs.getString("ameublement");
+					articleVendu =new Ameublement(nomArticle, description, miseAPrix, prixVente, etatVente, ameublement);}
+				if (categorie.equalsIgnoreCase("informatique")) {
+					String informatique = rs.getString("informatique");
+					articleVendu = new Informatique(nomArticle, description, miseAPrix, prixVente, etatVente, informatique);}
+				if (categorie.equalsIgnoreCase("vetement")) {
+					String vetement = rs.getString("vetement");
+					articleVendu = new Vetement(nomArticle, description, miseAPrix, prixVente, etatVente, vetement);}
+					
+				}
+			} catch (Exception e) {
+				throw new DALException("Impossible de lire la base de donnee");
+			}		
 		
+		return lstArticles;
 	}
 
 	@Override
@@ -124,10 +215,6 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 		
 	}
 
-	@Override
-	public List<ArticleVendu> getAllArticle() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }
