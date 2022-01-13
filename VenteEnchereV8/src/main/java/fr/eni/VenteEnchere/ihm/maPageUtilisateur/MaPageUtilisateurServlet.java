@@ -27,6 +27,10 @@ public class MaPageUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if (request.getSession().getAttribute("utilisateur") != null) {
+			System.out.println("session mapageUtilisateur en cours");
+		}
+		
 		String nextScreen = "WEB-INF/MaPageUtilisateur.jsp";
 		
 		if(request.getParameter("encheres")!=null) {
@@ -45,6 +49,8 @@ public class MaPageUtilisateurServlet extends HttpServlet {
 				}
 		
 		if(request.getParameter("deconnexion")!=null) {
+			System.out.println("ca passe par deconnection");
+			request.getSession().setAttribute("utilisateur", null);
 			
 			nextScreen ="AccueilServlet";
 				}

@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Servlet Filter implementation class connexionFilter
@@ -34,10 +35,14 @@ public class connexionFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
-		if (request.getParameter("creer") != null) {
-			request.getRequestDispatcher("MonProfilServlet").forward(request, response);
-		}
 		
+		String nextScreen = "ConnexionServlet";
+		
+//		if (((HttpServletRequest)request).getSession().getAttribute("utilisateur") != null) {
+//			nextScreen = "MonProfilServlet";
+//		}
+		
+//		request.getRequestDispatcher(nextScreen).forward(request, response);
 		
 		chain.doFilter(request, response);
 	}

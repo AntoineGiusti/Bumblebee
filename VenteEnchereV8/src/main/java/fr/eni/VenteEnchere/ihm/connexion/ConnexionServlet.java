@@ -31,6 +31,11 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		if (request.getSession().getAttribute("utilisateur") != null) {
+			System.out.println("session connexion en cours");
+		}
+		
 		String nextScreen = "WEB-INF/Connexion.jsp";
 		
 		if (request.getParameter("connexion") != null) {
@@ -43,6 +48,7 @@ public class ConnexionServlet extends HttpServlet {
 				
 				request.getSession().setAttribute("utilisateur", utilisateurConnect);
 				
+				
 				if(utilisateurConnect != null){
 					System.out.println("login ok");
 					
@@ -54,6 +60,9 @@ public class ConnexionServlet extends HttpServlet {
 			
 		}
 		
+		if (request.getParameter("creer") != null) {
+			nextScreen = "CreationProfilServlet";
+		}
 		
 			request.getRequestDispatcher(nextScreen).forward(request, response);
 		

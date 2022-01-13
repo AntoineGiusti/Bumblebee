@@ -27,12 +27,17 @@ public class AccueilServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		if (request.getSession().getAttribute("utilisateur") != null) {
+			System.out.println("session accueil en cours");
+		}
+		
 		
 		String nextScreen = "/WEB-INF/Accueil.jsp";
-		if(request.getParameter("ConnexionServlet")!=null) {
-			
-			nextScreen ="ConnexionServlet";
-			}
+		
+//		if(request.getParameter("ConnexionServlet")!=null) {
+//			
+//			nextScreen ="ConnexionServlet";
+//			}
 		
 		request.getRequestDispatcher(nextScreen).forward(request, response);
 	}

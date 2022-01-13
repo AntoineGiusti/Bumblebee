@@ -33,7 +33,7 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 		
 CreationProfilModel model = new CreationProfilModel();
 		
-//		MonProfilModel model = (MonProfilModel)request.getSession().getAttribute("model");
+//		MonProfilModel model = (MonProfilModel)request.getSession().getAttribute("model")
 		
 		if(request.getParameter("enregister")!=null) {
 			String pseudo = request.getParameter("pseudo");

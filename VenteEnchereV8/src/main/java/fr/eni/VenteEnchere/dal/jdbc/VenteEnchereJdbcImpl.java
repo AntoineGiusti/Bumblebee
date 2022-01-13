@@ -132,11 +132,10 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 				Integer credit = rs.getInt("credit");
 				boolean administrateur = rs.getBoolean("administrateur");
 				
-				if (administrateur = true) {
-					lstUsers.add(new Utilisateur(noUtilisateur,pseudo, nom, prenom, email, telephone, rue, codePostale,ville, motDePasse, credit, administrateur));
-				}else lstUsers.add(new Utilisateur(noUtilisateur,pseudo, nom, prenom, email,telephone,rue,codePostale,ville, motDePasse, credit));
 				
-
+					lstUsers.add(new Utilisateur(noUtilisateur,pseudo, nom, prenom, email, telephone, rue, codePostale,ville, motDePasse, credit, administrateur));
+				
+				
 			}
 
 		} catch (Exception e) {
