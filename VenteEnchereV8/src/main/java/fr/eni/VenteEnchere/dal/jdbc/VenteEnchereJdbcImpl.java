@@ -109,7 +109,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		return utilisateur;
 	}
 
-	@SuppressWarnings({ "unlikely-arg-type", "null" })
+	
 	@Override
 	public List<Utilisateur> getAll() throws DALException {
 		List<Utilisateur> lstUsers = new ArrayList<Utilisateur>();
