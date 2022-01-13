@@ -6,9 +6,12 @@
 <meta charset="UTF-8">
 <title>accueil</title>
 </head>
+
+<body>
+
 <h1>ENI-Enchères</h1>
 <a href="Connexion.jsp">S'inscrire - Se connecter</a>
-<body>
+
 <h3>Liste des enchères</h3>
 
 <h3>Filtres:</h3>
@@ -19,11 +22,22 @@
   <input type="text" id="filtre" name="filtre" placeholder="Le nom de l'article contient">
 </div>
 <br>
-<menuitem type="radio" radiogroup="group1">Catégorie:</menuitem>
+<div id="wrap">
+<ul class="navbar">
+
+    <a href="#"></a>
+    <ul>
+      <li><a href="#">Informatique</a></li>
+      <li><a href="#">Sport & Loisir</a></li>
+      <li><a href="#">Vêtement</a></li>
+      <li><a href="#">Ameublement</a></li>
+    </ul>
+  </li>
+<br>
 <input type = "submit" name="Rechercher" value="rechercher"/>
 <br>
 <br>
-
+<!-- article et caractéristiques a faire -->
 </form>
 
 </body>

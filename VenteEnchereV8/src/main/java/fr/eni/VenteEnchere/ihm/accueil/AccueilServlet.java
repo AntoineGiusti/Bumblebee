@@ -28,10 +28,14 @@ public class AccueilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		
-		String nextScreen = "/WEB-INF/rennes.jsp";
-		if(request.getParameter("")!=null) {
+		String nextScreen = "/WEB-INF/Accueil.jsp";
+		if(request.getParameter("Connexion.jsp")!=null) {
 			
-			nextScreen ="TourServlet";
+			nextScreen ="ConnexionServlet";
+			}
+		
+//		request.setAttribute("model", model);
+		request.getRequestDispatcher(nextScreen).forward(request, response);
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
