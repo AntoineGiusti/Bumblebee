@@ -1,4 +1,4 @@
-package fr.eni.VenteEnchere.ihm;
+package fr.eni.VenteEnchere.ihm.monProfil;
 
 import java.io.IOException;
 

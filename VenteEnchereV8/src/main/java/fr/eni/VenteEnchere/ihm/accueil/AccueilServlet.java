@@ -1,4 +1,4 @@
-package fr.eni.VenteEnchere.ihm;
+package fr.eni.VenteEnchere.ihm.accueil;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
