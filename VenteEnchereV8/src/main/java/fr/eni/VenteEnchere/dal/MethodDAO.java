@@ -20,4 +20,7 @@ public interface MethodDAO {
 	public void deleteArticle(ArticleVendu articleVendu)throws DALException;
 	public List<ArticleVendu> getAllArticle () throws DALException;
 	
+	/**Method Enchere**/
+	
+	
 }
