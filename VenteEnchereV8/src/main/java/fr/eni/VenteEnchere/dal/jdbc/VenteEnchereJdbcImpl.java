@@ -86,9 +86,14 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 			ResultSet rs = pStmt.executeQuery();
 			while (rs.next()) {
 				String nom = rs.getString("nom");
-				String prenom = rs.getString("nom");
-				String email = rs.getString("nom");
-				utilisateur.getPseudo();
+				String prenom = rs.getString("prenom");
+				String email = rs.getString("email");
+				String telephone = rs.getString("telephone");
+				String rue = rs.getString("rue");
+				String codePostal= rs.getString("code postale");
+				String ville = rs.getString("ville");
+				
+				utilisateur = new Utilisateur(nom , prenom , email , telephone , rue , codePostal, ville);
 			}
 		} catch (Exception e) {
 			throw new DALException("Je ne trouve pas ce pseudo");
