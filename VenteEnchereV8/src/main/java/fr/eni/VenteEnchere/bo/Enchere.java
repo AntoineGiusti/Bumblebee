@@ -19,6 +19,8 @@ public class Enchere {
 	private Utilisateur utilisateur;
 	
 	
+	
+	
 	//////////////////constructeurs////////////////////
 	/**
 	 * @param dateEnchere
@@ -33,6 +35,8 @@ public class Enchere {
 		this.articleVendu = articleVendu;
 		this.utilisateur = utilisateur;
 	}
+	
+	
 	
 	/**
 	 * @param dateEnchere
