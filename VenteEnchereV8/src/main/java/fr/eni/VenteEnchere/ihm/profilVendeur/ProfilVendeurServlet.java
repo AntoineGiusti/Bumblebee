@@ -1,4 +1,4 @@
-package fr.eni.VenteEnchere.ihm.connexion;
+package fr.eni.VenteEnchere.ihm.profilVendeur;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.VenteEnchere.bll.UtilisateurManager;
-import fr.eni.VenteEnchere.dal.DALException;
-
 /**
- * Servlet implementation class ConnexionServlet
+ * Servlet implementation class ProfilVendeurServlet
  */
-@WebServlet("/ConnexionServlet")
-public class ConnexionServlet extends HttpServlet {
+@WebServlet("/ProfilVendeurServlet")
+public class ProfilVendeurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConnexionServlet() {
+    public ProfilVendeurServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,34 +26,8 @@ public class ConnexionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String nextScreen = "WEB-INF/Connexion.jsp";
-		
-		if (request.getParameter("connexion") != null) {
-			
-			String pseudo = request.getParameter("pseudo");
-			String motDePasse = request.getParameter("motDePasse");
-			
-			try {
-				boolean logOk = UtilisateurManager.getInstance().verifLog(pseudo, motDePasse);
-				
-				if(logOk){
-					System.out.println("login ok");
-					
-					nextScreen = "MaPageUtilisateurServlet";
-				}		
-			} catch (DALException e) {
-				e.printStackTrace();
-			}	
-			
-		}
-		
-		
-			request.getRequestDispatcher(nextScreen).forward(request, response);
-		
-		
-			
-
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

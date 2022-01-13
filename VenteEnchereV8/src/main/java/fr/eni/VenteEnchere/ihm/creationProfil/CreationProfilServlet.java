@@ -34,6 +34,8 @@ public class CreationProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
+		String nextScreen = "WEB-INF/monProfil.jsp"; 
+		
 		CreationProfilModel model = new CreationProfilModel();
 		
 //		MonProfilModel model = (MonProfilModel)request.getSession().getAttribute("model");
@@ -53,8 +55,7 @@ public class CreationProfilServlet extends HttpServlet {
 			Utilisateur candidat = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 
 			model.setUtilisateur(candidat);			
-//			
-//			model.getLstUser().add(utilisateur);
+;
 
 			
 			try {
@@ -64,20 +65,22 @@ public class CreationProfilServlet extends HttpServlet {
 
 				System.out.println("ca passe");
 				
+				request.setAttribute("model", model);
+				
+				nextScreen = "MaPageUtilisateurServlet";
+				
+				
+				
 			} catch (BLLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				
 			}
-			
-//			manager.supprimerUtilisateur(utilisateur);
-//			
-//			manager.modifierUtilisateur(utilisateur);
-//			
+					
 		}
-			request.setAttribute("model", model);
-	
-			request.getRequestDispatcher("WEB-INF/monProfil.jsp").forward(request, response);
+		
+			request.getRequestDispatcher(nextScreen).forward(request, response);
+		
 		}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
