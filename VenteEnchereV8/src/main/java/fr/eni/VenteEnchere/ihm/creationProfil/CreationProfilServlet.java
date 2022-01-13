@@ -53,8 +53,7 @@ public class CreationProfilServlet extends HttpServlet {
 			Utilisateur candidat = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 
 			model.setUtilisateur(candidat);			
-//			
-//			model.getLstUser().add(utilisateur);
+;
 
 			
 			try {
@@ -64,20 +63,23 @@ public class CreationProfilServlet extends HttpServlet {
 
 				System.out.println("ca passe");
 				
+				request.setAttribute("model", model);
+				
+				request.getRequestDispatcher("MaPageUtilisateurServlet").forward(request, response);
+				
 			} catch (BLLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				
 			}
-			
-//			manager.supprimerUtilisateur(utilisateur);
-//			
-//			manager.modifierUtilisateur(utilisateur);
-//			
+					
 		}
-			request.setAttribute("model", model);
-	
+		else {
 			request.getRequestDispatcher("WEB-INF/monProfil.jsp").forward(request, response);
+		}
+			
+	
+			
 		}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
