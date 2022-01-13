@@ -98,14 +98,14 @@ public class ArticleVendu {
 	/**
 	 * @return the nonArticle
 	 */
-	public String getNonArticle() {
+	public String getNomArticle() {
 		return nomArticle;
 	}
 
 	/**
 	 * @param nonArticle the nonArticle to set
 	 */
-	public void setNonArticle(String nomArticle) {
+	public void setNomArticle(String nomArticle) {
 		this.nomArticle = nomArticle;
 	}
 

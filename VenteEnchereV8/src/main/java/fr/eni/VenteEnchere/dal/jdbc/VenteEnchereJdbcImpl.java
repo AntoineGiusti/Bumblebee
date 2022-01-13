@@ -144,7 +144,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ARTICLES_VENDUS, PreparedStatement.RETURN_GENERATED_KEYS);
 			
-			pStmt.setString(1, articleVendu.getNonArticle());
+			pStmt.setString(1, articleVendu.getNomArticle());
 			pStmt.setString(2, articleVendu.getDescription());
 			pStmt.setDate(3,Date.valueOf(articleVendu.getDateDebutEncheres()) );
 			pStmt.setDate(4,Date.valueOf( articleVendu.getDateFinEncheres()));
@@ -204,14 +204,28 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	}
 
 	@Override
-	public void updateArticle(ArticleVendu articleVendu) {
-		// TODO Auto-generated method stub
+	public void updateArticle(ArticleVendu articleVendu)throws DALException {		
+			try (Connection cnx = ConnectionProvider.getConnection();){
+				PreparedStatement pStmt = cnx.prepareStatement(UPDATE_ARTICLES_VENDUS);
+				pStmt.setString(1, articleVendu.getNomArticle());
+				pStmt.setString(2,articleVendu.getDescription());
+				pStmt.setString(3,articleVendu.getMiseAPrix());
+				pStmt.setString(4,articleVendu.getPrixVente());
+				pStmt.setString(5,articleVendu.getEtatVente());						
+				pStmt.executeUpdate();
+				
+			} catch (Exception e) {
+				throw new DALException("impossible de modifier l'article");
+			}
+			
+			
+		}
 		
-	}
+	
 
 	@Override
 	public void deleteArticle(ArticleVendu articleVendu) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
