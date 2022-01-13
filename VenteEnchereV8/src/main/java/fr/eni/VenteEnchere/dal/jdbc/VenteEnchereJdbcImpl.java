@@ -1,16 +1,20 @@
 package fr.eni.VenteEnchere.dal.jdbc;
 
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.VenteEnchere.bo.Ameublement;
 import fr.eni.VenteEnchere.bo.ArticleVendu;
+import fr.eni.VenteEnchere.bo.Enchere;
 import fr.eni.VenteEnchere.bo.Informatique;
 import fr.eni.VenteEnchere.bo.SportEtLoisir;
 import fr.eni.VenteEnchere.bo.Utilisateur;
@@ -20,7 +24,7 @@ import fr.eni.VenteEnchere.dal.MethodDAO;
 
 public class VenteEnchereJdbcImpl implements MethodDAO{ 
 	
-	/**Method utilisateurs **/
+	/** requete utilisateurs **/
 	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone,"
 			+ "rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 	private final String UPDATE_UTILISATEUR = "UPDATE INTO UTILISATEURS SET pseudo=?, nom =?, prenom =?,email =?, telephone =?, rue =?, code_postal =? , ville=?"
@@ -31,7 +35,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 	
 	private final String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
 	
-	/** Method Articles **/
+	/** requete Articles **/
 	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS nom_article, description, date_debut_encheres,date_fin_encheres, prix_initial,"
 
 
@@ -43,10 +47,14 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 
 	private final String SELECT_ALL_ARTICLES_VENDUS = "SELECT * FROM ARTICLES_VENDUS";
 	
+	/** requete enchere **/
 	
+	private final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_enchere,date_enchere,montant_enchere,no_article_no_utilisateur) VALUES (?,?,?,?,?)";
+	
+	private final String SELECT_ALL_ENCHERE ="SELECT * FROME ENCHERES";
 
 	
-	/**Method utilisateurs**/
+	/** Method utilisateurs **/
 	
 	@Override
 	public void insertUser(Utilisateur utilisateur) throws DALException {
@@ -177,8 +185,10 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 			
 			pStmt.setString(1, articleVendu.getNomArticle());
 			pStmt.setString(2, articleVendu.getDescription());
-			pStmt.setDate(3,Date.valueOf(articleVendu.getDateDebutEncheres()) );
-			pStmt.setDate(4,Date.valueOf( articleVendu.getDateFinEncheres()));
+			Timestamp timeStampStart = Timestamp.valueOf(articleVendu.getDateDebutEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			pStmt.setTimestamp(4,timeStampStart);
+			Timestamp timeStampEnd = Timestamp.valueOf(articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			pStmt.setTimestamp(5,timeStampEnd);
 			pStmt.setString(5, articleVendu.getMiseAPrix());
 			pStmt.setString(6, articleVendu.getPrixVente());
 			pStmt.setString(7, articleVendu.getEtatVente());			
@@ -265,6 +275,38 @@ public class VenteEnchereJdbcImpl implements MethodDAO{
 			throw new DALException("Impossible de supprimer cet article");
 		}
 		
+	}
+	/** Method Encheres **/
+
+	@Override
+	public void insertEnchere(Date dateEnchere, Integer montantEnchere, ArticleVendu articleVendu,
+			Utilisateur utilisateur) throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection();){
+			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ENCHERE);
+			pStmt.setString(1,utilisateur.getPseudo());
+			pStmt.setString(2,articleVendu.getNomArticle());
+			pStmt.setString(3,articleVendu.getDescription());
+			Timestamp timeStampStart = Timestamp.valueOf(articleVendu.getDateDebutEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			pStmt.setTimestamp(4,timeStampStart);
+			Timestamp timeStampEnd = Timestamp.valueOf(articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			pStmt.setTimestamp(5,timeStampEnd);
+			pStmt.setString(6,articleVendu.getMiseAPrix());
+			pStmt.setString(7,articleVendu.getPrixVente());
+			pStmt.setString(8,articleVendu.getEtatVente());	
+			Enchere enchere = new Enchere();
+			pStmt.setInt(9,enchere.getMontantEnchere() );
+			pStmt.executeUpdate();
+			
+		} catch (Exception e) {
+			throw new DALException("impossible d'inserer l'enchere");
+		}
+		
+	}
+
+	@Override
+	public List<Enchere> getAllEnchere() throws DALException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

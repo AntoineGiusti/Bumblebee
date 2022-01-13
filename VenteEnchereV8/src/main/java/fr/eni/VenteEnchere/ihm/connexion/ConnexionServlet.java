@@ -30,6 +30,8 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String nextScreen = "WEB-INF/Connexion.jsp";
+		
 		if (request.getParameter("connexion") != null) {
 			
 			String pseudo = request.getParameter("pseudo");
@@ -40,7 +42,8 @@ public class ConnexionServlet extends HttpServlet {
 				
 				if(logOk){
 					System.out.println("login ok");
-					request.getRequestDispatcher("WEB-INF/MaPageUtilisateur.jsp").forward(request, response);
+					
+					nextScreen = "MaPageUtilisateurServlet";
 				}		
 			} catch (DALException e) {
 				e.printStackTrace();
@@ -48,9 +51,9 @@ public class ConnexionServlet extends HttpServlet {
 			
 		}
 		
-		else {
-			request.getRequestDispatcher("WEB-INF/Connexion.jsp").forward(request, response);
-		}
+		
+			request.getRequestDispatcher(nextScreen).forward(request, response);
+		
 		
 			
 
