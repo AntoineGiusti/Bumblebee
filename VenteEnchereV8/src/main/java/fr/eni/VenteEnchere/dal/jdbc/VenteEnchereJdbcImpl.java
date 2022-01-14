@@ -57,13 +57,9 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	private final String SELECT_ALL_ENCHERE = "SELECT * FROM ENCHERES "
 			+ "INNER JOIN UTILISATEURS ON ENCHERES.no_enchere = UTILISATEURS.no_utilisateur "
 			+ "INNER JOIN ARTICLES_VENDUS ON ENCHERES.no_enchere = ARTICLES_VENDUS.vente_utilisateur ";
-	
-	
 
 	/** Method utilisateurs **/
 
-	
-	
 	/**
 	 * method d'insertion des utilisateurs
 	 */
@@ -97,10 +93,10 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		}
 
 	}
-	
+
 	/**
 	 * method de selection des données d'un utilisateur en passant par son pseudo
-	 */	
+	 */
 	@Override
 	public Utilisateur selectByPseudo(String pseudo) throws DALException {
 		Utilisateur utilisateur = null;
@@ -120,6 +116,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 				utilisateur = new Utilisateur(nom, prenom, email, telephone, rue, codePostal, ville);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DALException("Je ne trouve pas ce pseudo");
 		}
 
@@ -127,7 +124,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	}
 
 	/**
-	 * method pour voir la liste des utilisateurs
+	 * method pour afficher la liste des utilisateurs
 	 */
 	@Override
 	public List<Utilisateur> getAll() throws DALException {
@@ -146,15 +143,14 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 				String telephone = rs.getString("telephone");
 				String rue = rs.getString("rue");
 				String codePostale = rs.getString("code_postal");
-				String ville = rs.getString("ville");				
+				String ville = rs.getString("ville");
 				String motDePasse = rs.getString("mot_de_passe");
 				Integer credit = rs.getInt("credit");
 				boolean administrateur = rs.getBoolean("administrateur");
-				
-				
-					lstUsers.add(new Utilisateur(noUtilisateur,pseudo, nom, prenom, email, telephone, rue, codePostale,ville, motDePasse, credit, administrateur));
-				
-				
+
+				lstUsers.add(new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostale,
+						ville, motDePasse, credit, administrateur));
+
 			}
 
 		} catch (Exception e) {
@@ -164,6 +160,9 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		return lstUsers;
 	}
 
+	/**
+	 * method de modification des utilisateurs
+	 */
 	@Override
 	public void updateUser(Utilisateur utilisateur) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -180,11 +179,15 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			pStmt.executeUpdate();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DALException("impossible de modifier l'utilisaeur");
 		}
 
 	}
 
+	/**
+	 * method de suppression d'un utilisateurs en passant par son pseudo
+	 */
 	@Override
 	public void deleteUser(Utilisateur utilisateur) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -193,6 +196,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			pStmt.executeUpdate();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DALException("Impossible de supprimer cet utilisateur");
 		}
 
@@ -200,6 +204,9 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 
 	/** Method articles **/
 
+	/**
+	 * method d'insertion des articles
+	 */
 	@Override
 	public void insertArticle(ArticleVendu articleVendu) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -232,6 +239,9 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		}
 	}
 
+	/**
+	 * method d'affichage d'une liste d'article
+	 */
 	@Override
 	public List<ArticleVendu> getAllArticle() throws DALException {
 		List<ArticleVendu> lstArticles = new ArrayList<ArticleVendu>();
@@ -270,12 +280,16 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DALException("Impossible de lire la base de donnee");
 		}
 
 		return lstArticles;
 	}
 
+	/**
+	 * method de mise a jour des article
+	 */
 	@Override
 	public void updateArticle(ArticleVendu articleVendu) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -288,11 +302,15 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			pStmt.executeUpdate();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DALException("impossible de modifier l'article");
 		}
 
 	}
 
+	/**
+	 * method de suppression d'un article par son nom
+	 */
 	@Override
 	public void deleteArticle(ArticleVendu articleVendu) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
@@ -301,6 +319,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			pStmt.executeUpdate();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DALException("Impossible de supprimer cet article");
 		}
 
@@ -308,6 +327,9 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 
 	/** Method Encheres **/
 
+	/**
+	 * method d'insertion d'une enchere
+	 */
 	@Override
 	public void insertEnchere(Date dateEnchere, Integer montantEnchere, ArticleVendu articleVendu,
 			Utilisateur utilisateur) throws DALException {
@@ -330,18 +352,22 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			pStmt.executeUpdate();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DALException("impossible d'inserer l'enchere");
 		}
 
 	}
 
+	/**
+	 * method d'affichage des encheres
+	 */
 	@Override
 	public List<Enchere> getAllEnchere() throws DALException {
 		List<Enchere> lstEncheres = new ArrayList<Enchere>();
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 
 			Statement stmt = cnx.createStatement();
-			ResultSet rs = stmt.executeQuery(SELECT_ALL_ENCHERE );
+			ResultSet rs = stmt.executeQuery(SELECT_ALL_ENCHERE);
 
 			while (rs.next()) {
 
@@ -353,6 +379,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DALException("Impossible de lire la base de donnee");
 		}
 
