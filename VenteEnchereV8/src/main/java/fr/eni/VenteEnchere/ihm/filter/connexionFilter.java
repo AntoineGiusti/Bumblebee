@@ -39,8 +39,8 @@ public class connexionFilter implements Filter {
 		
 		
 		Utilisateur utilisateur = (Utilisateur) ((HttpServletRequest)request).getSession().getAttribute("utilisateur");
-		if(utilisateur == null) {
-			request.getRequestDispatcher("LoginServlet").forward(request, response);
+		if(utilisateur != null) {
+			request.getRequestDispatcher("ProfilUtilisateurServlet").forward(request, response);
 		}
 		else {
 			chain.doFilter(request, response);
