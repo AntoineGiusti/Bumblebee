@@ -7,6 +7,7 @@
 <title>connexion</title>
 </head>
 <body>
+	<h2>${erreur}</h2>
 	<form action="ConnexionServlet" method= "POST">
 		<label for="pseudo">Identifiant :</label>
 		<input type="text" name="pseudo" value="">

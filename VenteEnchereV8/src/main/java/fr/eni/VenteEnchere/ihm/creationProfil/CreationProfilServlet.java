@@ -65,12 +65,12 @@ public class CreationProfilServlet extends HttpServlet {
 				
 				request.setAttribute("model", model);
 				
-				nextScreen = "MaPageUtilisateurServlet";
+				nextScreen = "ConnexionServlet";
 				
 				
 				
 			} catch (BLLException e) {
-				// TODO Auto-generated catch block
+				request.setAttribute("erreur", e.toString());
 				e.printStackTrace();
 				
 			}

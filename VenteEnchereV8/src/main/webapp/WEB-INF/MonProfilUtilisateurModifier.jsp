@@ -28,11 +28,11 @@
 		<br>
 		<p>Ville <input type="text" name="ville" value="${utilisateur.ville}"/>
 		<br>
-		<p>Mot de passe actuel <input type="text" name="motDePasseActuel" value="${utilisateur.motDePasse}"/>
+		<p>Mot de passe actuel <input type="password" name="motDePasseActuel" value="${utilisateur.motDePasse}"/>
 		<br>
-		<p>Nouveau mot de passe <input type="text" name="NouveauMotDePasse"/>
+		<p>Nouveau mot de passe <input type="password" name="NouveauMotDePasse" value="${utilisateur.motDePasse}"/>
 		<br>
-		<p>Confirmation <input type="text" name="confirmation"/>
+		<p>Confirmation <input type="password" name="confirmation" value="${utilisateur.motDePasse}"/>
 		<br>
 		<p>Crédits : ${utilisateur.credit}</p>
 		<br>

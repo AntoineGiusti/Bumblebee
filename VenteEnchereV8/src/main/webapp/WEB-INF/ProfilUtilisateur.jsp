@@ -13,7 +13,6 @@
 	<form action="ProfilUtilisateurServlet" method= "POST">
 
 	<p>Pseudo : ${utilisateur.pseudo}</p>
-
 	<br>
 	<p>Nom : ${utilisateur.nom}</p>
 	<br>
