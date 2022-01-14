@@ -27,6 +27,17 @@ public class ArticleVendu {
 	
 	
 	
+	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres,
+			LocalDateTime dateFinEncheres, String miseAPrix, String prixVente) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+	}
+
 	public ArticleVendu(String nomArticle, String description, String miseAPrix, String prixVente, String etatVente) {
 		super();
 		this.nomArticle = nomArticle;
@@ -80,6 +91,8 @@ public class ArticleVendu {
 	 * @param categorie
 	 * @param retrait
 	 */
+	
+
 	
 
 	/**
