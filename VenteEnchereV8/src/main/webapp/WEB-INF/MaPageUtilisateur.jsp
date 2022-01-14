@@ -8,7 +8,7 @@
 </head>
 <body>
 <a href="AccueilServlet">Enchéres</a>
-<a href="vendreArticleServlet">vendre un article</a>
+<a href="NouvelleVenteServlet">vendre un article</a>
 <a href="ProfilUtilisateurServlet">mon profil</a>
 <a href="MaPageUtilisateurServlet?deconnexion" >deconnexion</a>
 <h1>Ma page utilisateur</h1>

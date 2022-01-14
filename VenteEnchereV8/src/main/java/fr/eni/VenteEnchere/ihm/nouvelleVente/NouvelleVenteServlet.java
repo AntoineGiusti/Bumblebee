@@ -2,24 +2,22 @@ package fr.eni.VenteEnchere.ihm.nouvelleVente;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
 import fr.eni.VenteEnchere.bo.ArticleVendu;
 import fr.eni.VenteEnchere.bo.Retrait;
 import fr.eni.VenteEnchere.bo.Utilisateur;
+
 
 /**
  * Servlet implementation class NouvelleVenteServlet
@@ -41,6 +39,11 @@ public class NouvelleVenteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		
+		Utilisateur utilisateurConnecte = (Utilisateur) session.getAttribute("utilisateur");
+		
 		
 		NouvelleVenteModel model = new NouvelleVenteModel();
 		String nextScreen = "/WEB-INF/NouvelleVente.jsp";
@@ -67,7 +70,35 @@ public class NouvelleVenteServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			String miseAPrix = request.getParameter("miseAPrix");
-			ArticleVendu article = new ArticleVendu(nomArticle,description, dateDebutEnchere, dateFinEnchere, miseAPrix);
+			
+			Utilisateur utilisateur = utilisateurConnecte;
+			
+			String libelleCategorie = request.getParameter("categorie");
+			int no_categorie = 0;
+			
+			switch (libelleCategorie) {
+			case "Ameublement": 
+				no_categorie = 1;
+				break;
+				
+			case "Informatique": 
+				no_categorie = 2;
+				break;
+				
+			case "Sport et loisir": 
+				no_categorie = 3;
+				break;
+				
+			case "Vetement": 
+				no_categorie = 4;
+				break;
+
+			default:
+				break;
+			}
+			
+			
+			
 			
 			model.getLstArticles();
 			
@@ -84,6 +115,10 @@ public class NouvelleVenteServlet extends HttpServlet {
 			
 			
 			retrait = new  Retrait(rue, codePostal,ville);
+			
+			
+			ArticleVendu article = new ArticleVendu(nomArticle,description, dateDebutEnchere, dateFinEnchere, miseAPrix, utilisateur, no_categorie, retrait);
+			
 			
 		}
 		if(request.getParameter("annuler") != null ) {
