@@ -49,11 +49,17 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			String NouveauMotDePasse = request.getParameter("NouveauMotDePasse");
 			String confirmation = request.getParameter("confirmation");
 			
-			//TODO voir pour utiliser l utilisateru en session
-			
 			HttpSession session = request.getSession();
 			
 			Utilisateur utilisateurModifier = (Utilisateur) session.getAttribute("utilisateur");
+			
+			Boolean logOk = UtilisateurManager.getInstance().verificationMotDePasseActuel(motDePasseActuel, utilisateurModifier.getMotDePasse());
+			
+			if (!logOk) {
+				System.out.println("mot de passe errone");
+				request.setAttribute("verifMp", "mot de passe errone");
+			}
+			
 			utilisateurModifier.setPseudo(pseudo);
 			utilisateurModifier.setNom(nom);
 			utilisateurModifier.setPrenom(prenom);
@@ -65,11 +71,8 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			utilisateurModifier.setMotDePasse(NouveauMotDePasse);
 			
 			
-			
-			//Utilisateur UtilisateurModifier = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-			
 			try {
-				UtilisateurManager.getInstance().modifierUtilisateur(utilisateurModifier, motDePasseActuel, confirmation);
+				UtilisateurManager.getInstance().modifierUtilisateur(utilisateurModifier, confirmation);
 			} catch (BLLException e) {
 				e.printStackTrace();
 			}

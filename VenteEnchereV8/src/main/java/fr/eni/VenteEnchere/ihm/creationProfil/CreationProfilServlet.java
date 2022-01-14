@@ -16,7 +16,7 @@ import fr.eni.VenteEnchere.bo.Utilisateur;
 /**
  * Servlet implementation class UtilisateurServlet
  */
-@WebServlet("/MonProfilServlet")
+@WebServlet("/CreationProfilServlet")
 public class CreationProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -34,7 +34,7 @@ public class CreationProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		String nextScreen = "WEB-INF/monProfil.jsp"; 
+		String nextScreen = "WEB-INF/CreerMonProfil.jsp"; 
 		
 		CreationProfilModel model = new CreationProfilModel();
 		

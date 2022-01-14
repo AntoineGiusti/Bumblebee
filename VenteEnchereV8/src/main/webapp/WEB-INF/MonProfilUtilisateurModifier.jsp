@@ -8,24 +8,27 @@
 </head>
 <body>
 	<h2>Modifier Mon profil</h2>
-	<form action="CreationProfilServlet" method="POST">
+	
+	<h3>${verifMp}</h3>
+	
+	<form action="ProfilUtilisateurModifierServlet" method="POST">
 		<p>Pseudo: <input type="text" name="pseudo" value="${utilisateur.pseudo}"/>
 		<br>
-		<p>Nom: <input type="text" name="nom" value="${model.utilisateur.nom}"/>
+		<p>Nom: <input type="text" name="nom" value="${utilisateur.nom}"/>
 		<br>
-		<p>Prenom: <input type="text" name="prenom" value="${model.utilisateur.prenom}"/>
+		<p>Prenom: <input type="text" name="prenom" value="${utilisateur.prenom}"/>
 		<br>
-		<p>Email: <input type="text" name="email" value="${model.utilisateur.email}"/>
+		<p>Email: <input type="text" name="email" value="${utilisateur.email}"/>
 		<br>
-		<p>Téléphone: <input type="text" name="telephone" value="${model.utilisateur.telephone}"/>
+		<p>Téléphone: <input type="text" name="telephone" value="${utilisateur.telephone}"/>
 		<br>
-		<p>Rue: <input type="text" name="rue" value="${model.utilisateur.rue}"/>
+		<p>Rue: <input type="text" name="rue" value="${utilisateur.rue}"/>
 		<br>
-		<p>Code postal <input type="text" name="codePostal" value="${model.utilisateur.codePostal}"/>
+		<p>Code postal <input type="text" name="codePostal" value="${utilisateur.codePostal}"/>
 		<br>
-		<p>Ville <input type="text" name="ville" value="${model.utilisateur.ville}"/>
+		<p>Ville <input type="text" name="ville" value="${utilisateur.ville}"/>
 		<br>
-		<p>Mot de passe actuel <input type="text" name="motDePasseActuel" value="${model.utilisateur.motDePasse}"/>
+		<p>Mot de passe actuel <input type="text" name="motDePasseActuel" value="${utilisateur.motDePasse}"/>
 		<br>
 		<p>Nouveau mot de passe <input type="text" name="NouveauMotDePasse"/>
 		<br>

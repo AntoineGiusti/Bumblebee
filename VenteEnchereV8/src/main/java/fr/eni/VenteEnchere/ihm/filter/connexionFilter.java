@@ -10,6 +10,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
+import fr.eni.VenteEnchere.bo.Utilisateur;
+
 /**
  * Servlet Filter implementation class connexionFilter
  */
@@ -36,16 +38,15 @@ public class connexionFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		
-		String nextScreen = "ConnexionServlet";
-		
-//		if (((HttpServletRequest)request).getSession().getAttribute("utilisateur") != null) {
-//			nextScreen = "MonProfilServlet";
-//		}
-		
-//		request.getRequestDispatcher(nextScreen).forward(request, response);
-		
-		chain.doFilter(request, response);
+		Utilisateur utilisateur = (Utilisateur) ((HttpServletRequest)request).getSession().getAttribute("utilisateur");
+		if(utilisateur != null) {
+			request.getRequestDispatcher("MaPageUtilisateurServlet").forward(request, response);
+		}
+		else {
+			chain.doFilter(request, response);
+		}
 	}
+
 
 	/**
 	 * @see Filter#init(FilterConfig)
