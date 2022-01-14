@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.VenteEnchere.bll.BLLException;
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
@@ -44,15 +45,30 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			String rue = request.getParameter("rue");
 			String codePostal= request.getParameter("codePostal");
 			String ville= request.getParameter("ville");
-			String motDePasse = request.getParameter("motDePasse");
+			String motDePasse = request.getParameter("motDePasseActuel");
 			String NouveauMotDePasse = request.getParameter("NouveauMotDePasse");
 			String confirmation = request.getParameter("confirmation");
 			
 			//TODO voir pour utiliser l utilisateru en session
-			Utilisateur UtilisateurModifier = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+			
+			HttpSession session = request.getSession();
+			
+			Utilisateur utilisateurModifier = (Utilisateur) session.getAttribute("utilisateur");
+			utilisateurModifier.setPseudo(pseudo);
+			utilisateurModifier.setNom(nom);
+			utilisateurModifier.setPrenom(prenom);
+			utilisateurModifier.setEmail(email);
+			utilisateurModifier.setTelephone(telephone);
+			utilisateurModifier.setRue(rue);
+			utilisateurModifier.setCodePostal(codePostal);
+			utilisateurModifier.setMotDePasse(NouveauMotDePasse);
+			
+			
+			
+			//Utilisateur UtilisateurModifier = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 			
 			try {
-				UtilisateurManager.getInstance().modifierUtilisateur(UtilisateurModifier, NouveauMotDePasse, confirmation);
+				UtilisateurManager.getInstance().modifierUtilisateur(utilisateurModifier, NouveauMotDePasse, confirmation);
 			} catch (BLLException e) {
 				e.printStackTrace();
 			}

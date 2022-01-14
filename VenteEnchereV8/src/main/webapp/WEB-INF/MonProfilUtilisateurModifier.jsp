@@ -25,7 +25,7 @@
 		<br>
 		<p>Ville <input type="text" name="ville" value="${model.utilisateur.ville}"/>
 		<br>
-		<p>Mot de passe actuel <input type="text" name="motDePasse" value="${model.utilisateur.motDePasse}"/>
+		<p>Mot de passe actuel <input type="text" name="motDePasseActuel" value="${model.utilisateur.motDePasse}"/>
 		<br>
 		<p>Nouveau mot de passe <input type="text" name="NouveauMotDePasse"/>
 		<br>
