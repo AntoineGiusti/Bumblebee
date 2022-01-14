@@ -100,7 +100,7 @@ public class UtilisateurManager {
 	
 	////////////////////////////////////////
 	
-	public void modifierUtilisateur(Utilisateur utilisateur,String nouvMp ,String confirmation) throws BLLException {
+	public void modifierUtilisateur(Utilisateur utilisateur,String MotDePasseActuel ,String confirmation) throws BLLException {
 		BLLException be = new BLLException();
 		
 		verificationPseudo(utilisateur.getPseudo(), be);
@@ -111,9 +111,7 @@ public class UtilisateurManager {
 		verificationRue(utilisateur.getRue(), be);
 		verificationCodePostal(utilisateur.getCodePostal(), be);
 		verificationVille(utilisateur.getVille(), be);
-		verificationMotDePasseActuel(utilisateur.getMotDePasse(), be);
-		verificationMotDePasse(nouvMp, be);
-		verificationConfirmation(nouvMp, confirmation, be);
+		verificationMotDePasse(MotDePasseActuel, be);
 		
 		
 		if (be.hasErreur()) {
