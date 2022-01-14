@@ -33,6 +33,8 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		
 		String nextScreen = "WEB-INF/MonProfilUtilisateurModifier.jsp";
 		
 	
@@ -48,8 +50,7 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			String motDePasseActuel = request.getParameter("motDePasseActuel");
 			String NouveauMotDePasse = request.getParameter("NouveauMotDePasse");
 			String confirmation = request.getParameter("confirmation");
-			
-			HttpSession session = request.getSession();
+		
 			
 			Utilisateur utilisateurModifier = (Utilisateur) session.getAttribute("utilisateur");
 			
@@ -77,6 +78,21 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 						
+		}
+		
+		if (request.getParameter("supprimer")!=null) {
+				
+			Utilisateur utilisateurSupprimer = (Utilisateur) session.getAttribute("utilisateur");
+			UtilisateurManager.getInstance().supprimerUtilisateur(utilisateurSupprimer);
+			
+			request.getSession().setAttribute("utilisateur", null);
+			
+			nextScreen ="AccueilServlet";
+			
+			if (request.getSession().getAttribute("utilisateur") == null) {
+				System.out.println("vous etes deconnecte");
+			}
+			
 		}
 		
 		request.getRequestDispatcher(nextScreen).forward(request, response);

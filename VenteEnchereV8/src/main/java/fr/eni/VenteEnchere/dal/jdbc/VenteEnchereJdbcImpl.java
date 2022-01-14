@@ -198,8 +198,10 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	public void deleteUser(Utilisateur utilisateur) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pStmt = cnx.prepareStatement(DELETE_UTILISATEUR);
-			pStmt.setString(1, utilisateur.getPseudo());
+			pStmt.setInt(1, utilisateur.getNoUtilisateur());
 			pStmt.executeUpdate();
+			
+			System.out.println("suppression passe par dao");
 
 		} catch (Exception e) {
 			e.printStackTrace();
