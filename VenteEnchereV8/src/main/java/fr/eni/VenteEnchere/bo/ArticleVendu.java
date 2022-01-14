@@ -20,7 +20,7 @@ public class ArticleVendu {
 	private String miseAPrix;
 	private String prixVente;
 	private String etatVente;
-	private Utilisateur user;
+	private Utilisateur utilisateur;
 	private List<Enchere> lstEncheres;
 	private Categorie categorie;
 	private Retrait retrait;
@@ -210,15 +210,15 @@ public class ArticleVendu {
 	/**
 	 * @return the user
 	 */
-	public Utilisateur getUser() {
-		return user;
+	public Utilisateur getutilisateur() {
+		return utilisateur;
 	}
 
 	/**
 	 * @param user the user to set
 	 */
-	public void setUser(Utilisateur user) {
-		this.user = user;
+	public void setutilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	/**
@@ -283,7 +283,7 @@ public class ArticleVendu {
 		builder.append(", etatVente=");
 		builder.append(etatVente);
 		builder.append(", user=");
-		builder.append(user);
+		builder.append(utilisateur);
 		builder.append(", lstEncheres=");
 		builder.append(lstEncheres);
 		builder.append(", categorie=");
