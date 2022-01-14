@@ -6,6 +6,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
 import fr.eni.VenteEnchere.bo.ArticleVendu;
 import fr.eni.VenteEnchere.bo.Retrait;
+import fr.eni.VenteEnchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class NouvelleVenteServlet
@@ -39,36 +43,33 @@ public class NouvelleVenteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		NouvelleVenteModel model = new NouvelleVenteModel();
-	
-		LocalDateTime.parse("yyyy-MM-dd : HH:mm:ss");
-		LocalDateTime localDateTime = LocalDateTime.now();
+		String nextScreen = "/WEB-INF/NouvelleVente.jsp";
 		
 		
 		
 		
-		
-		if (request.getParameter("Enregistrer") != null ) {
-			String nomArticle = request.getParameter("Article");
+		if (request.getParameter("enregistrer") != null ) {
+			String nomArticle = request.getParameter("article");
 			String description = request.getParameter("description");
 			String categorie = request.getParameter("categorie");			
-			String dateDebutEnchere = request.getParameter("debut de l'enchere");
+			String dateDebutEnchere = request.getParameter("dateDebutEnchere");
 			try {
-				Timestamp dateDebut = new Timestamp(((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateDebutEnchere)).getTime()));
+				Timestamp dateDebut = new Timestamp(((new SimpleDateFormat("dd/MM/yyyy").parse(dateDebutEnchere)).getTime()));
 			} catch (ParseException e) {
 			
 				e.printStackTrace();
 			}
 			String dateFinEnchere = request.getParameter("dateFinEnchere");
 			try {
-				Timestamp dateFin = new Timestamp(((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateFinEnchere)).getTime()));
+				Timestamp dateFin = new Timestamp(((new SimpleDateFormat("dd/MM/yyyy").parse(dateFinEnchere)).getTime()));
 			} catch (Exception e) {
 				
 				e.printStackTrace();
 			}
-			String miseAPrix = request.getParameter("Mise a prix");
+			String miseAPrix = request.getParameter("miseAPrix");
 			ArticleVendu article = new ArticleVendu(nomArticle,description, dateDebutEnchere, dateFinEnchere, miseAPrix);
 			
-			model.setArticleVendu(model);
+			model.getLstArticles();
 			
 			try {
 				
@@ -77,15 +78,33 @@ public class NouvelleVenteServlet extends HttpServlet {
 			}
 			
 			String rue = request.getParameter("rue");
-			String codePostal = request.getParameter("code postal");
-			String ville = request.getParameter("ville");
+			String codePostal = request.getParameter("codePostal");
+			String ville = request.getParameter("ville");			
 			Retrait retrait = new Retrait(rue,codePostal,ville);
 			
-			model.getRetrait();
+			
+			retrait = new  Retrait(rue, codePostal,ville);
+			
 		}
-		String nextScreen = "/WEB-INF/NouvelleVente.jsp";
+		if(request.getParameter("annuler") != null ) {
+			request.setAttribute("article","");
+			request.setAttribute("description","");
+			request.setAttribute("categorie","");
+			request.setAttribute("dateDebutEnchere","");
+			request.setAttribute("dateFinEnchere","");
+			request.setAttribute("miseAPrix","");
+			request.setAttribute("rue","");
+			request.setAttribute("codePostal","");
+			request.setAttribute("ville","");
+			
+		}
+		
+		
+		
+		
 		request.getRequestDispatcher(nextScreen).forward(request, response);
 	}	
+	
 	
 
 	/**
