@@ -45,7 +45,7 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			String rue = request.getParameter("rue");
 			String codePostal= request.getParameter("codePostal");
 			String ville= request.getParameter("ville");
-			String motDePasse = request.getParameter("motDePasseActuel");
+			String motDePasseActuel = request.getParameter("motDePasseActuel");
 			String NouveauMotDePasse = request.getParameter("NouveauMotDePasse");
 			String confirmation = request.getParameter("confirmation");
 			
@@ -61,6 +61,7 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			utilisateurModifier.setTelephone(telephone);
 			utilisateurModifier.setRue(rue);
 			utilisateurModifier.setCodePostal(codePostal);
+			utilisateurModifier.setVille(ville);
 			utilisateurModifier.setMotDePasse(NouveauMotDePasse);
 			
 			
@@ -68,7 +69,7 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			//Utilisateur UtilisateurModifier = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 			
 			try {
-				UtilisateurManager.getInstance().modifierUtilisateur(utilisateurModifier, NouveauMotDePasse, confirmation);
+				UtilisateurManager.getInstance().modifierUtilisateur(utilisateurModifier, motDePasseActuel, confirmation);
 			} catch (BLLException e) {
 				e.printStackTrace();
 			}
