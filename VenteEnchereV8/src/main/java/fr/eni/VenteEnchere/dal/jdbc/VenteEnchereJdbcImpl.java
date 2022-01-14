@@ -32,7 +32,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	/** requete utilisateurs **/
 	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone,"
 			+ "rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-	private final String UPDATE_UTILISATEUR = "UPDATE INTO UTILISATEURS SET pseudo=?, nom =?, prenom =?,email =?, telephone =?, rue =?, code_postal =? , ville=?"
+	private final String UPDATE_UTILISATEUR = "UPDATE INTO UTILISATEURS SET pseudo=?, nom =?, prenom =?,email =?, telephone =?, rue =?, code_postal =? , ville=?,"
 			+ "	rue =? , code_postal =?, ville =?, mot_de_passe =? WHERE pseudo =?";
 	private final String SELECT_BY_PSEUDO = " SELECT * FROM UTILISATEURS WHERE pseudo= ?";
 
