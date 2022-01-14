@@ -111,7 +111,8 @@ public class UtilisateurManager {
 		verificationRue(utilisateur.getRue(), be);
 		verificationCodePostal(utilisateur.getCodePostal(), be);
 		verificationVille(utilisateur.getVille(), be);
-		verificationMotDePasse(MotDePasseActuel, be);
+		verificationMotDePasse(utilisateur.getMotDePasse(), be);
+		verificationConfirmation(confirmation, utilisateur.getMotDePasse(), be);
 		
 		
 		if (be.hasErreur()) {
@@ -126,6 +127,14 @@ public class UtilisateurManager {
             throw new BLLException(e);
         }
 
+	}
+	
+	public Boolean verificationMotDePasseActuel(String mpSaisi, String motdepasseActuel) {
+		
+		Boolean mpOk = false;
+		
+		return mpOk;
+		
 	}
 	
 	
@@ -194,10 +203,6 @@ public class UtilisateurManager {
 		}
 	}
 	
-	private void verificationMotDePasseActuel(String motDePasse, BLLException be) {
-		if(motDePasse == null || motDePasse.isBlank() || motDePasse.length() > 30) {
-			be.ajouterErreur(new ParameterException("Le mot de passe est obligatoire et doit etre <= 30"));
-		}
-	}
+	
 	
 }

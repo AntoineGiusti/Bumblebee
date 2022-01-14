@@ -49,7 +49,7 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			String NouveauMotDePasse = request.getParameter("NouveauMotDePasse");
 			String confirmation = request.getParameter("confirmation");
 			
-			//TODO voir pour utiliser l utilisateru en session
+			Boolean logOk = false;
 			
 			HttpSession session = request.getSession();
 			
