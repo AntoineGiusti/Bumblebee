@@ -33,9 +33,9 @@ public class ConnexionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		if (request.getSession().getAttribute("utilisateur") != null) {
-			System.out.println("session connexion en cours");
-		}
+//		if (request.getSession().getAttribute("utilisateur") != null) {
+//			System.out.println("session connexion en cours");
+//		}
 		
 		String nextScreen = "WEB-INF/Connexion.jsp";
 		
@@ -46,6 +46,10 @@ public class ConnexionServlet extends HttpServlet {
 			
 			try {
 				Utilisateur utilisateurConnect = UtilisateurManager.getInstance().verifLog(pseudo, motDePasse);
+				
+				if (utilisateurConnect == null) {
+					request.setAttribute("erreur", "le pseudo et/ou le mot de passe sont erronés");
+				}
 				
 				HttpSession session = request.getSession();
 				

@@ -34,7 +34,7 @@ private List<Exception> erreurs = new ArrayList<Exception>();
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("BLLException");
+		StringBuilder sb = new StringBuilder("ATTENTION ! - ");
 		sb.append(System.lineSeparator());
 		for(Exception e : erreurs) {
 			sb.append(e.getMessage())

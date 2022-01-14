@@ -12,10 +12,7 @@
 	<br>
 	<form action="ProfilUtilisateurServlet" method= "POST">
 
-	<p>Pseudo: <div type="text" name="pseudo" value="${utilisateur.pseudo}"/>
-
 	<p>Pseudo : ${utilisateur.pseudo}</p>
-
 	<br>
 	<p>Nom : ${utilisateur.nom}</p>
 	<br>

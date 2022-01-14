@@ -35,6 +35,8 @@
 
 <input type = "submit" name="annuler" value="Annuler"/>
 
+<h3>${erreur}</h3>
+
 </form>
 </body>
 </html>
