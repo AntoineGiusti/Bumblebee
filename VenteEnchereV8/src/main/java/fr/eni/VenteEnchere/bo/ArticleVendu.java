@@ -46,6 +46,32 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 	}
+	
+	
+
+	/**
+	 * @param nomArticle
+	 * @param description
+	 * @param dateDebutEncheres
+	 * @param dateFinEncheres
+	 * @param miseAPrix
+	 * @param utilisateur
+	 * @param categorie
+	 * @param retrait
+	 */
+	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres,
+			LocalDateTime dateFinEncheres, String miseAPrix, Utilisateur utilisateur, Categorie categorie,
+			Retrait retrait) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+		this.retrait = retrait;
+	}
 
 	/**
 	 * 
@@ -94,6 +120,21 @@ public class ArticleVendu {
 	
 
 	
+
+	/**
+	 * @param nomArticle2
+	 * @param description2
+	 * @param dateDebutEnchere
+	 * @param dateFinEnchere
+	 * @param miseAPrix2
+	 * @param utilisateur2
+	 * @param no_categorie
+	 * @param retrait2
+	 */
+	public ArticleVendu(String nomArticle2, String description2, String dateDebutEnchere, String dateFinEnchere,
+			String miseAPrix2, Utilisateur utilisateur2, int no_categorie, Retrait retrait2) {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @return the noArticle
