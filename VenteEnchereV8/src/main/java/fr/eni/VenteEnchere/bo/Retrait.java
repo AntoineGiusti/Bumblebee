@@ -23,6 +23,16 @@ public class Retrait {
 	}
 	
 	
+	
+	public Retrait(String rue, String codePostal, String ville) {
+		super();
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+	}
+
+
+
 	public Retrait() {
 		super();
 	}
