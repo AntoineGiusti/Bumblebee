@@ -144,21 +144,48 @@ public class UtilisateurManager {
 		
 	}
 	
+	////////////////////////////////
+	
+	public void supprimerUtilisateur(Utilisateur utilisateur) {
+		try {
+			System.out.println("suppression passe par manager");
+			DAOFact.getInstance().deleteUser(utilisateur);
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	////////////////////methode de verification////////////////
 	
-	//TODO verif pour doublon
-	
+
 	private void verificationPseudo(String pseudo, BLLException be) {
-		if(pseudo == null || pseudo.isBlank() || pseudo.length() > 30) {
-			be.ajouterErreur(new ParameterException("Le pseudo est obligatoire et doit etre <= 30"));
+		if(pseudo == null || pseudo.isBlank() || pseudo.length() > 30 || pseudo.matches("\\p{Alpha}+")) {
+			be.ajouterErreur(new ParameterException("Le pseudo est obligatoire et doit etre <= 30 et doit "
+					+ "contenir uniqument des caracteres alphanumeriques"));
+		}
+		
+		try {
+			for (Utilisateur u : DAOFact.getInstance().getAll()) {
+						
+			if (u.getPseudo().equals(pseudo)) {
+			be.ajouterErreur(new ParameterException("Le pseudo existe deja"));
+				}			
+			}
+			
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	private void verificationNom(String nom, BLLException be) {
 		if(nom == null || nom.isBlank() || nom.length() > 30) {
 			be.ajouterErreur(new ParameterException("Le nom est obligatoire et doit etre <= 30"));
 		}
+		
 	}
 	
 	private void verificationPrenom(String prenom, BLLException be) {
@@ -171,7 +198,21 @@ public class UtilisateurManager {
 		if(email == null || email.isBlank() || email.length() > 50) {
 			be.ajouterErreur(new ParameterException("L'Email est obligatoire et doit etre <= 50"));
 		}
+		try {
+			for (Utilisateur u : DAOFact.getInstance().getAll()) {
+						
+			if (u.getEmail().equals(email)) {
+			be.ajouterErreur(new ParameterException("L'email existe deja"));
+				}			
+			}
+			
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
+	
 	
 	private void verificationTelephone(String telephone, BLLException be) {
 		if(telephone == null || telephone.isBlank() || telephone.length() > 15) {

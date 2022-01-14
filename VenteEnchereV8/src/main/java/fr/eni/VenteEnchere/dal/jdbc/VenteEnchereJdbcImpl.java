@@ -42,10 +42,12 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 
 	private final String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
 
+	
+	
 	/** requete Articles **/
-	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS nom_article, description, date_debut_encheres,date_fin_encheres, prix_initial,"
+	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial,"
 
-			+ "prix_vente, no_uilisateur, no_categorie VALUES (?,?,?,?,?,?,?,?)";
+			+ "prix_vente, no_utilisateur, no_categorie VALUES (?,?,?,?,?,?,?,?)";
 	
 	private final String UPDATE_ARTICLES_VENDUS = "UPDATE INTO ARTICLES_VENDUS SET nom =?, prenom =?,email =?, telephone =?,"
 			+ "	rue =? , code_postal =?, ville =?, mot_de_passe =? WHERE pseudo =?";
@@ -198,8 +200,10 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	public void deleteUser(Utilisateur utilisateur) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection();) {
 			PreparedStatement pStmt = cnx.prepareStatement(DELETE_UTILISATEUR);
-			pStmt.setString(1, utilisateur.getPseudo());
+			pStmt.setInt(1, utilisateur.getNoUtilisateur());
 			pStmt.executeUpdate();
+			
+			System.out.println("suppression passe par dao");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -229,7 +233,8 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			pStmt.setTimestamp(5, timeStampEnd);
 			pStmt.setString(5, articleVendu.getMiseAPrix());
 			pStmt.setString(6, articleVendu.getPrixVente());
-			pStmt.setString(7, articleVendu.getEtatVente());
+			pStmt.setInt(7, articleVendu.getutilisateur().getNoUtilisateur());
+			pStmt.setInt(8, articleVendu.getCategorie().getNoCategorie());
 			pStmt.executeUpdate();
 
 			ResultSet rs = pStmt.getGeneratedKeys();
@@ -241,7 +246,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-			throw new DALException("Impossible d'inserer");
+			throw new DALException("Impossible d'inserer article");
 		}
 	}
 
