@@ -51,8 +51,8 @@ public class MaPageUtilisateurServlet extends HttpServlet {
 		if(request.getParameter("deconnexion")!=null) {
 			System.out.println("ca passe par deconnection");
 			request.getSession().setAttribute("utilisateur", null);
-			if (request.getSession().getAttribute("utilisateur") != null) {
-				System.out.println("vous n etes pas deconnecter");
+			if (request.getSession().getAttribute("utilisateur") == null) {
+				System.out.println("vous etes deconnecte");
 			}
 			nextScreen ="AccueilServlet";
 				}

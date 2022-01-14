@@ -32,11 +32,13 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	/** requete utilisateurs **/
 	private final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone,"
 			+ "rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-	private final String UPDATE_UTILISATEUR = "UPDATE INTO UTILISATEURS SET pseudo=?, nom =?, prenom =?,email =?, telephone =?, rue =?, code_postal =? , ville=?"
-			+ "	rue =? , code_postal =?, ville =?, mot_de_passe =? WHERE pseudo =?";
+	
+	private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo=?, nom =?, prenom =?,email =?, telephone =?, rue =?, code_postal =? , ville=?,"
+			+ "mot_de_passe =? WHERE no_utilisateur =?";
+	
 	private final String SELECT_BY_PSEUDO = " SELECT * FROM UTILISATEURS WHERE pseudo= ?";
 
-	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE pseudo = ? ";
+	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ? ";
 
 	private final String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
 
@@ -44,8 +46,10 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS nom_article, description, date_debut_encheres,date_fin_encheres, prix_initial,"
 
 			+ "prix_vente, no_uilisateur, no_categorie VALUES (?,?,?,?,?,?,?,?)";
+	
 	private final String UPDATE_ARTICLES_VENDUS = "UPDATE INTO ARTICLES_VENDUS SET nom =?, prenom =?,email =?, telephone =?,"
 			+ "	rue =? , code_postal =?, ville =?, mot_de_passe =? WHERE pseudo =?";
+	
 	private final String DELETE_ARTICLES_VENDUS = "DELETE FROm ARTICLES_VENDUS WHERE pseudo = ? ";
 
 	private final String SELECT_ALL_ARTICLES_VENDUS = "SELECT * FROM ARTICLES_VENDUS";
@@ -95,7 +99,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	}
 
 	/**
-	 * method de selection des données d'un utilisateur en passant par son pseudo
+	 * method de selection des donnï¿½es d'un utilisateur en passant par son pseudo
 	 */
 	@Override
 	public Utilisateur selectByPseudo(String pseudo) throws DALException {
@@ -171,11 +175,13 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			pStmt.setString(2, utilisateur.getNom());
 			pStmt.setString(3, utilisateur.getPrenom());
 			pStmt.setString(4, utilisateur.getEmail());
-			pStmt.setString(5, utilisateur.getMotDePasse());
-			pStmt.setString(6, utilisateur.getTelephone());
-			pStmt.setString(7, utilisateur.getRue());
-			pStmt.setString(8, utilisateur.getCodePostal());
-			pStmt.setString(9, utilisateur.getVille());
+			pStmt.setString(5, utilisateur.getTelephone());
+			pStmt.setString(6, utilisateur.getRue());
+			pStmt.setString(7, utilisateur.getCodePostal());
+			pStmt.setString(8, utilisateur.getVille());
+			pStmt.setString(9, utilisateur.getMotDePasse());
+			pStmt.setInt(10, utilisateur.getNoUtilisateur());
+			System.out.println(utilisateur);
 			pStmt.executeUpdate();
 
 		} catch (Exception e) {
