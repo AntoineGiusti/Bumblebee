@@ -1,6 +1,7 @@
 package fr.eni.VenteEnchere.ihm.nouvelleVente;
 
 import fr.eni.VenteEnchere.bo.ArticleVendu;
+import fr.eni.VenteEnchere.bo.Retrait;
 
 /**
  * @author agiusti2021
@@ -9,6 +10,7 @@ import fr.eni.VenteEnchere.bo.ArticleVendu;
 public class NouvelleVenteModel extends ArticleVendu {
 	
 	private ArticleVendu articleVendu;
+	private Retrait retrait;
 	
 	
 	public NouvelleVenteModel(String nomArticle, String description, String miseAPrix, String prixVente,
@@ -36,6 +38,16 @@ public class NouvelleVenteModel extends ArticleVendu {
 		builder.append("]");
 		return builder.toString();
 	}
+
+	public Retrait getRetrait() {
+		return retrait;
+	}
+
+	public void setRetrait(Retrait model) {
+		this.retrait = model;
+	}
+
+	
 	
 	
 
