@@ -100,7 +100,7 @@ public class UtilisateurManager {
 	
 	////////////////////////////////////////
 	
-	public void modifierUtilisateur(Utilisateur utilisateur) throws BLLException {
+	public void modifierUtilisateur(Utilisateur utilisateur,String nouvMp ,String confirmation) throws BLLException {
 		BLLException be = new BLLException();
 		
 		verificationPseudo(utilisateur.getPseudo(), be);
@@ -111,6 +111,10 @@ public class UtilisateurManager {
 		verificationRue(utilisateur.getRue(), be);
 		verificationCodePostal(utilisateur.getCodePostal(), be);
 		verificationVille(utilisateur.getVille(), be);
+		verificationMotDePasseActuel(utilisateur.getMotDePasse(), be);
+		verificationMotDePasse(nouvMp, be);
+		verificationConfirmation(nouvMp, confirmation, be);
+		
 		
 		if (be.hasErreur()) {
 			throw be;
@@ -189,6 +193,12 @@ public class UtilisateurManager {
 	private void verificationConfirmation(String confirmation ,String motDePasse, BLLException be) {
 		if(!confirmation.equals(motDePasse)) {
 			be.ajouterErreur(new ParameterException("La confirmation doit etre identique au mot de passe"));
+		}
+	}
+	
+	private void verificationMotDePasseActuel(String motDePasse, BLLException be) {
+		if(motDePasse == null || motDePasse.isBlank() || motDePasse.length() > 30) {
+			be.ajouterErreur(new ParameterException("Le mot de passe est obligatoire et doit etre <= 30"));
 		}
 	}
 	
