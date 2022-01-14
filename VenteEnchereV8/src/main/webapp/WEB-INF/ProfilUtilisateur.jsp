@@ -11,7 +11,7 @@
 	<br>
 	<br>
 	<form action="ProfilUtilisateurServlet" method= "POST">
-	<p>Pseudo: <input type="text" name="pseudo" value="${utilisateur.pseudo}"/>
+	<p>Pseudo: <div type="text" name="pseudo" value="${utilisateur.pseudo}"/>
 	<br>
 	<p>Nom: <input type="text" name="nom" value="${utilisateur.nom}"/>
 	<br>
