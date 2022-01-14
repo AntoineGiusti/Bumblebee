@@ -26,10 +26,21 @@ public class DetailVenteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
+		
+		String nextScreen = "WEB-INF/DetailVente.jsp";
+		if(request.getParameter("encherir")!=null) {
+			
+			
+			nextScreen = "DetailVenteServlet";
+			
+			
+			
+		}
+		
+		//request.getSession().setAttribute("model", model);
+		
+		request.getRequestDispatcher("WEB-INF/DetailVente.jsp").forward(request, response);
+		}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

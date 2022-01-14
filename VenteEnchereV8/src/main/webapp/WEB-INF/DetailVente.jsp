@@ -11,35 +11,34 @@
 	
 	<h2>Détail vente</h2>
 	
-	<img alt="#" src="fichier****">
+	<img  src="" alt=>
 	
 	<form action="DetailVenteServlet" method="POST">
-	<h2>--Nom de L'article--</h2>
+	<h2>${articleVendu.nomArticle}</h2>
 		
 	<h2>Description:</h2>
-	<P>$(categorie.libelle)</P>
+	<P>${lstcategorie.categorie}</P>
 		
 	<h2>Catégorie: </h2>
-	<p>$(categorie.)</p>
+	<p>${categorie.libelle}</p>
 		
 	<h2>Meilleure offre:</h2>
-	<p>$(utilisateur.credit)par $(utlisiateur.prenom)</p>
+	<p>${utilisateur.credit}par ${utilisateur.prenom}</p>
 		
 	<h2>Mise à prix</h2>
-	<p>$(???????.credit)</p>
+	<p>${enchere.montantEnchere}</p>
 		
 	<h2>Fin de l'enchère:</h2>
-	<p>$(???????.LocalDateTime)</p>
+	<p>${enchere.dateEnchere}</p>
 		
 	<h2>Retrait:</h2>
-	<p>$(utilisateur.rue) $(utilisateur.codePostal) $(utilisateur.ville)</p>
+	<p>${utilisateur.rue} ${utilisateur.codePostal} ${utilisateur.ville}</p>
 		
 	<h2>Vendeur</h2>
-	<p>$(utilisateur.pseudo)</p>
+	<p>${profilVendeur.utilisateur.pseudo}</p>
 		
 	<h2>Ma proposition:</h2>
-		
-		
+	<menu>--chiffre--</menu>
 	<input type="submit" name="encherir" value="Enchérir"/>
 	</form>
 	
