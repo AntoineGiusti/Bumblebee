@@ -22,17 +22,13 @@
   <input type="text" id="filtre" name="filtre" placeholder="Le nom de l'article contient">
 </div>
 <br>
-<div id="wrap">
-<ul class="navbar">
-
-    <a href="#"></a>
-    <ul>
-      <li><a href="#">Informatique</a></li>
-      <li><a href="#">Sport & Loisir</a></li>
-      <li><a href="#">Vêtement</a></li>
-      <li><a href="#">Ameublement</a></li>
-    </ul>
-  </li>
+<p><select name = "categorie">
+	<option value = "ameublement">Ameublement</option>
+	<option value = "informatique">Informatique</option>
+	<option value = "sportEtLoisir">Sport et loisir</option>
+	<option value = "vetement">Vetement</option>
+</select>
+</p>
 <br>
 <input type = "submit" name="Rechercher" value="rechercher"/>
 <br>
