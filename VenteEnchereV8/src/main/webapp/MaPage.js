@@ -1,6 +1,10 @@
 /**
  * 
+
+
  */function clickAchat() {
+	
+	console.log("entrée dans clickAchat");
 var cours = document.getElementbyId("cours");
 cours.checked = false;
 cours.disabled = true;
@@ -13,6 +17,8 @@ termine.disabled = true;
 }
 
 function clickVente() {
+	
+	console.log("entrée dans clickVente");
 	var ouvert = document.getElementbyId("ouvert");
 	ouvert.checked = false;
 	ouvert.disabled = true;
@@ -23,3 +29,4 @@ function clickVente() {
 	win.checked = false;
 	win.disabled = true;
 }
+

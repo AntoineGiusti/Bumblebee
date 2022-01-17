@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Ma page utilisateur</title>
+
+
 </head>
 <body>
 <h1><a href="AccueilServlet">ENI-Enchères</a></h1>
@@ -30,28 +32,26 @@
 	<option value = "vetement">Vetement</option>
 </select></p>
 <input type="submit" name="rechercher" value="Rechercher">
-
-
-<input type="radio" name="achat" value="Achats" id="achat" onclick="clickAchat">
+<br>
 <div>
-<input type="checkbox" id="ouvert" >enchères ouvertes
-<input type="checkbox" id="mienne" >mes enchères
+<input type="radio" name="achat" value="Achats" id="achat" onclick="clickAchat">Achats
+<br>
+<input type="checkbox" id="ouvert" >enchères ouvertes<br>
+<input type="checkbox" id="mienne" >mes enchères<br>
 <input type="checkbox" id="win" >mes enchères remportées
 </div>
-	
-<input type="radio" name="mesvente" value="Mes ventes" id="vente">
+<br>
 <div>
-<input type="checkbox" id="cours" >mes ventes en cours
-<input type="checkbox" id="nostart" >ventes non débutées
+<input type="radio" name="mesvente" value="Mes ventes" id="vente" onclick="clickVente">Mes ventes
+<br>
+<input type="checkbox" id="cours" >mes ventes en cours<br>
+<input type="checkbox" id="nostart" >ventes non débutées<br>
 <input type="checkbox" id="termine" >ventes terminées
 </div>
+
+
 
 </body>
 </html>
 
-<script type="application/javascript">
-var element = document.getElementbyId("ouvert");
-element.checked = false;
-element.disabled = true;
-
-</script>
+<script src="MaPage.js" type="application/javascript"></script>
