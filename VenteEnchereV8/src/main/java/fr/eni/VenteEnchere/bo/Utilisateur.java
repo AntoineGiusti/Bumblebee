@@ -73,43 +73,21 @@ public class Utilisateur {
 		super();
 		this.pseudo = pseudo;
 	}
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Utilisateur [noUtilisateur=");
-		builder.append(noUtilisateur);
-		builder.append(", pseudo=");
-		builder.append(pseudo);
-		builder.append(", nom=");
-		builder.append(nom);
-		builder.append(", prenom=");
-		builder.append(prenom);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append(", telephone=");
-		builder.append(telephone);
-		builder.append(", rue=");
-		builder.append(rue);
-		builder.append(", codePostal=");
-		builder.append(codePostal);
-		builder.append(", ville=");
-		builder.append(ville);
-		builder.append(", motDePasse=");
-		builder.append(motDePasse);
-		builder.append(", credit=");
-		builder.append(credit);
-		builder.append(", administrateur=");
-		builder.append(administrateur);
-		builder.append(", lstArticles=");
-		builder.append(lstArticles);
-		builder.append(", lstEnchere=");
-		builder.append(lstEnchere);
-		builder.append("]");
-		return builder.toString();
-		//TODO a modifier en fonction 
-	}
+	
 	public Utilisateur() {
 		super();
+	}
+	
+	
+	
+	/**
+	 * @param pseudo
+	 * @param email
+	 */
+	public Utilisateur(String pseudo, String email) {
+		super();
+		this.pseudo = pseudo;
+		this.email = email;
 	}
 	public Utilisateur(Integer noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, Integer credit, boolean administrateur) {
@@ -182,6 +160,44 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 		this.administrateur = administrateur;
 	}
+	
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Utilisateur [noUtilisateur=");
+		builder.append(noUtilisateur);
+		builder.append(", pseudo=");
+		builder.append(pseudo);
+		builder.append(", nom=");
+		builder.append(nom);
+		builder.append(", prenom=");
+		builder.append(prenom);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", telephone=");
+		builder.append(telephone);
+		builder.append(", rue=");
+		builder.append(rue);
+		builder.append(", codePostal=");
+		builder.append(codePostal);
+		builder.append(", ville=");
+		builder.append(ville);
+		builder.append(", motDePasse=");
+		builder.append(motDePasse);
+		builder.append(", credit=");
+		builder.append(credit);
+		builder.append(", administrateur=");
+		builder.append(administrateur);
+		builder.append(", lstArticles=");
+		builder.append(lstArticles);
+		builder.append(", lstEnchere=");
+		builder.append(lstEnchere);
+		builder.append("]");
+		return builder.toString();
+		//TODO a modifier en fonction 
+	}
+	
 	
 	public Integer getNoUtilisateur() {
 		return noUtilisateur;

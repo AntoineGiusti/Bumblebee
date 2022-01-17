@@ -37,7 +37,11 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 		
 		String nextScreen = "WEB-INF/MonProfilUtilisateurModifier.jsp";
 		
-	
+		Utilisateur utilisateurModifier = (Utilisateur) session.getAttribute("utilisateur");
+		
+		Utilisateur utilisateurOrigin = new Utilisateur(utilisateurModifier.getPseudo(),utilisateurModifier.getEmail());
+		
+		
 		if(request.getParameter("enregister")!=null) {
 			String pseudo = request.getParameter("pseudo");
 			String nom = request.getParameter("nom");
@@ -50,17 +54,20 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			String motDePasseActuel = request.getParameter("motDePasseActuel");
 			String NouveauMotDePasse = request.getParameter("NouveauMotDePasse");
 			String confirmation = request.getParameter("confirmation");
-		
 			
-			Utilisateur utilisateurModifier = (Utilisateur) session.getAttribute("utilisateur");
-			
-			Boolean logOk = UtilisateurManager.getInstance().verificationMotDePasseActuel(motDePasseActuel, utilisateurModifier.getMotDePasse());
+					
+			Boolean logOk = false;
+			try {
+				logOk = UtilisateurManager.getInstance().verificationMotDePasseActuel(motDePasseActuel, utilisateurModifier.getMotDePasse());
+			} catch (BLLException e1) {
+				e1.printStackTrace();
+			}
 			
 			if (!logOk) {
 				System.out.println("mot de passe errone");
 				request.setAttribute("verifMp", "mot de passe errone");
 			}
-			
+			else {
 			utilisateurModifier.setPseudo(pseudo);
 			utilisateurModifier.setNom(nom);
 			utilisateurModifier.setPrenom(prenom);
@@ -70,11 +77,13 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			utilisateurModifier.setCodePostal(codePostal);
 			utilisateurModifier.setVille(ville);
 			utilisateurModifier.setMotDePasse(NouveauMotDePasse);
+			}
 			
 			
 			try {
-				UtilisateurManager.getInstance().modifierUtilisateur(utilisateurModifier, confirmation);
+				UtilisateurManager.getInstance().modifierUtilisateur(utilisateurModifier,utilisateurOrigin, confirmation);
 			} catch (BLLException e) {
+				request.setAttribute("erreur", e.toString());
 				e.printStackTrace();
 			}
 						
