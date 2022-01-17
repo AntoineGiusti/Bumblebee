@@ -121,26 +121,6 @@ public class ArticleVendu {
 
 	
 
-	/**
-	 * @param nomArticle2
-	 * @param description2
-	 * @param dateDebutEnchere
-	 * @param dateFinEnchere
-	 * @param miseAPrix2
-	 * @param utilisateur2
-	 * @param no_categorie
-	 * @param retrait2
-	 */
-	public ArticleVendu(String nomArticle2, String description2, String dateDebutEnchere, String dateFinEnchere,
-			String miseAPrix2, Utilisateur utilisateur2, Categorie categorie, Retrait retrait2) {
-		// TODO Auto-generated constructor stub
-	}
-
-	public ArticleVendu(String nomArticle2, String description2, LocalDateTime dateDebutEnchere,
-			LocalDateTime dateFinEnchere, Integer miseAPrix2, Utilisateur utilisateur2, Integer no_categorie,
-			Retrait retrait2) {
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * @return the noArticle

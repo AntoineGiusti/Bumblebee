@@ -1,8 +1,9 @@
 package fr.eni.VenteEnchere.ihm.nouvelleVente;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,18 +54,36 @@ public class NouvelleVenteServlet extends HttpServlet {
 		if (request.getParameter("enregistrer") != null ) {
 			String nomArticle = request.getParameter("article");
 			String description = request.getParameter("description");
-			String categorie = request.getParameter("categorie");			
-			LocalDateTime dateDebutEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("yyyy-MM-dd T HH:mm:ss"));
-		
-			LocalDateTime dateFinEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("yyyy-MM-dd T HH:mm:ss"));
+			String categorie = request.getParameter("categorie");	
 			
-			Integer miseAPrix =Integer.parseInt(request.getParameter("miseAPrix")) ;
+			String debutEnchere = request.getParameter("dateDebutEnchere");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date resultat = null;
+			try {
+				resultat = sdf.parse(debutEnchere);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String finEnchere = request.getParameter("dateFinEnchere");
+			try {
+				resultat = sdf.parse(finEnchere);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 			
+			
+//			LocalDateTime dateDebutEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));		
+//			LocalDateTime dateFinEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));			
+			Integer miseAPrix =Integer.parseInt(request.getParameter("miseAPrix")) ;			
 			Utilisateur utilisateur = utilisateurConnecte;
-			Categorie categorieArticle;
+			Categorie categorieArticle = null;					
 			
 			String libelleCategorie = request.getParameter("categorie");
-			Integer noCategorie = 0;
+			Integer noCategorie = 0;			
+			
+			
+				
 			
 			switch (libelleCategorie) {
 			case "Ameublement": 
@@ -87,24 +106,13 @@ public class NouvelleVenteServlet extends HttpServlet {
 				break;
 			}
 			
-			
-			
-			try {
-				
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			Retrait retrait ; 
 			
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");			
-			Retrait retrait = new Retrait(rue,codePostal,ville);
 			
-			
-			retrait = new  Retrait(rue, codePostal,ville);
-			
-			
-			ArticleVendu article = new ArticleVendu(nomArticle,description, dateDebutEnchere, dateFinEnchere, miseAPrix, utilisateur, noCategorie, retrait);
+			ArticleVendu article = new ArticleVendu();
 			
 			
 		}
