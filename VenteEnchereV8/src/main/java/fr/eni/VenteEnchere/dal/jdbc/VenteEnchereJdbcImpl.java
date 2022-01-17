@@ -36,7 +36,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo=?, nom =?, prenom =?,email =?, telephone =?, rue =?, code_postal =? , ville=?,"
 			+ "mot_de_passe =? WHERE no_utilisateur =?";	
 
-	private final String SELECT_BY_PSEUDO = " SELECT * FROM UTILISATEURS WHERE pseudo= ?";
+	private final String SELECT_BY_ID = " SELECT * FROM UTILISATEURS WHERE no_utilisateur= ?";
 
 	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ? ";
 
@@ -104,22 +104,28 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	 * method de selection des donn�es d'un utilisateur en passant par son pseudo
 	 */
 	@Override
-	public Utilisateur selectByPseudo(String pseudo) throws DALException {
+	public Utilisateur selectById(Integer noUtilisateur) throws DALException {
 		Utilisateur utilisateur = null;
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pStmt = cnx.prepareStatement(SELECT_BY_PSEUDO);
-			pStmt.setString(1, "pseudo");
+			PreparedStatement pStmt = cnx.prepareStatement(SELECT_BY_ID);
+			String noUtil = noUtilisateur.toString();
+			pStmt.setString(1, noUtil);
 			ResultSet rs = pStmt.executeQuery();
 			while (rs.next()) {
+				Integer id = rs.getInt("no_utilisateur");
+				String pseudo = rs.getString("pseudo");
 				String nom = rs.getString("nom");
 				String prenom = rs.getString("prenom");
 				String email = rs.getString("email");
 				String telephone = rs.getString("telephone");
 				String rue = rs.getString("rue");
-				String codePostal = rs.getString("code_postale");
+				String codePostal = rs.getString("code_postal");
 				String ville = rs.getString("ville");
-
-				utilisateur = new Utilisateur(nom, prenom, email, telephone, rue, codePostal, ville);
+				String motDePasse = rs.getString("mot_de_passe");
+				Integer credits = rs.getInt("credit");
+				boolean administrateur = rs.getBoolean("administrateur");
+			
+				utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credits, administrateur);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

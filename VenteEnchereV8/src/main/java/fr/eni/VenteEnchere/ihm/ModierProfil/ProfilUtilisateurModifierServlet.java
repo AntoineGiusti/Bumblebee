@@ -37,9 +37,23 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 		
 		String nextScreen = "WEB-INF/MonProfilUtilisateurModifier.jsp";
 		
-		Utilisateur utilisateurModifier = (Utilisateur) session.getAttribute("utilisateur");
+		ProfilUtilisateurModifierModel model = null;
 		
-		Utilisateur utilisateurOrigin = new Utilisateur(utilisateurModifier.getPseudo(),utilisateurModifier.getEmail());
+		Utilisateur utilisateurModel = (Utilisateur) session.getAttribute("utilisateur");
+		
+		try {
+			model = new ProfilUtilisateurModifierModel(UtilisateurManager.getInstance().utilisateurParId(utilisateurModel.getNoUtilisateur()));
+		} catch (BLLException e2) {
+
+			e2.printStackTrace();
+		}
+		
+		request.setAttribute("model", model);
+		
+		
+		Utilisateur utilisateurAModifier = (Utilisateur) session.getAttribute("utilisateur");
+		
+		Utilisateur utilisateurOrigin = new Utilisateur(utilisateurAModifier.getPseudo(),utilisateurAModifier.getEmail());
 		
 		
 		if(request.getParameter("enregister")!=null) {
@@ -55,10 +69,11 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			String NouveauMotDePasse = request.getParameter("NouveauMotDePasse");
 			String confirmation = request.getParameter("confirmation");
 			
+			/////
 					
 			Boolean logOk = false;
 			try {
-				logOk = UtilisateurManager.getInstance().verificationMotDePasseActuel(motDePasseActuel, utilisateurModifier.getMotDePasse());
+				logOk = UtilisateurManager.getInstance().verificationMotDePasseActuel(motDePasseActuel, utilisateurAModifier.getMotDePasse());
 			} catch (BLLException e1) {
 				e1.printStackTrace();
 			}
@@ -68,26 +83,34 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 				request.setAttribute("verifMp", "mot de passe errone");
 			}
 			else {
-			utilisateurModifier.setPseudo(pseudo);
-			utilisateurModifier.setNom(nom);
-			utilisateurModifier.setPrenom(prenom);
-			utilisateurModifier.setEmail(email);
-			utilisateurModifier.setTelephone(telephone);
-			utilisateurModifier.setRue(rue);
-			utilisateurModifier.setCodePostal(codePostal);
-			utilisateurModifier.setVille(ville);
-			utilisateurModifier.setMotDePasse(NouveauMotDePasse);
-			}
-			
+			utilisateurAModifier.setPseudo(pseudo);
+			utilisateurAModifier.setNom(nom);
+			utilisateurAModifier.setPrenom(prenom);
+			utilisateurAModifier.setEmail(email);
+			utilisateurAModifier.setTelephone(telephone);
+			utilisateurAModifier.setRue(rue);
+			utilisateurAModifier.setCodePostal(codePostal);
+			utilisateurAModifier.setVille(ville);
+			utilisateurAModifier.setMotDePasse(NouveauMotDePasse);
 			
 			try {
-				UtilisateurManager.getInstance().modifierUtilisateur(utilisateurModifier,utilisateurOrigin, confirmation);
+				UtilisateurManager.getInstance().modifierUtilisateur(utilisateurAModifier,utilisateurOrigin, confirmation);
+				Utilisateur utilisateurModifie = UtilisateurManager.getInstance().utilisateurParId(utilisateurAModifier.getNoUtilisateur());
+				ProfilUtilisateurModifierModel modelmodifie = new ProfilUtilisateurModifierModel(utilisateurModifie);
+				request.setAttribute("model", modelmodifie);
+				
 			} catch (BLLException e) {
 				request.setAttribute("erreur", e.toString());
 				e.printStackTrace();
 			}
+			
+			
+			}		
 						
 		}
+		
+		
+		//////////////////
 		
 		if (request.getParameter("supprimer")!=null) {
 				
@@ -103,6 +126,8 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			}
 			
 		}
+		
+		
 		
 		request.getRequestDispatcher(nextScreen).forward(request, response);
 	}

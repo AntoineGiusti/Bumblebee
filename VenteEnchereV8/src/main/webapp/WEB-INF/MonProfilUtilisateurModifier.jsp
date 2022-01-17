@@ -12,29 +12,29 @@
 	<h3>${verifMp}</h3>
 	
 	<form action="ProfilUtilisateurModifierServlet" method="POST">
-		<p>Pseudo: <input type="text" name="pseudo" value="${utilisateur.pseudo}"/>
+		<p>Pseudo: <input type="text" name="pseudo" value="${model.utilisateurUdapte.pseudo}"/>
 		<br>
-		<p>Nom: <input type="text" name="nom" value="${utilisateur.nom}"/>
+		<p>Nom: <input type="text" name="nom" value="${model.utilisateurUdapte.nom}"/>
 		<br>
-		<p>Prenom: <input type="text" name="prenom" value="${utilisateur.prenom}"/>
+		<p>Prenom: <input type="text" name="prenom" value="${model.utilisateurUdapte.prenom}"/>
 		<br>
-		<p>Email: <input type="text" name="email" value="${utilisateur.email}"/>
+		<p>Email: <input type="text" name="email" value="${model.utilisateurUdapte.email}"/>
 		<br>
-		<p>Téléphone: <input type="text" name="telephone" value="${utilisateur.telephone}"/>
+		<p>Téléphone: <input type="text" name="telephone" value="${model.utilisateurUdapte.telephone}"/>
 		<br>
-		<p>Rue: <input type="text" name="rue" value="${utilisateur.rue}"/>
+		<p>Rue: <input type="text" name="rue" value="${model.utilisateurUdapte.rue}"/>
 		<br>
-		<p>Code postal <input type="text" name="codePostal" value="${utilisateur.codePostal}"/>
+		<p>Code postal <input type="text" name="codePostal" value="${model.utilisateurUdapte.codePostal}"/>
 		<br>
-		<p>Ville <input type="text" name="ville" value="${utilisateur.ville}"/>
+		<p>Ville <input type="text" name="ville" value="${model.utilisateurUdapte.ville}"/>
 		<br>
-		<p>Mot de passe actuel <input type="password" name="motDePasseActuel" value=""/>
+		<p>Mot de passe actuel <input type="text" name="motDePasseActuel" />
 		<br>
-		<p>Nouveau mot de passe <input type="password" name="NouveauMotDePasse" value=""/>
+		<p>Nouveau mot de passe <input type="text" name="NouveauMotDePasse" value="${model.utilisateurUdapte.motDePasse}"/>
 		<br>
-		<p>Confirmation <input type="password" name="confirmation" value=""/>
+		<p>Confirmation <input type="text" name="confirmation" value="${model.utilisateurUdapte.motDePasse}"/>
 		<br>
-		<p>Crédits : ${utilisateur.credit}</p>
+		<p>Crédits : ${utilisateurUdapte.credit}</p>
 		<br>
 		<input type = "submit" name="enregister" value="enregister"/>
 		
