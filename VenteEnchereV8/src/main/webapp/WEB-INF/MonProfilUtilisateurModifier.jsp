@@ -28,11 +28,11 @@
 		<br>
 		<p>Ville <input type="text" name="ville" value="${utilisateur.ville}"/>
 		<br>
-		<p>Mot de passe actuel <input type="password" name="motDePasseActuel" value="${utilisateur.motDePasse}"/>
+		<p>Mot de passe actuel <input type="password" name="motDePasseActuel" value=""/>
 		<br>
-		<p>Nouveau mot de passe <input type="password" name="NouveauMotDePasse" value="${utilisateur.motDePasse}"/>
+		<p>Nouveau mot de passe <input type="password" name="NouveauMotDePasse" value=""/>
 		<br>
-		<p>Confirmation <input type="password" name="confirmation" value="${utilisateur.motDePasse}"/>
+		<p>Confirmation <input type="password" name="confirmation" value=""/>
 		<br>
 		<p>Crédits : ${utilisateur.credit}</p>
 		<br>
@@ -41,6 +41,8 @@
 		<input type = "submit" name="supprimer" value="Supprimer Compte"/>
 	
 	</form>
+	
+	<h3>${erreur}</h3>
 
 </body>
 </html>

@@ -100,20 +100,28 @@ public class UtilisateurManager {
 	
 	////////////////////////////////////////
 	
-	public void modifierUtilisateur(Utilisateur utilisateur,String confirmation) throws BLLException {
+	public void modifierUtilisateur(Utilisateur utilisateurModifier, Utilisateur utilisateurOrigin,String confirmation) throws BLLException {
 		BLLException be = new BLLException();
 		
-		verificationPseudo(utilisateur.getPseudo(), be);
-		verificationNom(utilisateur.getNom(), be);
-		verificationPrenom(utilisateur.getPrenom(), be);
-		verificationEmail(utilisateur.getEmail(), be);
-		verificationTelephone(utilisateur.getTelephone(), be);
-		verificationRue(utilisateur.getRue(), be);
-		verificationCodePostal(utilisateur.getCodePostal(), be);
-		verificationVille(utilisateur.getVille(), be);
-		verificationMotDePasse(utilisateur.getMotDePasse(), be);
 		
-		verificationConfirmation(confirmation, utilisateur.getMotDePasse(), be);
+		if (!utilisateurModifier.getPseudo().equals(utilisateurOrigin.getPseudo())) {
+			verificationPseudo(utilisateurModifier.getPseudo(), be);
+		}
+		
+		verificationNom(utilisateurModifier.getNom(), be);
+		verificationPrenom(utilisateurModifier.getPrenom(), be);
+		
+		if (!utilisateurModifier.getEmail().equals(utilisateurOrigin.getEmail())) {
+			verificationEmail(utilisateurModifier.getEmail(), be);
+		}
+		
+		verificationTelephone(utilisateurModifier.getTelephone(), be);
+		verificationRue(utilisateurModifier.getRue(), be);
+		verificationCodePostal(utilisateurModifier.getCodePostal(), be);
+		verificationVille(utilisateurModifier.getVille(), be);
+		verificationMotDePasse(utilisateurModifier.getMotDePasse(), be);
+		
+		verificationConfirmation(confirmation, utilisateurModifier.getMotDePasse(), be);
 		
 		
 		if (be.hasErreur()) {
@@ -121,7 +129,7 @@ public class UtilisateurManager {
 		}
 		
 		try {
-            DAOFact.getInstance().updateUser(utilisateur);
+            DAOFact.getInstance().updateUser(utilisateurModifier);
 
         } catch (DALException e) {
             e.printStackTrace();
@@ -132,12 +140,17 @@ public class UtilisateurManager {
 	
 	////////////////////////////////
 	
-	public Boolean verificationMotDePasseActuel(String mpSaisi, String motdepasseActuel) {
+	public Boolean verificationMotDePasseActuel(String mpSaisi, String motdepasseActuel) throws BLLException {
+		
+		BLLException be = new BLLException();
 		
 		Boolean mpOk = false;
 		
 		if (mpSaisi.equals(motdepasseActuel)) {
 			mpOk = true;
+		}
+		else {
+			throw be;
 		}
 		
 		return mpOk;
