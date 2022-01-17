@@ -20,12 +20,12 @@ public class Vetement extends ArticleVendu {
 	}
 
 	public Vetement(Integer noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, String miseAPrix, String prixVente, String etatVente) {
+			LocalDateTime dateFinEncheres, Integer miseAPrix, String prixVente, String etatVente) {
 		super(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, etatVente);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Vetement(String nomArticle, String description, String miseAPrix, String prixVente, String etatVente, String vetement) {
+	public Vetement(String nomArticle, String description, Integer miseAPrix, String prixVente, String etatVente, String vetement) {
 		super(nomArticle, description, miseAPrix, prixVente, etatVente);
 		this.vetement = vetement;
 	}

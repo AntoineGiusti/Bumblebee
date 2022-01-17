@@ -1,10 +1,8 @@
 package fr.eni.VenteEnchere.ihm.nouvelleVente;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
 import fr.eni.VenteEnchere.bo.ArticleVendu;
+import fr.eni.VenteEnchere.bo.Categorie;
 import fr.eni.VenteEnchere.bo.Retrait;
 import fr.eni.VenteEnchere.bo.Utilisateur;
 
@@ -55,26 +54,17 @@ public class NouvelleVenteServlet extends HttpServlet {
 			String nomArticle = request.getParameter("article");
 			String description = request.getParameter("description");
 			String categorie = request.getParameter("categorie");			
-			String dateDebutEnchere = request.getParameter("dateDebutEnchere");
-			try {
-				Timestamp dateDebut = new Timestamp(((new SimpleDateFormat("dd/MM/yyyy").parse(dateDebutEnchere)).getTime()));
-			} catch (ParseException e) {
+			LocalDateTime dateDebutEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("yyyy-MM-dd T HH:mm:ss"));
+		
+			LocalDateTime dateFinEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("yyyy-MM-dd T HH:mm:ss"));
 			
-				e.printStackTrace();
-			}
-			String dateFinEnchere = request.getParameter("dateFinEnchere");
-			try {
-				Timestamp dateFin = new Timestamp(((new SimpleDateFormat("dd/MM/yyyy").parse(dateFinEnchere)).getTime()));
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}
-			String miseAPrix = request.getParameter("miseAPrix");
+			Integer miseAPrix =Integer.parseInt(request.getParameter("miseAPrix")) ;
 			
 			Utilisateur utilisateur = utilisateurConnecte;
+			Categorie categorieArticle;
 			
 			String libelleCategorie = request.getParameter("categorie");
-			int no_categorie = 0;
+			Integer no_categorie = 0;
 			
 			switch (libelleCategorie) {
 			case "Ameublement": 
@@ -98,9 +88,6 @@ public class NouvelleVenteServlet extends HttpServlet {
 			}
 			
 			
-			
-			
-			model.getLstArticles();
 			
 			try {
 				

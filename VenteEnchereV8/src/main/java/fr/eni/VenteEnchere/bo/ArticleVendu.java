@@ -17,7 +17,7 @@ public class ArticleVendu {
 	private String description;
 	private LocalDateTime dateDebutEncheres;
 	private LocalDateTime dateFinEncheres;
-	private String miseAPrix;
+	private Integer miseAPrix;
 	private String prixVente;
 	private String etatVente;
 	private Utilisateur utilisateur;
@@ -28,7 +28,7 @@ public class ArticleVendu {
 	
 	
 	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, String miseAPrix, String prixVente) {
+			LocalDateTime dateFinEncheres, Integer miseAPrix, String prixVente) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -38,7 +38,7 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 	}
 
-	public ArticleVendu(String nomArticle, String description, String miseAPrix, String prixVente, String etatVente) {
+	public ArticleVendu(String nomArticle, String description, Integer miseAPrix, String prixVente, String etatVente) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -52,21 +52,21 @@ public class ArticleVendu {
 	/**
 	 * @param nomArticle
 	 * @param description
-	 * @param dateDebutEncheres
-	 * @param dateFinEncheres
+	 * @param dateDebutEnchere
+	 * @param dateFinEnchere
 	 * @param miseAPrix
 	 * @param utilisateur
-	 * @param categorie
+	 * @param no_categorie
 	 * @param retrait
 	 */
-	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, String miseAPrix, Utilisateur utilisateur, Categorie categorie,
+	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEnchere,
+			LocalDateTime dateFinEnchere, Integer miseAPrix, Utilisateur utilisateur, Categorie categorie,
 			Retrait retrait) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
-		this.dateDebutEncheres = dateDebutEncheres;
-		this.dateFinEncheres = dateFinEncheres;
+		this.dateDebutEncheres = dateDebutEnchere;
+		this.dateFinEncheres = dateFinEnchere;
 		this.miseAPrix = miseAPrix;
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
@@ -91,7 +91,7 @@ public class ArticleVendu {
 	 * @param etatVente
 	 */
 	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, String miseAPrix, String prixVente, String etatVente) {
+			LocalDateTime dateFinEncheres, Integer miseAPrix, String prixVente, String etatVente) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -132,7 +132,13 @@ public class ArticleVendu {
 	 * @param retrait2
 	 */
 	public ArticleVendu(String nomArticle2, String description2, String dateDebutEnchere, String dateFinEnchere,
-			String miseAPrix2, Utilisateur utilisateur2, int no_categorie, Retrait retrait2) {
+			String miseAPrix2, Utilisateur utilisateur2, Categorie categorie, Retrait retrait2) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public ArticleVendu(String nomArticle2, String description2, LocalDateTime dateDebutEnchere,
+			LocalDateTime dateFinEnchere, Integer miseAPrix2, Utilisateur utilisateur2, Integer no_categorie,
+			Retrait retrait2) {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -209,14 +215,14 @@ public class ArticleVendu {
 	/**
 	 * @return the miseAPrix
 	 */
-	public String getMiseAPrix() {
+	public Integer getMiseAPrix() {
 		return miseAPrix;
 	}
 
 	/**
 	 * @param miseAPrix the miseAPrix to set
 	 */
-	public void setMiseAPrix(String miseAPrix) {
+	public void setMiseAPrix(Integer miseAPrix) {
 		this.miseAPrix = miseAPrix;
 	}
 

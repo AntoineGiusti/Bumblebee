@@ -220,8 +220,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	@Override
 	public void insertArticle(ArticleVendu articleVendu) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ARTICLES_VENDUS,
-					PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ARTICLES_VENDUS);
 
 			pStmt.setString(1, articleVendu.getNomArticle());
 			pStmt.setString(2, articleVendu.getDescription());
@@ -231,7 +230,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			Timestamp timeStampEnd = Timestamp.valueOf(
 					articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 			pStmt.setTimestamp(5, timeStampEnd);
-			pStmt.setString(5, articleVendu.getMiseAPrix());
+			pStmt.setInt(5, articleVendu.getMiseAPrix());
 			pStmt.setString(6, articleVendu.getPrixVente());
 			pStmt.setInt(7, articleVendu.getutilisateur().getNoUtilisateur());
 			pStmt.setInt(8, articleVendu.getCategorie().getNoCategorie());
@@ -264,7 +263,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			while (rs.next()) {
 				String nomArticle = rs.getString("nom_article");
 				String description = rs.getString("description");
-				String miseAPrix = rs.getString("mise_a_Prix");
+				Integer miseAPrix = rs.getInt("mise_a_Prix");
 				String prixVente = rs.getString("prix_de_vente");
 				String etatVente = rs.getString("etat");
 				String categorie = rs.getString("categorie").trim();
@@ -307,7 +306,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			PreparedStatement pStmt = cnx.prepareStatement(UPDATE_ARTICLES_VENDUS);
 			pStmt.setString(1, articleVendu.getNomArticle());
 			pStmt.setString(2, articleVendu.getDescription());
-			pStmt.setString(3, articleVendu.getMiseAPrix());
+			pStmt.setInt(3, articleVendu.getMiseAPrix());
 			pStmt.setString(4, articleVendu.getPrixVente());
 			pStmt.setString(5, articleVendu.getEtatVente());
 			pStmt.executeUpdate();
@@ -355,7 +354,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			Timestamp timeStampEnd = Timestamp.valueOf(
 					articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 			pStmt.setTimestamp(5, timeStampEnd);
-			pStmt.setString(6, articleVendu.getMiseAPrix());
+			pStmt.setInt(6, articleVendu.getMiseAPrix());
 			pStmt.setString(7, articleVendu.getPrixVente());
 			pStmt.setString(8, articleVendu.getEtatVente());
 			Enchere enchere = new Enchere();
