@@ -64,23 +64,23 @@ public class NouvelleVenteServlet extends HttpServlet {
 			Categorie categorieArticle;
 			
 			String libelleCategorie = request.getParameter("categorie");
-			Integer no_categorie = 0;
+			Integer noCategorie = 0;
 			
 			switch (libelleCategorie) {
 			case "Ameublement": 
-				no_categorie = 1;
+				noCategorie = 1;
 				break;
 				
 			case "Informatique": 
-				no_categorie = 2;
+				noCategorie = 2;
 				break;
 				
 			case "Sport et loisir": 
-				no_categorie = 3;
+				noCategorie = 3;
 				break;
 				
 			case "Vetement": 
-				no_categorie = 4;
+				noCategorie = 4;
 				break;
 
 			default:
@@ -104,7 +104,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 			retrait = new  Retrait(rue, codePostal,ville);
 			
 			
-			ArticleVendu article = new ArticleVendu(nomArticle,description, dateDebutEnchere, dateFinEnchere, miseAPrix, utilisateur, no_categorie, retrait);
+			ArticleVendu article = new ArticleVendu(nomArticle,description, dateDebutEnchere, dateFinEnchere, miseAPrix, utilisateur, noCategorie, retrait);
 			
 			
 		}
