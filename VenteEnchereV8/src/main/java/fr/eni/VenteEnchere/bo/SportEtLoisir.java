@@ -15,12 +15,12 @@ public class SportEtLoisir extends ArticleVendu {
 	}
 
 	public SportEtLoisir(Integer noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, String miseAPrix, String prixVente, String etatVente) {
+			LocalDateTime dateFinEncheres, Integer miseAPrix, String prixVente, String etatVente) {
 		super(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, etatVente);
 		// TODO Auto-generated constructor stub
 	}
 
-	public SportEtLoisir(String nomArticle, String description, String miseAPrix, String prixVente, String etatVente, String sport) {
+	public SportEtLoisir(String nomArticle, String description, Integer miseAPrix, String prixVente, String etatVente, String sport) {
 		super(nomArticle, description, miseAPrix, prixVente, etatVente);
 		this.sport = sport;
 	}

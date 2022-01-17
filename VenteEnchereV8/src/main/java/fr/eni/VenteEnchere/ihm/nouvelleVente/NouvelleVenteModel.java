@@ -1,5 +1,6 @@
 package fr.eni.VenteEnchere.ihm.nouvelleVente;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +15,19 @@ public class NouvelleVenteModel extends ArticleVendu {
 	
 	private ArticleVendu articleVendu;
 	private Retrait retrait;
-	private List<ArticleVendu> lstArticles = new ArrayList<>();
+	private List<ArticleVendu> lstArticles = new ArrayList<ArticleVendu>();
 	
 	
 	
-//	public NouvelleVenteModel(String nomArticle, String description, String miseAPrix, String prixVente,
-//			String etatVente) {
-//		super(nomArticle, description, miseAPrix, prixVente, etatVente);
-//	}
+	
+	
+	
+
+	public NouvelleVenteModel(String nomArticle, String description, LocalDateTime dateDebutEncheres,
+			LocalDateTime dateFinEncheres, Integer miseAPrix, String prixVente) {
+		super(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente);
+		// TODO Auto-generated constructor stub
+	}
 
 	public NouvelleVenteModel() {
 		// TODO Auto-generated constructor stub
@@ -62,8 +68,5 @@ public class NouvelleVenteModel extends ArticleVendu {
 
 	
 
-	
-	
-	
 
 }

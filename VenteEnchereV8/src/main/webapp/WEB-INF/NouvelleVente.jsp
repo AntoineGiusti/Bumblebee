@@ -24,14 +24,14 @@
 </select>
 </p><br>
 <p>Photo de l'article <input type = "submit" name = "upload" value = "UPLOADER"/></p><br>
-<p>Mise a prix : <input type = "number" name = "miseAPrix" /> euros</p><br>
+<p>Mise a prix : <input type = "number" name = "miseAPrix" /> point(s)</p><br>
 <p>Debut de l'enchere : <input type = "date" name = "dateDebutEnchere"/></p><br>
 <p>Fin de l'enchere : <input type = "date" name = dateFinEnchere/></p><br>
 <fieldset>
 	<legend>Retrait</legend>
-	<p>Rue : <input type = "text" name= "rue"/></p><br>
-	<p>Code Postal : <input type = "text" name= "codePostal"/></p><br>
-	<p>Ville : <input type = "text" name= "ville"/></p><br>
+	<p>Rue : <input type = "text" name= "rue" value = "${Utilisateur.rue}"/></p><br>
+	<p>Code Postal : <input type = "text" name= "codePostal" value = "${Utilisateur.codePostal}"/></p><br>
+	<p>Ville : <input type = "text" name= "ville" value = "${Utilisateur.ville}"/></p><br>
 </fieldset>
 <div class = "bouton">
 <input type = "submit" name = "enregistrer" value = "Enregistrer"/>

@@ -1,10 +1,9 @@
 package fr.eni.VenteEnchere.ihm.nouvelleVente;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
 import fr.eni.VenteEnchere.bo.ArticleVendu;
+import fr.eni.VenteEnchere.bo.Categorie;
 import fr.eni.VenteEnchere.bo.Retrait;
 import fr.eni.VenteEnchere.bo.Utilisateur;
 
@@ -54,70 +54,65 @@ public class NouvelleVenteServlet extends HttpServlet {
 		if (request.getParameter("enregistrer") != null ) {
 			String nomArticle = request.getParameter("article");
 			String description = request.getParameter("description");
-			String categorie = request.getParameter("categorie");			
-			String dateDebutEnchere = request.getParameter("dateDebutEnchere");
+			String categorie = request.getParameter("categorie");	
+			
+			String debutEnchere = request.getParameter("dateDebutEnchere");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date resultat = null;
 			try {
-				Timestamp dateDebut = new Timestamp(((new SimpleDateFormat("dd/MM/yyyy").parse(dateDebutEnchere)).getTime()));
+				resultat = sdf.parse(debutEnchere);
 			} catch (ParseException e) {
-			
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String dateFinEnchere = request.getParameter("dateFinEnchere");
+			String finEnchere = request.getParameter("dateFinEnchere");
 			try {
-				Timestamp dateFin = new Timestamp(((new SimpleDateFormat("dd/MM/yyyy").parse(dateFinEnchere)).getTime()));
+				resultat = sdf.parse(finEnchere);
 			} catch (Exception e) {
-				
-				e.printStackTrace();
+				// TODO: handle exception
 			}
-			String miseAPrix = request.getParameter("miseAPrix");
 			
+			
+//			LocalDateTime dateDebutEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));		
+//			LocalDateTime dateFinEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));			
+			Integer miseAPrix =Integer.parseInt(request.getParameter("miseAPrix")) ;			
 			Utilisateur utilisateur = utilisateurConnecte;
+			Categorie categorieArticle = null;					
 			
 			String libelleCategorie = request.getParameter("categorie");
-			int no_categorie = 0;
+			Integer noCategorie = 0;			
+			
+			
+				
 			
 			switch (libelleCategorie) {
 			case "Ameublement": 
-				no_categorie = 1;
+				noCategorie = 1;
 				break;
 				
 			case "Informatique": 
-				no_categorie = 2;
+				noCategorie = 2;
 				break;
 				
 			case "Sport et loisir": 
-				no_categorie = 3;
+				noCategorie = 3;
 				break;
 				
 			case "Vetement": 
-				no_categorie = 4;
+				noCategorie = 4;
 				break;
 
 			default:
 				break;
 			}
 			
-			
-			
-			
-			model.getLstArticles();
-			
-			try {
-				
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			Retrait retrait ; 
 			
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");			
-			Retrait retrait = new Retrait(rue,codePostal,ville);
 			
-			
-			retrait = new  Retrait(rue, codePostal,ville);
-			
-			
-			ArticleVendu article = new ArticleVendu(nomArticle,description, dateDebutEnchere, dateFinEnchere, miseAPrix, utilisateur, no_categorie, retrait);
+			ArticleVendu article = new ArticleVendu();
 			
 			
 		}

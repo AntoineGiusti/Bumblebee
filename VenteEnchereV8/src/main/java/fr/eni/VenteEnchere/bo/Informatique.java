@@ -20,12 +20,12 @@ public class Informatique extends ArticleVendu{
 	}
 
 	public Informatique(Integer noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, String miseAPrix, String prixVente, String etatVente) {
+			LocalDateTime dateFinEncheres, Integer miseAPrix, String prixVente, String etatVente) {
 		super(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, etatVente);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Informatique(String nomArticle, String description, String miseAPrix, String prixVente, String etatVente, String informatique) {
+	public Informatique(String nomArticle, String description, Integer miseAPrix, String prixVente, String etatVente, String informatique) {
 		super(nomArticle, description, miseAPrix, prixVente, etatVente);
 		this.informatique = informatique;
 	}
