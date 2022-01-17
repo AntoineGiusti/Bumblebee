@@ -1,4 +1,4 @@
-package fr.eni.VenteEnchere.ihm.accueil;
+package fr.eni.VenteEnchere.ihm.listeEncheres;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AccueilServlet
+ * Servlet implementation class ListeEncheresServlet
  */
-@WebServlet("/AccueilServlet")
-public class AccueilServlet extends HttpServlet {
+@WebServlet("/ListeEncheresServlet")
+public class ListeEncheresServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccueilServlet() {
+    public ListeEncheresServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,21 +26,12 @@ public class AccueilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		if (request.getSession().getAttribute("utilisateur") != null) {
-			System.out.println("session accueil en cours");
-		}
 		
 		
-		String nextScreen = "/WEB-INF/Accueil.jsp";
 		
-		if(request.getParameter("rechercher")!=null) {
-			
-			nextScreen ="ListeEncheresServlet";
-			}
-		
-		request.getRequestDispatcher(nextScreen).forward(request, response);
+		request.getRequestDispatcher("WEB-INF/ListeEncheres.jsp").forward(request, response);
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
