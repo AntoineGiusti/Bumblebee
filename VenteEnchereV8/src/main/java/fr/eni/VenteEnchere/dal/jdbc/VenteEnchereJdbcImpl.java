@@ -65,11 +65,6 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			+ "ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie";
 	
 	
-	
-//	SELECT id, prenom, nom, date_achat, num_facture, prix_total
-//	FROM utilisateur
-//	INNER JOIN commande ON utilisateur.id = commande.utilisateur_id
-
 	/** requete enchere **/
 
 	private final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_enchere,date_enchere,montant_enchere,no_article_no_utilisateur) VALUES (?,?,?,?,?)";

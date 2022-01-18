@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.VenteEnchere.bll.ArticleManager;
+import fr.eni.VenteEnchere.bll.BLLException;
+
 /**
  * Servlet implementation class AccueilServlet
  */
@@ -26,13 +29,21 @@ public class AccueilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		if (request.getSession().getAttribute("utilisateur") != null) {
-			System.out.println("session accueil en cours");
-		}
-		
+
 		
 		String nextScreen = "/WEB-INF/Accueil.jsp";
+		
+		AccueilModel model = new AccueilModel();
+		try {
+			model.setLstArticles(ArticleManager.getInstance().getAllArticle());
+		} catch (BLLException e) {
+		
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("model", model);
+		
+		
 		
 		if(request.getParameter("rechercher")!=null) {
 			
