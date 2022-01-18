@@ -131,25 +131,30 @@ public class ArticleVendu {
 	}
 
 	
-	
-
-	
-
 	/**
-	 * @param noArticle2
-	 * @param nomArticle2
-	 * @param description2
-	 * @param dateDebutVente
-	 * @param dateFinVente
-	 * @param miseAPrix2
-	 * @param prixVente2
-	 * @param utilisateur2
-	 * @param categorie2
+	 * @param noArticle
+	 * @param nomArticle
+	 * @param description
+	 * @param dateDebutEncheres
+	 * @param dateFinEncheres
+	 * @param miseAPrix
+	 * @param prixVente
+	 * @param utilisateur
+	 * @param categorie
 	 */
-	public ArticleVendu(Integer noArticle2, String nomArticle2, String description2, LocalDate dateDebutVente,
-			LocalDate dateFinVente, Integer miseAPrix2, Integer prixVente2, Utilisateur utilisateur2,
-			Categorie categorie2) {
-		// TODO Auto-generated constructor stub
+	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, Integer miseAPrix, Integer prixVente, Utilisateur utilisateur,
+			Categorie categorie) {
+		super();
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
 	}
 
 

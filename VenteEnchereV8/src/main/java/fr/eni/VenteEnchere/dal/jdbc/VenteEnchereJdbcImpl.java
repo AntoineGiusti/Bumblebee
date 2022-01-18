@@ -59,10 +59,14 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	private final String DELETE_ARTICLES_VENDUS = "DELETE FROM ARTICLES_VENDUS WHERE pseudo = ? ";
 
 	private final String SELECT_ALL_ARTICLES_VENDUS = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres,"
-			+ " prix_initial, prix_vente, no_utilisateur, no_categorie"
-			+ "  FROM ARTICLES_VENDUS"
-			+ "INNER JOIN CATEGORIES"
-			+ "ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie";
+			+ " prix_initial, prix_vente, no_utilisateur, ARTICLES_VENDUS.no_categorie, libelle"
+			+ " FROM ARTICLES_VENDUS"
+			+ " INNER JOIN CATEGORIES"
+			+ " ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie";
+	
+//	SELECT id, prenom, nom, date_achat, num_facture, prix_total
+//	FROM utilisateur
+//	INNER JOIN commande ON utilisateur.id = commande.utilisateur_id
 	
 	
 	/** requete enchere **/
@@ -281,12 +285,14 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			while (rs.next()) {
 				
 				Integer noArticle = rs.getInt("no_article");
+				System.out.println(noArticle);
+				
 				String nomArticle = rs.getString("nom_article");
 				String description = rs.getString("description");
-				LocalDate dateDebutVente = rs.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				LocalDate dateFinVente = rs.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				Integer miseAPrix = rs.getInt("mise_a_Prix");
-				Integer prixVente = rs.getInt("prix_de_vente");
+				LocalDate dateDebutVente = rs.getDate("date_debut_encheres").toLocalDate();
+				LocalDate dateFinVente = rs.getDate("date_fin_encheres").toLocalDate();
+				Integer miseInitial = rs.getInt("prix_initial");
+				Integer prixVente = rs.getInt("prix_vente");
 				Integer noUtilisateur = rs.getInt("no_utilisateur");
 				Integer noCategorie = rs.getInt("no_categorie");
 				
@@ -298,8 +304,9 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 				
 				
 				ArticleVendu articleVendu = new ArticleVendu(noArticle, nomArticle, description, 
-						dateDebutVente, dateFinVente, miseAPrix, prixVente, utilisateur, categorie);
+						dateDebutVente, dateFinVente, miseInitial, prixVente, utilisateur, categorie);
 						
+				System.out.println(articleVendu);
 				lstArticles.add(articleVendu);		
 
 				

@@ -32,6 +32,7 @@
 <br>
 <input type = "submit" name="Rechercher" value="rechercher"/>
 <br>
+	${model.lstArticles }
 <br>
 <!-- article et caractéristiques a faire -->
 </form>
