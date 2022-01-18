@@ -17,16 +17,18 @@ public class NouvelleVenteModel extends ArticleVendu {
 	private Retrait retrait;
 	private List<ArticleVendu> lstArticles = new ArrayList<ArticleVendu>();
 	
-	
-	
-	
-	
-	
 
-	public NouvelleVenteModel(String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, Integer miseAPrix, String prixVente) {
-		super(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente);
-		// TODO Auto-generated constructor stub
+
+	/**
+	 * @param articleVendu
+	 * @param retrait
+	 * @param lstArticles
+	 */
+	public NouvelleVenteModel(ArticleVendu articleVendu, Retrait retrait, List<ArticleVendu> lstArticles) {
+		super();
+		this.articleVendu = articleVendu;
+		this.retrait = retrait;
+		this.lstArticles = lstArticles;
 	}
 
 	public NouvelleVenteModel() {
