@@ -54,4 +54,4 @@
 </body>
 </html>
 
-<script src="MaPage.js" type="application/javascript"></script>
+<script src="WEB-INF/MaPage.js" type="application/javascript"></script>

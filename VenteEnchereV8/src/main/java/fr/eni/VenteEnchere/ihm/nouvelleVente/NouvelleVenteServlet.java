@@ -3,7 +3,9 @@ package fr.eni.VenteEnchere.ihm.nouvelleVente;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -106,13 +108,20 @@ public class NouvelleVenteServlet extends HttpServlet {
 				break;
 			}
 			
+			ArticleVendu article = new ArticleVendu();
+			List<ArticleVendu> lstArticles = new ArrayList<ArticleVendu>();
+			
+			
+			
+			
+			
 			Retrait retrait ; 
 			
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");			
 			
-			ArticleVendu article = new ArticleVendu();
+			
 			
 			
 		}

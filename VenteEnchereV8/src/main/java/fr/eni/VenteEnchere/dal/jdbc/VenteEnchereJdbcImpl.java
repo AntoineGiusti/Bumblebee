@@ -16,6 +16,7 @@ import fr.eni.VenteEnchere.bo.Ameublement;
 import fr.eni.VenteEnchere.bo.ArticleVendu;
 import fr.eni.VenteEnchere.bo.Enchere;
 import fr.eni.VenteEnchere.bo.Informatique;
+import fr.eni.VenteEnchere.bo.Retrait;
 import fr.eni.VenteEnchere.bo.SportEtLoisir;
 import fr.eni.VenteEnchere.bo.Utilisateur;
 import fr.eni.VenteEnchere.bo.Vetement;
@@ -348,19 +349,23 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			pStmt.setString(1, utilisateur.getPseudo());
 			pStmt.setString(2, articleVendu.getNomArticle());
 			pStmt.setString(3, articleVendu.getDescription());
-//			Timestamp timeStampStart = Timestamp.valueOf(
-//					articleVendu.getDateDebutEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-//			pStmt.setTimestamp(4, timeStampStart);
-//			Timestamp timeStampEnd = Timestamp.valueOf(
-//					articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-//			pStmt.setTimestamp(5, timeStampEnd);
+			Timestamp timeStampStart = Timestamp.valueOf(
+					articleVendu.getDateDebutEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+			pStmt.setTimestamp(4, timeStampStart);
+			Timestamp timeStampEnd = Timestamp.valueOf(
+					articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+			pStmt.setTimestamp(5, timeStampEnd);
 			pStmt.setInt(6, articleVendu.getMiseAPrix());
 			pStmt.setString(7, articleVendu.getPrixVente());
 			pStmt.setString(8, articleVendu.getEtatVente());
 			Enchere enchere = new Enchere();
 			pStmt.setInt(9, enchere.getMontantEnchere());
+			Retrait retrait = new Retrait();
+			pStmt.setString(10, utilisateur.getRue() );
+			pStmt.setString(11,utilisateur.getCodePostal());
+			pStmt.setString(12, utilisateur.getVille());
 			pStmt.executeUpdate();
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DALException("impossible d'inserer l'enchere");
