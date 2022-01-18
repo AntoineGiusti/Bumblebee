@@ -18,7 +18,7 @@ public class ArticleVendu {
 	private LocalDate dateDebutEncheres;
 	private LocalDate dateFinEncheres;
 	private Integer miseAPrix;
-	private String prixVente;
+	private Integer prixVente;
 	private String etatVente;
 	private Utilisateur utilisateur;
 	private List<Enchere> lstEncheres;
@@ -60,7 +60,7 @@ public class ArticleVendu {
 
 
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, Integer miseAPrix, String prixVente) {
+			LocalDate dateFinEncheres, Integer miseAPrix, Integer prixVente) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -70,7 +70,7 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 	}
 
-	public ArticleVendu(String nomArticle, String description, Integer miseAPrix, String prixVente, String etatVente) {
+	public ArticleVendu(String nomArticle, String description, Integer miseAPrix, Integer prixVente, String etatVente) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -118,7 +118,7 @@ public class ArticleVendu {
 	 * @param etatVente
 	 */
 	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, Integer miseAPrix, String prixVente, String etatVente) {
+			LocalDate dateFinEncheres, Integer miseAPrix, Integer prixVente, String etatVente) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -134,6 +134,25 @@ public class ArticleVendu {
 	
 
 	
+
+	/**
+	 * @param noArticle2
+	 * @param nomArticle2
+	 * @param description2
+	 * @param dateDebutVente
+	 * @param dateFinVente
+	 * @param miseAPrix2
+	 * @param prixVente2
+	 * @param utilisateur2
+	 * @param categorie2
+	 */
+	public ArticleVendu(Integer noArticle2, String nomArticle2, String description2, LocalDate dateDebutVente,
+			LocalDate dateFinVente, Integer miseAPrix2, Integer prixVente2, Utilisateur utilisateur2,
+			Categorie categorie2) {
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 	/**
 	 * @return the noArticle
@@ -222,14 +241,14 @@ public class ArticleVendu {
 	/**
 	 * @return the prixVente
 	 */
-	public String getPrixVente() {
+	public Integer getPrixVente() {
 		return prixVente;
 	}
 
 	/**
 	 * @param prixVente the prixVente to set
 	 */
-	public void setPrixVente(String prixVente) {
+	public void setPrixVente(Integer prixVente) {
 		this.prixVente = prixVente;
 	}
 

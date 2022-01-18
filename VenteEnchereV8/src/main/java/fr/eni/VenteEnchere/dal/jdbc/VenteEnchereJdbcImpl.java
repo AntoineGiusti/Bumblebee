@@ -7,13 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.VenteEnchere.bo.Ameublement;
 import fr.eni.VenteEnchere.bo.ArticleVendu;
+import fr.eni.VenteEnchere.bo.Categorie;
 import fr.eni.VenteEnchere.bo.Enchere;
 import fr.eni.VenteEnchere.bo.Informatique;
 import fr.eni.VenteEnchere.bo.Retrait;
@@ -55,7 +58,17 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	
 	private final String DELETE_ARTICLES_VENDUS = "DELETE FROM ARTICLES_VENDUS WHERE pseudo = ? ";
 
-	private final String SELECT_ALL_ARTICLES_VENDUS = "SELECT * FROM ARTICLES_VENDUS";
+	private final String SELECT_ALL_ARTICLES_VENDUS = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres,"
+			+ " prix_initial, prix_vente, no_utilisateur, no_categorie"
+			+ "  FROM ARTICLES_VENDUS"
+			+ "INNER JOIN CATEGORIES"
+			+ "ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie";
+	
+	
+	
+//	SELECT id, prenom, nom, date_achat, num_facture, prix_total
+//	FROM utilisateur
+//	INNER JOIN commande ON utilisateur.id = commande.utilisateur_id
 
 	/** requete enchere **/
 
@@ -271,34 +284,51 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			ResultSet rs = stmt.executeQuery(SELECT_ALL_ARTICLES_VENDUS);
 
 			while (rs.next()) {
+				
+				Integer noArticle = rs.getInt("no_article");
 				String nomArticle = rs.getString("nom_article");
 				String description = rs.getString("description");
+				LocalDate dateDebutVente = rs.getDate("date_debut_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				LocalDate dateFinVente = rs.getDate("date_fin_encheres").toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 				Integer miseAPrix = rs.getInt("mise_a_Prix");
-				String prixVente = rs.getString("prix_de_vente");
-				String etatVente = rs.getString("etat");
-				String categorie = rs.getString("categorie").trim();
-				ArticleVendu articleVendu = null;
+				Integer prixVente = rs.getInt("prix_de_vente");
+				Integer noUtilisateur = rs.getInt("no_utilisateur");
+				Integer noCategorie = rs.getInt("no_categorie");
+				
+				Utilisateur utilisateur = selectById(noUtilisateur);
+		
+				String libelleCat = rs.getString("libelle");
+				Categorie categorie = new Categorie(noCategorie, libelleCat);
+				
+				
+				
+				ArticleVendu articleVendu = new ArticleVendu(noArticle, nomArticle, description, 
+						dateDebutVente, dateFinVente, miseAPrix, prixVente, utilisateur, categorie);
+						
+				lstArticles.add(articleVendu);		
 
-				if (categorie.equalsIgnoreCase("sport") || categorie.equalsIgnoreCase("loisir")) {
-					String sport = rs.getString("sport et loisir");
-					articleVendu = new SportEtLoisir(nomArticle, description, miseAPrix, prixVente, etatVente, sport);
-				}
-				if (categorie.equalsIgnoreCase("ameublement")) {
-					String ameublement = rs.getString("ameublement");
-					articleVendu = new Ameublement(nomArticle, description, miseAPrix, prixVente, etatVente,
-							ameublement);
-				}
-				if (categorie.equalsIgnoreCase("informatique")) {
-					String informatique = rs.getString("informatique");
-					articleVendu = new Informatique(nomArticle, description, miseAPrix, prixVente, etatVente,
-							informatique);
-				}
-				if (categorie.equalsIgnoreCase("vetement")) {
-					String vetement = rs.getString("vetement");
-					articleVendu = new Vetement(nomArticle, description, miseAPrix, prixVente, etatVente, vetement);
-				}
-
+				
 			}
+//				if (categorie.equalsIgnoreCase("sport") || categorie.equalsIgnoreCase("loisir")) {
+//					String sport = rs.getString("sport et loisir");
+//					articleVendu = new SportEtLoisir(nomArticle, description, miseAPrix, prixVente, etatVente, sport);
+//				}
+//				if (categorie.equalsIgnoreCase("ameublement")) {
+//					String ameublement = rs.getString("ameublement");
+//					articleVendu = new Ameublement(nomArticle, description, miseAPrix, prixVente, etatVente,
+//							ameublement);
+//				}
+//				if (categorie.equalsIgnoreCase("informatique")) {
+//					String informatique = rs.getString("informatique");
+//					articleVendu = new Informatique(nomArticle, description, miseAPrix, prixVente, etatVente,
+//							informatique);
+//				}
+//				if (categorie.equalsIgnoreCase("vetement")) {
+//					String vetement = rs.getString("vetement");
+//					articleVendu = new Vetement(nomArticle, description, miseAPrix, prixVente, etatVente, vetement);
+//				}
+
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DALException("Impossible de lire la base de donnee");
@@ -317,7 +347,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			pStmt.setString(1, articleVendu.getNomArticle());
 			pStmt.setString(2, articleVendu.getDescription());
 			pStmt.setInt(3, articleVendu.getMiseAPrix());
-			pStmt.setString(4, articleVendu.getPrixVente());
+			pStmt.setInt(4, articleVendu.getPrixVente());
 			pStmt.setString(5, articleVendu.getEtatVente());
 			pStmt.executeUpdate();
 
@@ -365,7 +395,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 					articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
 			pStmt.setTimestamp(5, timeStampEnd);
 			pStmt.setInt(6, articleVendu.getMiseAPrix());
-			pStmt.setString(7, articleVendu.getPrixVente());
+			pStmt.setInt(7, articleVendu.getPrixVente());
 			pStmt.setString(8, articleVendu.getEtatVente());
 			Enchere enchere = new Enchere();
 			pStmt.setInt(9, enchere.getMontantEnchere());
