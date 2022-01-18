@@ -3,6 +3,8 @@
  */
 package fr.eni.VenteEnchere.bll;
 
+import java.util.List;
+
 import fr.eni.VenteEnchere.bo.ArticleVendu;
 import fr.eni.VenteEnchere.dal.DALException;
 import fr.eni.VenteEnchere.dal.DAOFact;
@@ -35,6 +37,14 @@ import fr.eni.VenteEnchere.dal.DAOFact;
 		}
 	}
 	
-	
+	public List<ArticleVendu> getAllArticle() throws BLLException {
+		try {
+			return DAOFact.getInstance().getAllArticle();
+		} catch (DALException e) {
+			e.printStackTrace();
+			throw new BLLException();
+			
+		}
+	}
 	
 }
