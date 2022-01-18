@@ -52,4 +52,10 @@
 </div>
 </form>
 </body>
+<<<<<<< HEAD
 </html>
+
+<script src="WEB-INF/MaPage.js" type="application/javascript"></script>
+=======
+</html>
+>>>>>>> 3162b5861a6dc9959e650dbc06d4a941bcf441a5

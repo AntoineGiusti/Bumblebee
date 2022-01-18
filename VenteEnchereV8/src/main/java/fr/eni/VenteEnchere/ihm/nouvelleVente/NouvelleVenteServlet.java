@@ -3,10 +3,15 @@ package fr.eni.VenteEnchere.ihm.nouvelleVente;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+<<<<<<< HEAD
+import java.util.ArrayList;
+=======
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+>>>>>>> 3162b5861a6dc9959e650dbc06d4a941bcf441a5
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -119,14 +124,29 @@ public class NouvelleVenteServlet extends HttpServlet {
 				break;
 			}
 			
+<<<<<<< HEAD
+			ArticleVendu article = new ArticleVendu();
+			List<ArticleVendu> lstArticles = new ArrayList<ArticleVendu>();
+			
+			
+			
+			
+			
+			Retrait retrait ; 
+=======
 			Categorie categorieArticle = new Categorie(noCategorie, libelleCategorie);
+>>>>>>> 3162b5861a6dc9959e650dbc06d4a941bcf441a5
 			
 			Retrait retrait ; 	
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");			
 			
+<<<<<<< HEAD
+			
+=======
 			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEnchere, dateFinEnchere, miseAPrix, utilisateurConnecte, categorieArticle);
+>>>>>>> 3162b5861a6dc9959e650dbc06d4a941bcf441a5
 			
 			ArticleManager.getInstance().ajouterArticleAVendre(article);
 		
