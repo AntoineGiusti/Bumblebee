@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>Ma page utilisateur</title>
 
-
 </head>
 <body>
 <h1><a href="AccueilServlet">ENI-Enchères</a></h1>
@@ -16,7 +15,7 @@
 <a href="ProfilUtilisateurServlet">Mon profil</a>
 <a href="MaPageUtilisateurServlet?deconnexion" >Déconnexion</a>
 <h2>Liste des enchères</h2>
-
+<form action="">
 <h2>Filtres : </h2>
 
 <div>
@@ -33,25 +32,24 @@
 </select></p>
 <input type="submit" name="rechercher" value="Rechercher">
 <br>
+<script type="text/javascript" src="<%=request.getContextPath()%>/MaPage.js"></script>
 <div>
-<input type="radio" name="achat" value="Achats" id="achat" onclick="clickAchat">Achats
+<input type="radio" name="achat" value="Achats" id="achat" onclick="clickAchat()">Achats
+
+<input type="radio" name="achat" value="Mes ventes" id="vente" onclick="clickVente()">Mes ventes
+</div>
 <br>
+<div>
 <input type="checkbox" id="ouvert" >enchères ouvertes<br>
 <input type="checkbox" id="mienne" >mes enchères<br>
 <input type="checkbox" id="win" >mes enchères remportées
 </div>
 <br>
 <div>
-<input type="radio" name="mesvente" value="Mes ventes" id="vente" onclick="clickVente">Mes ventes
-<br>
-<input type="checkbox" id="cours" >mes ventes en cours<br>
+<input type="checkbox" id="ventes" >mes ventes en cours<br>
 <input type="checkbox" id="nostart" >ventes non débutées<br>
 <input type="checkbox" id="termine" >ventes terminées
 </div>
-
-
-
+</form>
 </body>
 </html>
-
-<script src="MaPage.js" type="application/javascript"></script>
