@@ -7,8 +7,9 @@
 <meta charset="ISO-8859-1">
 <title>Creer Mon Profil</title>
 </head>
-<h1>ENI-Enchères</h1>
+
 <body>
+<h1><a href = "ConnexionServlet"> ENI-Encheres </a></h1>
 <h2>Mon profil</h2>
 <form action="CreationProfilServlet" method="POST">
 <p>Pseudo: <input type="text" name="pseudo" value="${model.utilisateur.pseudo}"/>

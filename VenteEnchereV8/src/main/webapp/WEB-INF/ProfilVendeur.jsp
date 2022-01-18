@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Profil Vendeur</title>
 </head>
 <body>
+<h1><a href = "ConnexionServlet"> ENI-Encheres </a></h1>
 
 </body>
 </html>

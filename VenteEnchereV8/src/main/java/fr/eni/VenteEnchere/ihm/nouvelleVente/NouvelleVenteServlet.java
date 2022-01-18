@@ -1,16 +1,9 @@
 package fr.eni.VenteEnchere.ihm.nouvelleVente;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-<<<<<<< HEAD
-import java.util.ArrayList;
-=======
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
->>>>>>> 3162b5861a6dc9959e650dbc06d4a941bcf441a5
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -27,157 +20,138 @@ import fr.eni.VenteEnchere.bo.Categorie;
 import fr.eni.VenteEnchere.bo.Retrait;
 import fr.eni.VenteEnchere.bo.Utilisateur;
 
-
 /**
  * Servlet implementation class NouvelleVenteServlet
  */
 @WebServlet("/NouvelleVenteServlet")
 public class NouvelleVenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private static UtilisateurManager manager = UtilisateurManager.getInstance();       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public NouvelleVenteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	private static UtilisateurManager manager = UtilisateurManager.getInstance();
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public NouvelleVenteServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
-		
+
 		Utilisateur utilisateurConnecte = (Utilisateur) session.getAttribute("utilisateur");
-		
-		
+
 		NouvelleVenteModel model = new NouvelleVenteModel();
 		String nextScreen = "/WEB-INF/NouvelleVente.jsp";
-		
-		
-		
-		
-		if (request.getParameter("enregistrer") != null ) {
+
+		if (request.getParameter("enregistrer") != null) {
 			String nomArticle = request.getParameter("nomArticle");
 			String description = request.getParameter("description");
-			
-			String debutEnchere = request.getParameter("dateDebutEnchere");	
+
+			String debutEnchere = request.getParameter("dateDebutEnchere");
 			System.out.println(debutEnchere);
 			String finEnchere = request.getParameter("dateFinEnchere");
 			System.out.println(finEnchere);
-			//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			LocalDate dateDebutEnchere = null;
 			LocalDate dateFinEnchere = null;
-			
+
 //			try {
 //				dateDebutEnchere = sdf.parse(debutEnchere);
 //			} catch (ParseException e) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
-			
-			
+
 			// "dd/MM/yyyy"
-			
+
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			  //convert String to LocalDate
+			// convert String to LocalDate
 			dateDebutEnchere = LocalDate.parse(debutEnchere, formatter);
-			
-			
+
 //			try {
 //				dateFinEnchere = sdf.parse(finEnchere);
 //			} catch (Exception e) {
 //				// TODO: handle exception
 //				e.printStackTrace();
 //			}
-			
+
 			dateFinEnchere = LocalDate.parse(finEnchere, formatter);
-			
+
 //			LocalDateTime dateDebutEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));		
 //			LocalDateTime dateFinEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));			
-			Integer miseAPrix =Integer.parseInt(request.getParameter("miseAPrix")) ;			
-							
+			Integer miseAPrix = Integer.parseInt(request.getParameter("miseAPrix"));
+
 			String libelleCategorie = request.getParameter("categorie");
-			Integer noCategorie = 0;			
-			
+			Integer noCategorie = 0;
+
 			switch (libelleCategorie) {
-			case "ameublement": 
+			case "ameublement":
 				noCategorie = 1;
 				break;
-				
-			case "informatique": 
+
+			case "informatique":
 				noCategorie = 2;
 				break;
-				
-			case "sportEtLoisir": 
+
+			case "sportEtLoisir":
 				noCategorie = 3;
 				break;
-				
-			case "vetement": 
+
+			case "vetement":
 				noCategorie = 4;
 				break;
 
 			default:
 				break;
 			}
-			
-<<<<<<< HEAD
-			ArticleVendu article = new ArticleVendu();
-			List<ArticleVendu> lstArticles = new ArrayList<ArticleVendu>();
-			
-			
-			
-			
-			
-			Retrait retrait ; 
-=======
+
+			Retrait retrait;
+
 			Categorie categorieArticle = new Categorie(noCategorie, libelleCategorie);
->>>>>>> 3162b5861a6dc9959e650dbc06d4a941bcf441a5
+
 			
-			Retrait retrait ; 	
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
-			String ville = request.getParameter("ville");			
-			
-<<<<<<< HEAD
-			
-=======
-			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEnchere, dateFinEnchere, miseAPrix, utilisateurConnecte, categorieArticle);
->>>>>>> 3162b5861a6dc9959e650dbc06d4a941bcf441a5
-			
+			String ville = request.getParameter("ville");
+
+			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEnchere, dateFinEnchere,
+					miseAPrix, utilisateurConnecte, categorieArticle);
+
 			ArticleManager.getInstance().ajouterArticleAVendre(article);
-		
-		///////annuler vente///////////////////////	
-			
+
+			/////// annuler vente///////////////////////
+
 		}
-		if(request.getParameter("annuler") != null ) {
-			request.setAttribute("article","");
-			request.setAttribute("description","");
-			request.setAttribute("categorie","");
-			request.setAttribute("dateDebutEnchere","");
-			request.setAttribute("dateFinEnchere","");
-			request.setAttribute("miseAPrix","");
-			request.setAttribute("rue","");
-			request.setAttribute("codePostal","");
-			request.setAttribute("ville","");
-			
+		if (request.getParameter("annuler") != null) {
+			request.setAttribute("article", "");
+			request.setAttribute("description", "");
+			request.setAttribute("categorie", "");
+			request.setAttribute("dateDebutEnchere", "");
+			request.setAttribute("dateFinEnchere", "");
+			request.setAttribute("miseAPrix", "");
+			request.setAttribute("rue", "");
+			request.setAttribute("codePostal", "");
+			request.setAttribute("ville", "");
+
 		}
-		
-		
-		
-		
+
 		request.getRequestDispatcher(nextScreen).forward(request, response);
-	}	
-	
-	
+	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

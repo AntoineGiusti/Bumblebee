@@ -8,7 +8,7 @@
 </head>
 <body>
 <<<<<<< HEAD
-	<h1><a href = "http://localhost:8080/VenteEnchereV8/ConnexionServlet"> ENI-Encheres </a></h1>
+	<h1><a href = "ConnexionServlet"> ENI-Encheres </a></h1>
 		<div class = "imgArticle">
 			<img alt="image aticle" />
 		</div>

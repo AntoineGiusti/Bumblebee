@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>ENI-Enchères</h1>
+	<h1><a href = "ConnexionServlet"> ENI-Encheres </a></h1>
 	
 	<h2>Détail vente</h2>
 	

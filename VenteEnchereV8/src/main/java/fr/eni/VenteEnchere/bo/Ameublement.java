@@ -1,6 +1,6 @@
 package fr.eni.VenteEnchere.bo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Ameublement extends ArticleVendu {
 	
@@ -19,8 +19,8 @@ public class Ameublement extends ArticleVendu {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ameublement(Integer noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, Integer miseAPrix, String prixVente, String etatVente) {
+	public Ameublement(Integer noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, Integer miseAPrix, String prixVente, String etatVente) {
 		super(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, etatVente);
 		// TODO Auto-generated constructor stub
 	}

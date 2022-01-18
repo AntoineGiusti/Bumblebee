@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<a href="AccueilServlet">ENI-Enchères</a>
+<h1><a href = "ConnexionServlet"> ENI-Encheres </a></h1>
 <form action="ListeEncheresServlet" method="POST">
 
 

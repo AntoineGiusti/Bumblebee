@@ -7,7 +7,7 @@
 <title>Mon Profil</title>
 </head>
 <body>
-	<h1>ENI_Enchères</h1>
+	<h1><a href = "ConnexionServlet"> ENI-Encheres </a></h1>
 	<br>
 	<br>
 	<form action="ProfilUtilisateurServlet" method= "POST">
