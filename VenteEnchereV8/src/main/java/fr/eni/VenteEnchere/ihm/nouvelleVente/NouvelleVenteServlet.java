@@ -1,11 +1,13 @@
 package fr.eni.VenteEnchere.ihm.nouvelleVente;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
+=======
+>>>>>>> 114d235e0155b909a0baa94bd8501420aa70a75b
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +19,7 @@ import fr.eni.VenteEnchere.bll.ArticleManager;
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
 import fr.eni.VenteEnchere.bo.ArticleVendu;
 import fr.eni.VenteEnchere.bo.Categorie;
-import fr.eni.VenteEnchere.bo.Retrait;
+
 import fr.eni.VenteEnchere.bo.Utilisateur;
 
 /**
@@ -112,6 +114,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 			default:
 				break;
 			}
+<<<<<<< HEAD
 
 			Retrait retrait;
 
@@ -125,6 +128,19 @@ public class NouvelleVenteServlet extends HttpServlet {
 			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEnchere, dateFinEnchere,
 					miseAPrix, utilisateurConnecte, categorieArticle);
 
+=======
+			
+			Categorie categorieArticle = new Categorie(noCategorie, libelleCategorie);
+
+				
+			String rue = request.getParameter("rue");
+			String codePostal = request.getParameter("codePostal");
+			String ville = request.getParameter("ville");			
+
+			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEnchere, dateFinEnchere, miseAPrix, utilisateurConnecte, categorieArticle);
+
+			
+>>>>>>> 114d235e0155b909a0baa94bd8501420aa70a75b
 			ArticleManager.getInstance().ajouterArticleAVendre(article);
 
 			/////// annuler vente///////////////////////
