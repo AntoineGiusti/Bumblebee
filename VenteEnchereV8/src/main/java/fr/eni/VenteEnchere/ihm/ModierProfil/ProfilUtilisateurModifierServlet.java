@@ -33,26 +33,31 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(); // appel de l' objet session
 		
 		String nextScreen = "WEB-INF/MonProfilUtilisateurModifier.jsp";
 		
 		ProfilUtilisateurModifierModel model = null;
 		
-		Utilisateur utilisateurModel = (Utilisateur) session.getAttribute("utilisateur");
+		// variable determinant quel utilisateur sera appele dans le model
+		Utilisateur utilisateurModel = (Utilisateur) session.getAttribute("utilisateur"); 
 		
+		
+		// cree le model avec l utilisateur avec les attribut en base de donnee de l utilisateur en session
 		try {
-			model = new ProfilUtilisateurModifierModel(UtilisateurManager.getInstance().utilisateurParId(utilisateurModel.getNoUtilisateur()));
+			model = new ProfilUtilisateurModifierModel(UtilisateurManager.getInstance().utilisateurParId(utilisateurModel.getNoUtilisateur())); 
 		} catch (BLLException e2) {
 
 			e2.printStackTrace();
 		}
 		
+		// transfert a la jsp les attribut du model
 		request.setAttribute("model", model);
 		
-		
+		// cree une variable de l utilisateur en session
 		Utilisateur utilisateurAModifier = (Utilisateur) session.getAttribute("utilisateur");
 		
+		// cree un nouvel utilisateur avec le pseudo en l email de l utilisateur session , pour etre comparer ( contrainte d unicite)
 		Utilisateur utilisateurOrigin = new Utilisateur(utilisateurAModifier.getPseudo(),utilisateurAModifier.getEmail());
 		
 		
@@ -70,7 +75,8 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			String confirmation = request.getParameter("confirmation");
 			
 			/////
-					
+			
+			//verifie la comformite du mot de passe
 			Boolean logOk = false;
 			try {
 				logOk = UtilisateurManager.getInstance().verificationMotDePasseActuel(motDePasseActuel, utilisateurAModifier.getMotDePasse());
@@ -82,6 +88,8 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 				System.out.println("mot de passe errone");
 				request.setAttribute("verifMp", "mot de passe errone");
 			}
+			
+			// si le mot de passe est conforme , l utilisateur session est modifie
 			else {
 			utilisateurAModifier.setPseudo(pseudo);
 			utilisateurAModifier.setNom(nom);
@@ -93,10 +101,14 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			utilisateurAModifier.setVille(ville);
 			utilisateurAModifier.setMotDePasse(NouveauMotDePasse);
 			
+			
 			try {
+				// les modification sont envoyees en bdd
 				UtilisateurManager.getInstance().modifierUtilisateur(utilisateurAModifier,utilisateurOrigin, confirmation);
+				// le model est maj par la bdd
 				Utilisateur utilisateurModifie = UtilisateurManager.getInstance().utilisateurParId(utilisateurAModifier.getNoUtilisateur());
 				ProfilUtilisateurModifierModel modelmodifie = new ProfilUtilisateurModifierModel(utilisateurModifie);
+				// les nouveaux attributs sont envoyes a la jsp
 				request.setAttribute("model", modelmodifie);
 				
 			} catch (BLLException e) {

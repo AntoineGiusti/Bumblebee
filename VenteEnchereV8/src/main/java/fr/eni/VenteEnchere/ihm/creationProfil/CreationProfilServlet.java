@@ -77,6 +77,11 @@ public class CreationProfilServlet extends HttpServlet {
 					
 		}
 		
+		if(request.getParameter("annuler")!=null) {
+			nextScreen = "AccueilServlet";
+		}
+		
+		
 			request.getRequestDispatcher(nextScreen).forward(request, response);
 		
 		}
