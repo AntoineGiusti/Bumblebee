@@ -117,17 +117,6 @@ public class NouvelleVenteServlet extends HttpServlet {
 
 			Retrait retrait;
 
-			Categorie categorieArticle = new Categorie(noCategorie, libelleCategorie);
-
-			
-			String rue = request.getParameter("rue");
-			String codePostal = request.getParameter("codePostal");
-			String ville = request.getParameter("ville");
-
-			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEnchere, dateFinEnchere,
-					miseAPrix, utilisateurConnecte, categorieArticle);
-
-
 			
 			Categorie categorieArticle = new Categorie(noCategorie, libelleCategorie);
 
