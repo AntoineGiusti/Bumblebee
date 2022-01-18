@@ -14,7 +14,7 @@ public interface MethodDAO {
 	public void updateUser(Utilisateur utilisateur)throws DALException;
 	public void deleteUser (Utilisateur utilisateur)throws DALException;
 	public List<Utilisateur> getAll () throws DALException;
-	public Utilisateur selectByPseudo(String pseudo)throws DALException;
+	public Utilisateur selectById(Integer id)throws DALException;
 		
 	/** Method Article**/
 	public void insertArticle(ArticleVendu articleVendu)throws DALException;

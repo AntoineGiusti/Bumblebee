@@ -79,7 +79,7 @@ public class EnchereDAOMock implements MethodDAO {
 	}
 
 	@Override
-	public Utilisateur selectByPseudo(String pseudo) throws DALException {
+	public Utilisateur selectById(Integer pseudo) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}

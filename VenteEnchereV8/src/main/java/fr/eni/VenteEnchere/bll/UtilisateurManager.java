@@ -69,6 +69,21 @@ public class UtilisateurManager {
 
 	}
 	
+	/////////////////////////
+	
+	public Utilisateur utilisateurParId(Integer id) throws BLLException {
+		
+		try {
+			return DAOFact.getInstance().selectById(id);
+		} catch (DALException e) {
+			e.printStackTrace();
+			throw new BLLException(e);
+		}
+		
+	}
+	
+	
+	
 	///////////////////////////
 	
 	public List<Utilisateur> listeUtilisateurs() throws BLLException{
@@ -119,8 +134,7 @@ public class UtilisateurManager {
 		verificationRue(utilisateurModifier.getRue(), be);
 		verificationCodePostal(utilisateurModifier.getCodePostal(), be);
 		verificationVille(utilisateurModifier.getVille(), be);
-		verificationMotDePasse(utilisateurModifier.getMotDePasse(), be);
-		
+		verificationMotDePasse(utilisateurModifier.getMotDePasse(), be);	
 		verificationConfirmation(confirmation, utilisateurModifier.getMotDePasse(), be);
 		
 		
