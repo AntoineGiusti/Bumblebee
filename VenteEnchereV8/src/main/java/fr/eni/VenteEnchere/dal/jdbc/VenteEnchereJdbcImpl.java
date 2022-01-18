@@ -45,9 +45,9 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	
 	
 	/** requete Articles **/
-	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS nom_article, description, prix_initial,date_debut_encheres, date_fin_encheres"
+	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS (nom_article, description ,date_debut_encheres, date_fin_encheres"
 
-			+ "prix_vente, no_utilisateur, no_categorie VALUES (?,?,?,?,?,?,?,?)";
+			+ ", prix_initial, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?)";
 	
 	private final String UPDATE_ARTICLES_VENDUS = "UPDATE INTO ARTICLES_VENDUS SET nom =?, prenom =?,email =?, telephone =?,"
 			+ "	rue =? , code_postal =?, ville =?, mot_de_passe =? WHERE pseudo =?";
@@ -227,19 +227,22 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	public void insertArticle(ArticleVendu articleVendu) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ARTICLES_VENDUS, PreparedStatement.RETURN_GENERATED_KEYS);
-
+			
+			System.out.println(articleVendu);
+			
 			pStmt.setString(1, articleVendu.getNomArticle());
 			pStmt.setString(2, articleVendu.getDescription());
-			Timestamp timeStampStart = Timestamp.valueOf(
-					articleVendu.getDateDebutEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd T HH:mm:ss")));
-			pStmt.setTimestamp(4, timeStampStart);
-			Timestamp timeStampEnd = Timestamp.valueOf(
-					articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd T HH:mm:ss")));
-			pStmt.setTimestamp(5, timeStampEnd);
+			pStmt.setDate(3, Date.valueOf(articleVendu.getDateDebutEncheres()));
+//			Timestamp timeStampStart = Timestamp.valueOf(
+//					articleVendu.getDateDebutEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//			pStmt.setTimestamp(4, timeStampStart);
+//			Timestamp timeStampEnd = Timestamp.valueOf(
+//					articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//			pStmt.setTimestamp(5, timeStampEnd);
+			pStmt.setDate(4, Date.valueOf(articleVendu.getDateFinEncheres()));
 			pStmt.setInt(5, articleVendu.getMiseAPrix());
-			pStmt.setString(6, articleVendu.getPrixVente());
-			pStmt.setInt(7, articleVendu.getutilisateur().getNoUtilisateur());
-			pStmt.setInt(8, articleVendu.getCategorie().getNoCategorie());
+			pStmt.setInt(6, articleVendu.getutilisateur().getNoUtilisateur());
+			pStmt.setInt(7, articleVendu.getCategorie().getNoCategorie());
 			pStmt.executeUpdate();
 
 			ResultSet rs = pStmt.getGeneratedKeys();

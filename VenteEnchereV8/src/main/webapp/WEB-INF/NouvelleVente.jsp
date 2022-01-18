@@ -26,7 +26,7 @@
 <p>Photo de l'article <input type = "submit" name = "upload" value = "UPLOADER"/></p><br>
 <p>Mise a prix : <input type = "number" name = "miseAPrix" /> point(s)</p><br>
 <p>Debut de l'enchere : <input type = "date" name = "dateDebutEnchere"/></p><br>
-<p>Fin de l'enchere : <input type = "date" name = dateFinEnchere/></p><br>
+<p>Fin de l'enchere : <input type = "date" name = "dateFinEnchere"/></p><br>
 <fieldset>
 	<legend>Retrait</legend>
 	<p>Rue : <input type = "text" name= "rue" value = "${Utilisateur.rue}"/></p><br>
