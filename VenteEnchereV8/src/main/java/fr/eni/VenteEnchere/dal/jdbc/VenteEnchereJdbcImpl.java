@@ -37,7 +37,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo=?, nom =?, prenom =?,email =?, telephone =?, rue =?, code_postal =? , ville=?,"
 			+ "mot_de_passe =? WHERE no_utilisateur =?";	
 
-	private final String SELECT_BY_PSEUDO = " SELECT * FROM UTILISATEURS WHERE pseudo= ?";
+	private final String SELECT_BY_ID = " SELECT * FROM UTILISATEURS WHERE no_utilisateur= ?";
 
 	private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ? ";
 
@@ -46,9 +46,9 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	
 	
 	/** requete Articles **/
-	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS nom_article, description, prix_initial,date_debut_encheres, date_fin_encheres"
+	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS (nom_article, description ,date_debut_encheres, date_fin_encheres"
 
-			+ "prix_vente, no_utilisateur, no_categorie VALUES (?,?,?,?,?,?,?,?)";
+			+ ", prix_initial, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?)";
 	
 	private final String UPDATE_ARTICLES_VENDUS = "UPDATE INTO ARTICLES_VENDUS SET nom =?, prenom =?,email =?, telephone =?,"
 			+ "	rue =? , code_postal =?, ville =?, mot_de_passe =? WHERE pseudo =?";
@@ -105,22 +105,28 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	 * method de selection des donn�es d'un utilisateur en passant par son pseudo
 	 */
 	@Override
-	public Utilisateur selectByPseudo(String pseudo) throws DALException {
+	public Utilisateur selectById(Integer noUtilisateur) throws DALException {
 		Utilisateur utilisateur = null;
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pStmt = cnx.prepareStatement(SELECT_BY_PSEUDO);
-			pStmt.setString(1, "pseudo");
+			PreparedStatement pStmt = cnx.prepareStatement(SELECT_BY_ID);
+			String noUtil = noUtilisateur.toString();
+			pStmt.setString(1, noUtil);
 			ResultSet rs = pStmt.executeQuery();
 			while (rs.next()) {
+				Integer id = rs.getInt("no_utilisateur");
+				String pseudo = rs.getString("pseudo");
 				String nom = rs.getString("nom");
 				String prenom = rs.getString("prenom");
 				String email = rs.getString("email");
 				String telephone = rs.getString("telephone");
 				String rue = rs.getString("rue");
-				String codePostal = rs.getString("code_postale");
+				String codePostal = rs.getString("code_postal");
 				String ville = rs.getString("ville");
-
-				utilisateur = new Utilisateur(nom, prenom, email, telephone, rue, codePostal, ville);
+				String motDePasse = rs.getString("mot_de_passe");
+				Integer credits = rs.getInt("credit");
+				boolean administrateur = rs.getBoolean("administrateur");
+			
+				utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credits, administrateur);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -222,19 +228,22 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	public void insertArticle(ArticleVendu articleVendu) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ARTICLES_VENDUS, PreparedStatement.RETURN_GENERATED_KEYS);
-
+			
+			System.out.println(articleVendu);
+			
 			pStmt.setString(1, articleVendu.getNomArticle());
 			pStmt.setString(2, articleVendu.getDescription());
-			Timestamp timeStampStart = Timestamp.valueOf(
-					articleVendu.getDateDebutEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd T HH:mm:ss")));
-			pStmt.setTimestamp(4, timeStampStart);
-			Timestamp timeStampEnd = Timestamp.valueOf(
-					articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd T HH:mm:ss")));
-			pStmt.setTimestamp(5, timeStampEnd);
+			pStmt.setDate(3, Date.valueOf(articleVendu.getDateDebutEncheres()));
+//			Timestamp timeStampStart = Timestamp.valueOf(
+//					articleVendu.getDateDebutEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//			pStmt.setTimestamp(4, timeStampStart);
+//			Timestamp timeStampEnd = Timestamp.valueOf(
+//					articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//			pStmt.setTimestamp(5, timeStampEnd);
+			pStmt.setDate(4, Date.valueOf(articleVendu.getDateFinEncheres()));
 			pStmt.setInt(5, articleVendu.getMiseAPrix());
-			pStmt.setString(6, articleVendu.getPrixVente());
-			pStmt.setInt(7, articleVendu.getutilisateur().getNoUtilisateur());
-			pStmt.setInt(8, articleVendu.getCategorie().getNoCategorie());
+			pStmt.setInt(6, articleVendu.getutilisateur().getNoUtilisateur());
+			pStmt.setInt(7, articleVendu.getCategorie().getNoCategorie());
 			pStmt.executeUpdate();
 
 			ResultSet rs = pStmt.getGeneratedKeys();

@@ -33,13 +33,32 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(); // appel de l' objet session
 		
 		String nextScreen = "WEB-INF/MonProfilUtilisateurModifier.jsp";
 		
-		Utilisateur utilisateurModifier = (Utilisateur) session.getAttribute("utilisateur");
+		ProfilUtilisateurModifierModel model = null;
 		
-		Utilisateur utilisateurOrigin = new Utilisateur(utilisateurModifier.getPseudo(),utilisateurModifier.getEmail());
+		// variable determinant quel utilisateur sera appele dans le model
+		Utilisateur utilisateurModel = (Utilisateur) session.getAttribute("utilisateur"); 
+		
+		
+		// cree le model avec l utilisateur avec les attribut en base de donnee de l utilisateur en session
+		try {
+			model = new ProfilUtilisateurModifierModel(UtilisateurManager.getInstance().utilisateurParId(utilisateurModel.getNoUtilisateur())); 
+		} catch (BLLException e2) {
+
+			e2.printStackTrace();
+		}
+		
+		// transfert a la jsp les attribut du model
+		request.setAttribute("model", model);
+		
+		// cree une variable de l utilisateur en session
+		Utilisateur utilisateurAModifier = (Utilisateur) session.getAttribute("utilisateur");
+		
+		// cree un nouvel utilisateur avec le pseudo en l email de l utilisateur session , pour etre comparer ( contrainte d unicite)
+		Utilisateur utilisateurOrigin = new Utilisateur(utilisateurAModifier.getPseudo(),utilisateurAModifier.getEmail());
 		
 		
 		if(request.getParameter("enregister")!=null) {
@@ -55,10 +74,12 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			String NouveauMotDePasse = request.getParameter("NouveauMotDePasse");
 			String confirmation = request.getParameter("confirmation");
 			
-					
+			/////
+			
+			//verifie la comformite du mot de passe
 			Boolean logOk = false;
 			try {
-				logOk = UtilisateurManager.getInstance().verificationMotDePasseActuel(motDePasseActuel, utilisateurModifier.getMotDePasse());
+				logOk = UtilisateurManager.getInstance().verificationMotDePasseActuel(motDePasseActuel, utilisateurAModifier.getMotDePasse());
 			} catch (BLLException e1) {
 				e1.printStackTrace();
 			}
@@ -67,27 +88,41 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 				System.out.println("mot de passe errone");
 				request.setAttribute("verifMp", "mot de passe errone");
 			}
+			
+			// si le mot de passe est conforme , l utilisateur session est modifie
 			else {
-			utilisateurModifier.setPseudo(pseudo);
-			utilisateurModifier.setNom(nom);
-			utilisateurModifier.setPrenom(prenom);
-			utilisateurModifier.setEmail(email);
-			utilisateurModifier.setTelephone(telephone);
-			utilisateurModifier.setRue(rue);
-			utilisateurModifier.setCodePostal(codePostal);
-			utilisateurModifier.setVille(ville);
-			utilisateurModifier.setMotDePasse(NouveauMotDePasse);
-			}
+			utilisateurAModifier.setPseudo(pseudo);
+			utilisateurAModifier.setNom(nom);
+			utilisateurAModifier.setPrenom(prenom);
+			utilisateurAModifier.setEmail(email);
+			utilisateurAModifier.setTelephone(telephone);
+			utilisateurAModifier.setRue(rue);
+			utilisateurAModifier.setCodePostal(codePostal);
+			utilisateurAModifier.setVille(ville);
+			utilisateurAModifier.setMotDePasse(NouveauMotDePasse);
 			
 			
 			try {
-				UtilisateurManager.getInstance().modifierUtilisateur(utilisateurModifier,utilisateurOrigin, confirmation);
+				// les modification sont envoyees en bdd
+				UtilisateurManager.getInstance().modifierUtilisateur(utilisateurAModifier,utilisateurOrigin, confirmation);
+				// le model est maj par la bdd
+				Utilisateur utilisateurModifie = UtilisateurManager.getInstance().utilisateurParId(utilisateurAModifier.getNoUtilisateur());
+				ProfilUtilisateurModifierModel modelmodifie = new ProfilUtilisateurModifierModel(utilisateurModifie);
+				// les nouveaux attributs sont envoyes a la jsp
+				request.setAttribute("model", modelmodifie);
+				
 			} catch (BLLException e) {
 				request.setAttribute("erreur", e.toString());
 				e.printStackTrace();
 			}
+			
+			
+			}		
 						
 		}
+		
+		
+		//////////////////
 		
 		if (request.getParameter("supprimer")!=null) {
 				
@@ -103,6 +138,8 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			}
 			
 		}
+		
+		
 		
 		request.getRequestDispatcher(nextScreen).forward(request, response);
 	}

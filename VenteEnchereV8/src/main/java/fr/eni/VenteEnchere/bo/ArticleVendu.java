@@ -3,7 +3,7 @@
  */
 package fr.eni.VenteEnchere.bo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -15,8 +15,8 @@ public class ArticleVendu {
 	private Integer noArticle;
 	private String nomArticle;
 	private String description;
-	private LocalDateTime dateDebutEncheres;
-	private LocalDateTime dateFinEncheres;
+	private LocalDate dateDebutEncheres;
+	private LocalDate dateFinEncheres;
 	private Integer miseAPrix;
 	private String prixVente;
 	private String etatVente;
@@ -27,8 +27,40 @@ public class ArticleVendu {
 	
 	
 	
-	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, Integer miseAPrix, String prixVente) {
+	/**
+	 * 
+	 */
+	public ArticleVendu() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	/**
+	 * @param nomArticle
+	 * @param description
+	 * @param dateDebutEncheres
+	 * @param dateFinEncheres
+	 * @param miseAPrix
+	 * @param utilisateur
+	 * @param categorie
+	 */
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, Integer miseAPrix, Utilisateur utilisateur, Categorie categorie) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+	}
+
+
+
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, Integer miseAPrix, String prixVente) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -59,8 +91,8 @@ public class ArticleVendu {
 	 * @param no_categorie
 	 * @param retrait
 	 */
-	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEnchere,
-			LocalDateTime dateFinEnchere, Integer miseAPrix, Utilisateur utilisateur, Categorie categorie,
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEnchere,
+			LocalDate dateFinEnchere, Integer miseAPrix, Utilisateur utilisateur, Categorie categorie,
 			Retrait retrait) {
 		super();
 		this.nomArticle = nomArticle;
@@ -73,12 +105,7 @@ public class ArticleVendu {
 		this.retrait = retrait;
 	}
 
-	/**
-	 * 
-	 */
-	public ArticleVendu() {
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	/**
 	 * @param noArticle
@@ -90,8 +117,8 @@ public class ArticleVendu {
 	 * @param prixVente
 	 * @param etatVente
 	 */
-	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, Integer miseAPrix, String prixVente, String etatVente) {
+	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, Integer miseAPrix, String prixVente, String etatVente) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -103,24 +130,10 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 	}
 
-	/**
-	 * @param noArticle
-	 * @param nonArticle
-	 * @param description
-	 * @param dateDebutEncheres
-	 * @param dateFinEncheres
-	 * @param miseAPrix
-	 * @param prixVente
-	 * @param etatVente
-	 * @param user
-	 * @param lstEncheres
-	 * @param categorie
-	 * @param retrait
-	 */
+	
 	
 
 	
-
 
 	/**
 	 * @return the noArticle
@@ -167,28 +180,28 @@ public class ArticleVendu {
 	/**
 	 * @return the dateDebutEncheres
 	 */
-	public LocalDateTime getDateDebutEncheres() {
+	public LocalDate getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
 
 	/**
 	 * @param dateDebutEncheres the dateDebutEncheres to set
 	 */
-	public void setDateDebutEncheres(LocalDateTime dateDebutEncheres) {
+	public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
 
 	/**
 	 * @return the dateFinEncheres
 	 */
-	public LocalDateTime getDateFinEncheres() {
+	public LocalDate getDateFinEncheres() {
 		return dateFinEncheres;
 	}
 
 	/**
 	 * @param dateFinEncheres the dateFinEncheres to set
 	 */
-	public void setDateFinEncheres(LocalDateTime dateFinEncheres) {
+	public void setDateFinEncheres(LocalDate dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 

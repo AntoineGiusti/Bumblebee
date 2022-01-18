@@ -3,7 +3,13 @@ package fr.eni.VenteEnchere.ihm.nouvelleVente;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+>>>>>>> 3162b5861a6dc9959e650dbc06d4a941bcf441a5
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.VenteEnchere.bll.ArticleManager;
 import fr.eni.VenteEnchere.bll.UtilisateurManager;
 import fr.eni.VenteEnchere.bo.ArticleVendu;
 import fr.eni.VenteEnchere.bo.Categorie;
@@ -54,53 +61,62 @@ public class NouvelleVenteServlet extends HttpServlet {
 		
 		
 		if (request.getParameter("enregistrer") != null ) {
-			String nomArticle = request.getParameter("article");
+			String nomArticle = request.getParameter("nomArticle");
 			String description = request.getParameter("description");
-			String categorie = request.getParameter("categorie");	
 			
-			String debutEnchere = request.getParameter("dateDebutEnchere");
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date resultat = null;
-			try {
-				resultat = sdf.parse(debutEnchere);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			String debutEnchere = request.getParameter("dateDebutEnchere");	
+			System.out.println(debutEnchere);
 			String finEnchere = request.getParameter("dateFinEnchere");
-			try {
-				resultat = sdf.parse(finEnchere);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			System.out.println(finEnchere);
+			//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			LocalDate dateDebutEnchere = null;
+			LocalDate dateFinEnchere = null;
 			
+//			try {
+//				dateDebutEnchere = sdf.parse(debutEnchere);
+//			} catch (ParseException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			
+			
+			// "dd/MM/yyyy"
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			  //convert String to LocalDate
+			dateDebutEnchere = LocalDate.parse(debutEnchere, formatter);
+			
+			
+//			try {
+//				dateFinEnchere = sdf.parse(finEnchere);
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//				e.printStackTrace();
+//			}
+			
+			dateFinEnchere = LocalDate.parse(finEnchere, formatter);
 			
 //			LocalDateTime dateDebutEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));		
 //			LocalDateTime dateFinEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));			
 			Integer miseAPrix =Integer.parseInt(request.getParameter("miseAPrix")) ;			
-			Utilisateur utilisateur = utilisateurConnecte;
-			Categorie categorieArticle = null;					
-			
+							
 			String libelleCategorie = request.getParameter("categorie");
 			Integer noCategorie = 0;			
 			
-			
-				
-			
 			switch (libelleCategorie) {
-			case "Ameublement": 
+			case "ameublement": 
 				noCategorie = 1;
 				break;
 				
-			case "Informatique": 
+			case "informatique": 
 				noCategorie = 2;
 				break;
 				
-			case "Sport et loisir": 
+			case "sportEtLoisir": 
 				noCategorie = 3;
 				break;
 				
-			case "Vetement": 
+			case "vetement": 
 				noCategorie = 4;
 				break;
 
@@ -108,6 +124,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 				break;
 			}
 			
+<<<<<<< HEAD
 			ArticleVendu article = new ArticleVendu();
 			List<ArticleVendu> lstArticles = new ArrayList<ArticleVendu>();
 			
@@ -116,13 +133,24 @@ public class NouvelleVenteServlet extends HttpServlet {
 			
 			
 			Retrait retrait ; 
+=======
+			Categorie categorieArticle = new Categorie(noCategorie, libelleCategorie);
+>>>>>>> 3162b5861a6dc9959e650dbc06d4a941bcf441a5
 			
+			Retrait retrait ; 	
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");			
 			
+<<<<<<< HEAD
 			
+=======
+			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEnchere, dateFinEnchere, miseAPrix, utilisateurConnecte, categorieArticle);
+>>>>>>> 3162b5861a6dc9959e650dbc06d4a941bcf441a5
 			
+			ArticleManager.getInstance().ajouterArticleAVendre(article);
+		
+		///////annuler vente///////////////////////	
 			
 		}
 		if(request.getParameter("annuler") != null ) {
