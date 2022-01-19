@@ -38,6 +38,20 @@ public class AccueilServlet extends HttpServlet {
 		
 		if(request.getParameter("Rechercher")!=null) {
 			
+			
+			
+			if (request.getParameter("filtre").length() > 0) {	
+				try {
+					model.setLstArticlesParMotClef(ArticleManager.getInstance().getArticleByMotClef(request.getParameter("filtre")));
+					request.setAttribute("model", model);
+				} catch (BLLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
+			else {
+				
 			switch (request.getParameter("categorie")) {
 			case "toutes":
 				try {
@@ -105,7 +119,7 @@ public class AccueilServlet extends HttpServlet {
 			
 			nextScreen ="/WEB-INF/Accueil.jsp";
 			}
-		
+		}
 		
 			else {
 				try {

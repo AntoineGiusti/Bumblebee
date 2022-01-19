@@ -17,8 +17,7 @@ public class AccueilModel {
 	
 	private List<ArticleVendu> lstArticlesParCategorie ;
 	
-	
-	
+	private List<ArticleVendu> lstArticlesParMotClef ;
 	
 
 
@@ -48,6 +47,19 @@ public class AccueilModel {
 	}
 	
 	
+	/**
+	 * @param lstArticles
+	 * @param lstArticlesParCategorie
+	 * @param lstArticlesParMotClef
+	 */
+	public AccueilModel(List<ArticleVendu> lstArticles, List<ArticleVendu> lstArticlesParCategorie,
+			List<ArticleVendu> lstArticlesParMotClef) {
+		super();
+		this.lstArticles = lstArticles;
+		this.lstArticlesParCategorie = lstArticlesParCategorie;
+		this.lstArticlesParMotClef = lstArticlesParMotClef;
+	}
+
 	@Override
 	public String toString() {
 		return "AccueilModel [lstArticles=" + lstArticles + "]";
@@ -82,6 +94,14 @@ public class AccueilModel {
 
 	public void setLstArticlesParCategorie(List<ArticleVendu> lstArticlesParCategorie) {
 		this.lstArticlesParCategorie = lstArticlesParCategorie;
+	}
+
+	public List<ArticleVendu> getLstArticlesParMotClef() {
+		return lstArticlesParMotClef;
+	}
+
+	public void setLstArticlesParMotClef(List<ArticleVendu> lstArticlesParMotClef) {
+		this.lstArticlesParMotClef = lstArticlesParMotClef;
 	}
 	
 
