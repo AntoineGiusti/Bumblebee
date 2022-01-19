@@ -29,6 +29,10 @@ public interface MethodDAO {
 	public List<Enchere> getAllEnchere()throws DALException;
 	
 	public void update(String nomModifier) throws DALException;
+	/**
+	 * @param enchere
+	 */
+	public void insertEnchere(Enchere enchere);
 	
 	
 }

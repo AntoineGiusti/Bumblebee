@@ -3,6 +3,8 @@
  */
 package fr.eni.VenteEnchere.bll;
 
+import java.sql.Date;
+
 import fr.eni.VenteEnchere.bo.ArticleVendu;
 import fr.eni.VenteEnchere.bo.Enchere;
 import fr.eni.VenteEnchere.bo.Utilisateur;
@@ -21,7 +23,7 @@ public class EnchereManager {
 		private static EnchereManager instance = new EnchereManager();
 	}
 	
-	public EnchereManager getInstance() {
+	public static EnchereManager getInstance() {
 		return EnchereManagerHolder.instance;
 	}
 	
@@ -29,13 +31,10 @@ public class EnchereManager {
 
 	////////////////////singleton//////////////////
 
-	private void modifPrixEnchere(Enchere montantEnchere) throws BLLException {
-			try {
-				DAOFact.getInstance().insertEnchere();
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public void ajouterEnchere() throws BLLException, DALException {
+			Enchere enchere = new Enchere();
+		DAOFact.getInstance().insertEnchere(enchere);
+
 	}
 }
 
