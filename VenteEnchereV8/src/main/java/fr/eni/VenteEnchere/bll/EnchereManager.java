@@ -3,6 +3,8 @@
  */
 package fr.eni.VenteEnchere.bll;
 
+import fr.eni.VenteEnchere.bo.ArticleVendu;
+import fr.eni.VenteEnchere.bo.Enchere;
 import fr.eni.VenteEnchere.bo.Utilisateur;
 import fr.eni.VenteEnchere.dal.DALException;
 import fr.eni.VenteEnchere.dal.DAOFact;
@@ -27,13 +29,13 @@ public class EnchereManager {
 
 	////////////////////singleton//////////////////
 
-	private Integer modifierPrixEnchere(Integer prixModifier) {
-		return prixModifier;
-	}
-	
-	private void meilleurNomAcheteur(String nomModifier) throws BLLException, DALException {
-		DAOFact.getInstance().update(nomModifier);
-		
-		
+	private void modifPrixEnchere(Enchere montantEnchere) throws BLLException {
+			try {
+				DAOFact.getInstance().insertEnchere();
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 }
+
