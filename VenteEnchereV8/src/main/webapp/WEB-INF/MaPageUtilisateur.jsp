@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Ma page utilisateur</title>
-
+<link rel="stylesheet" href="VenteEnchereV8/CSS/MaPage.css" >
 </head>
 <body>
 	<div class = "logo">
