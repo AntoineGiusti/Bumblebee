@@ -103,4 +103,10 @@ public class EnchereDAOMock implements MethodDAO {
 		
 	}
 
+	@Override
+	public List<ArticleVendu> getArticleByCategotie(Integer no_categorieSelect) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

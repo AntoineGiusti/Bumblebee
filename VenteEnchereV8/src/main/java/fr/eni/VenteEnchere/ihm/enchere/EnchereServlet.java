@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class EnchereServlet
  */
 @WebServlet("/EnchereServlet")
-public class DetailVenteServlet extends HttpServlet {
+public class EnchereServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetailVenteServlet() {
+    public EnchereServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,15 @@ public class DetailVenteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String nextScreen  = "WEB-INF/DetailVente.jsp";
+		
+		if(request.getParameter("encherir") != null) {
+			nextScreen = "WEB-INF/Accueil.jsp";
+			
+		}
+		
+		request.getRequestDispatcher(nextScreen).forward(request, response);
 	}
 
 	/**
