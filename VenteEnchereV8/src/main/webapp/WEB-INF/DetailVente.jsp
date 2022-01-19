@@ -4,43 +4,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Detail Vente</title>
 </head>
 <body>
-	<h1><a href = "ConnexionServlet"> ENI-Encheres </a></h1>
-	
-	<h2>Détail vente</h2>
-	
-	<img  src="" alt=>
-	
-	<form action="DetailVenteServlet" method="POST">
-	<h2>${articleVendu.nomArticle}</h2>
-		
-	<h2>Description:</h2>
-	<P>${lstcategorie.categorie}</P>
-		
-	<h2>Catégorie: </h2>
-	<p>${categorie.libelle}</p>
-		
-	<h2>Meilleure offre:</h2>
-	<p>${utilisateur.credit}par ${utilisateur.prenom}</p>
-		
-	<h2>Mise à prix</h2>
-	<p>${enchere.montantEnchere}</p>
-		
-	<h2>Fin de l'enchère:</h2>
-	<p>${enchere.dateEnchere}</p>
-		
-	<h2>Retrait:</h2>
-	<p>${utilisateur.rue} ${utilisateur.codePostal} ${utilisateur.ville}</p>
-		
-	<h2>Vendeur</h2>
-	<p>${profilVendeur.utilisateur.pseudo}</p>
-		
-	<h2>Ma proposition:</h2>
-	<menu>--chiffre--</menu>
-	<input type="submit" name="encherir" value="Enchérir"/>
-	</form>
-	
+	<div class = "logo">
+		<h1><a href = "ConnexionServlet"> ENI-Encheres </a></h1>
+	</div>
+	<h2>Detail vente</h2>
+		<div class = "img">
+			<img  src="" >
+		</div>
+	<div class = "formulaire">	
+		<form action="DetailVenteServlet" method="POST">
+			<p>${articleVendu.nomArticle}</p>
+			<p>Description : ${lstCategorie.categorie}</P><br>	
+			<p>Catégorie : ${categorie.libelle}</p><br>
+			<p>Meilleure offre : ${utilisateur.credit}par ${utilisateur.prenom}</p><br>				
+			<p>Mise à prix : ${enchere.montantEnchere}</p><br>				
+			<p>Fin de l'enchère : ${enchere.dateEnchere}</p><br>					
+			<p>Retrait : ${utilisateur.rue} <br>			
+			 ${utilisateur.codePostal} ${utilisateur.ville}</p><br>				
+			<p>Vendeur : ${profilVendeur.utilisateur.pseudo}</p><br>				
+			<p>Ma proposition : <input type = "number" name = "proposition"/></p>			
+			<input type ="submit" name="encherir" value="Enchérir"/>
+		</form>
+	</div>	
 </body>
 </html>
