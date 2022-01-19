@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import fr.eni.VenteEnchere.bo.ArticleVendu;
+import fr.eni.VenteEnchere.bo.Categorie;
 import fr.eni.VenteEnchere.bo.Enchere;
 import fr.eni.VenteEnchere.bo.Utilisateur;
 
@@ -21,6 +22,7 @@ public interface MethodDAO {
 	public void updateArticle (ArticleVendu articleVendu)throws DALException;
 	public void deleteArticle(ArticleVendu articleVendu)throws DALException;
 	public List<ArticleVendu> getAllArticle () throws DALException;
+	public List<ArticleVendu> getArticleByCategotie (Integer no_categorieSelect) throws DALException;
 	
 	/**Method Enchere**/
 	public void insertEnchere(Date dateEnchere, Integer montant_enchere, ArticleVendu articleVendu, Utilisateur utilisateur)throws DALException;
