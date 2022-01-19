@@ -63,9 +63,9 @@ public class AccueilServlet extends HttpServlet {
 				
 				try {
 					
-					model.setLstArticlesParCategorie(null);
+					model.setLstArticlesParCategorie(ArticleManager.getInstance().getArticleByCategorie(1));
 				} catch (BLLException e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
 				}
 				
@@ -74,8 +74,7 @@ public class AccueilServlet extends HttpServlet {
 			case "informatique":
 				
 				try {
-					System.out.println("comprend le menu deroule");
-					request.setAttribute("lstInfo", ArticleManager.getInstance().getArticleByCategorie(2)); 
+					model.setLstArticlesParCategorie(ArticleManager.getInstance().getArticleByCategorie(2));
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -86,7 +85,7 @@ public class AccueilServlet extends HttpServlet {
 			case "sportEtLoisir":
 				
 				try {
-					ArticleManager.getInstance().getArticleByCategorie(3);
+					model.setLstArticlesParCategorie(ArticleManager.getInstance().getArticleByCategorie(3));
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -97,7 +96,7 @@ public class AccueilServlet extends HttpServlet {
 			case "vetement":
 				
 				try {
-					ArticleManager.getInstance().getArticleByCategorie(4);
+					model.setLstArticlesParCategorie(ArticleManager.getInstance().getArticleByCategorie(4));
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

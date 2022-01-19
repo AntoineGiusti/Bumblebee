@@ -36,7 +36,7 @@
 	${model.lstArticles }
 <br>
 <br>
-	${lstInfo }
+	${model.lstArticlesParCategorie }
 <br>
 
 <!-- article et caractéristiques a faire -->
