@@ -36,9 +36,7 @@ public class AccueilServlet extends HttpServlet {
 		AccueilModel model = new AccueilModel();
 		
 		
-		if(request.getParameter("Rechercher")!=null) {
-			
-			
+		if(request.getParameter("Rechercher")!=null) {	
 			
 			if (request.getParameter("filtre").length() > 0) {	
 				try {

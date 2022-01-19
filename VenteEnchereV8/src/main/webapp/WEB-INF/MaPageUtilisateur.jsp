@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +54,35 @@
 			<input type="checkbox" id="termine" >ventes terminées
 		</div>
 	</form>
+	
+		<c:forEach items="${model.lstAllArticles}" var="art">
+	<p><a href = "<c:url value = "DetailVenteServlet?id=${art.noArticle}"/>">${art.nomArticle}</a><br>
+	 prix de vente : ${art.prixVente}<br>
+	 date de fin enchere : ${art.dateFinEncheres}<br>
+	 vendeur : ${art.utilisateur.pseudo}</p>
+	</c:forEach>
+
+	<c:forEach items="${model.lstArticlesParCategorie}" var="artByCat">
+	<p><a href="DetailVenteServlet">${artByCat.nomArticle}</a><br>
+	 prix de vente : ${artByCat.prixVente}<br>
+	 date de fin enchere : ${artByCat.dateFinEncheres}<br>
+	 vendeur : ${artByCat.utilisateur.pseudo}</p>
+	</c:forEach>
+	
+	<c:forEach items="${model.lstArticlesParMotClef}" var="artByMot">
+	<p><a href="DetailVenteServlet">${artByMot.nomArticle}</a><br>
+	 prix de vente : ${artByMot.prixVente}<br>
+	 date de fin enchere : ${artByMot.dateFinEncheres}<br>
+	 vendeur : ${artByMot.utilisateur.pseudo}</p>
+	</c:forEach>
+	
+	
+	<a href = "<c:url value = "DetailVenteServlet?id=${art.noArticle}"/>">${article.nomArticle}</a>
+	
+	
+	
+	
+	
 </body>
 <script type="text/javascript" src="<%=request.getContextPath()%>/MaPage.js"></script>
 </html>

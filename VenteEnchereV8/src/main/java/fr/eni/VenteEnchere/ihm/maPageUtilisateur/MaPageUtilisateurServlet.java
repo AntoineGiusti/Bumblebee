@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import fr.eni.VenteEnchere.bll.ArticleManager;
+import fr.eni.VenteEnchere.bll.BLLException;
+
 
 /**
  * Servlet implementation class MaPageUtilisateurServlet
@@ -27,11 +30,13 @@ public class MaPageUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (request.getSession().getAttribute("utilisateur") != null) {
-			System.out.println("session mapageUtilisateur en cours");
-		}
-		
 		String nextScreen = "WEB-INF/MaPageUtilisateur.jsp";
+		
+		MaPageUtilisateurModel model = new MaPageUtilisateurModel();
+		
+		
+		///////////navigation
+		
 		
 		if(request.getParameter("encheres")!=null) {
 			
@@ -56,6 +61,91 @@ public class MaPageUtilisateurServlet extends HttpServlet {
 			}
 			nextScreen ="AccueilServlet";
 				}
+		
+		//////////encheres
+		
+		if(request.getParameter("rechercher")!=null) {	
+			
+			if (request.getParameter("filtre").length() > 0) {	
+				try {
+					model.setLstArticlesParMotClef(ArticleManager.getInstance().getArticleByMotClef(request.getParameter("filtre")));
+					request.setAttribute("model", model);
+				} catch (BLLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
+			else {
+				
+			switch (request.getParameter("categorie")) {
+			case "Toutes":
+				try {
+					model.setLstAllArticles(ArticleManager.getInstance().getAllArticle());
+					request.setAttribute("model", model);
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+				
+			case "ameublement":
+				
+				try {
+					
+					model.setLstArticlesParCategorie(ArticleManager.getInstance().getArticleByCategorie(1));
+					request.setAttribute("model", model);
+				} catch (BLLException e) {
+				
+					e.printStackTrace();
+				}
+				
+				break;
+				
+			case "informatique":
+				
+				try {
+					model.setLstArticlesParCategorie(ArticleManager.getInstance().getArticleByCategorie(2));
+					request.setAttribute("model", model);
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				break;
+				
+			case "sportEtLoisir":
+				
+				try {
+					model.setLstArticlesParCategorie(ArticleManager.getInstance().getArticleByCategorie(3));
+					request.setAttribute("model", model);
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				break;
+				
+			case "vetement":
+				
+				try {
+					model.setLstArticlesParCategorie(ArticleManager.getInstance().getArticleByCategorie(4));
+					request.setAttribute("model", model);
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+		
+			
+		
 		
 		
 		request.getRequestDispatcher(nextScreen).forward(request, response);
