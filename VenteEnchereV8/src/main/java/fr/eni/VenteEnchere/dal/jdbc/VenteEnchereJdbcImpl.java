@@ -64,6 +64,8 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			+ " INNER JOIN CATEGORIES"
 			+ " ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie";
 	
+	
+	private final String UPDATE_ENCHERE = "UPDATE INTO ENCHERE SET montant_enchere = ? WHERE no_enchere = ?";
 //	SELECT id, prenom, nom, date_achat, num_facture, prix_total
 //	FROM utilisateur
 //	INNER JOIN commande ON utilisateur.id = commande.utilisateur_id
@@ -440,6 +442,13 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		}
 
 		return lstEncheres;
+	}
+
+
+	@Override
+	public void update(String nomModifier) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

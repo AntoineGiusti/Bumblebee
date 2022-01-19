@@ -97,4 +97,10 @@ public class EnchereDAOMock implements MethodDAO {
 		return null;
 	}
 
+	@Override
+	public void update(String nomModifier) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

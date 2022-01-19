@@ -26,7 +26,7 @@ public interface MethodDAO {
 	public void insertEnchere(Date dateEnchere, Integer montant_enchere, ArticleVendu articleVendu, Utilisateur utilisateur)throws DALException;
 	public List<Enchere> getAllEnchere()throws DALException;
 	
-	
+	public void update(String nomModifier);
 	
 	
 }
