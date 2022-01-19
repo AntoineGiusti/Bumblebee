@@ -13,16 +13,11 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import fr.eni.VenteEnchere.bo.Ameublement;
 import fr.eni.VenteEnchere.bo.ArticleVendu;
 import fr.eni.VenteEnchere.bo.Categorie;
 import fr.eni.VenteEnchere.bo.Enchere;
-import fr.eni.VenteEnchere.bo.Informatique;
 import fr.eni.VenteEnchere.bo.Retrait;
-import fr.eni.VenteEnchere.bo.SportEtLoisir;
 import fr.eni.VenteEnchere.bo.Utilisateur;
-import fr.eni.VenteEnchere.bo.Vetement;
 import fr.eni.VenteEnchere.dal.DALException;
 import fr.eni.VenteEnchere.dal.MethodDAO;
 
@@ -51,7 +46,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	/** requete Articles **/
 	private final String INSERT_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS (nom_article, description ,date_debut_encheres, date_fin_encheres"
 
-			+ ", prix_initial, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?)";
+			+ ", prix_initial, no_utilisateur, no_categorie, prix_vente) VALUES (?,?,?,?,?,?,?,?)";
 	
 	private final String UPDATE_ARTICLES_VENDUS = "UPDATE INTO ARTICLES_VENDUS SET nom =?, prenom =?,email =?, telephone =?,"
 			+ "	rue =? , code_postal =?, ville =?, mot_de_passe =? WHERE pseudo =?";
@@ -261,16 +256,11 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			pStmt.setString(1, articleVendu.getNomArticle());
 			pStmt.setString(2, articleVendu.getDescription());
 			pStmt.setDate(3, Date.valueOf(articleVendu.getDateDebutEncheres()));
-//			Timestamp timeStampStart = Timestamp.valueOf(
-//					articleVendu.getDateDebutEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-//			pStmt.setTimestamp(4, timeStampStart);
-//			Timestamp timeStampEnd = Timestamp.valueOf(
-//					articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-//			pStmt.setTimestamp(5, timeStampEnd);
 			pStmt.setDate(4, Date.valueOf(articleVendu.getDateFinEncheres()));
 			pStmt.setInt(5, articleVendu.getMiseAPrix());
 			pStmt.setInt(6, articleVendu.getutilisateur().getNoUtilisateur());
 			pStmt.setInt(7, articleVendu.getCategorie().getNoCategorie());
+			pStmt.setInt(8, articleVendu.getPrixVente());
 			pStmt.executeUpdate();
 
 			ResultSet rs = pStmt.getGeneratedKeys();
@@ -323,29 +313,11 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 						
 				System.out.println(articleVendu);
 				lstArticles.add(articleVendu);		
-
-				
+	
 			}
-//				if (categorie.equalsIgnoreCase("sport") || categorie.equalsIgnoreCase("loisir")) {
-//					String sport = rs.getString("sport et loisir");
-//					articleVendu = new SportEtLoisir(nomArticle, description, miseAPrix, prixVente, etatVente, sport);
-//				}
-//				if (categorie.equalsIgnoreCase("ameublement")) {
-//					String ameublement = rs.getString("ameublement");
-//					articleVendu = new Ameublement(nomArticle, description, miseAPrix, prixVente, etatVente,
-//							ameublement);
-//				}
-//				if (categorie.equalsIgnoreCase("informatique")) {
-//					String informatique = rs.getString("informatique");
-//					articleVendu = new Informatique(nomArticle, description, miseAPrix, prixVente, etatVente,
-//							informatique);
-//				}
-//				if (categorie.equalsIgnoreCase("vetement")) {
-//					String vetement = rs.getString("vetement");
-//					articleVendu = new Vetement(nomArticle, description, miseAPrix, prixVente, etatVente, vetement);
-//				}
 
-			
+
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DALException("Impossible de lire la base de donnee");
