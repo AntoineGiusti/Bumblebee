@@ -34,6 +34,8 @@ public class AccueilServlet extends HttpServlet {
 		String nextScreen = "/WEB-INF/Accueil.jsp";
 		
 		AccueilModel model = new AccueilModel();
+		
+		
 		try {
 			model.setLstArticles(ArticleManager.getInstance().getAllArticle());
 		} catch (BLLException e) {
@@ -45,10 +47,74 @@ public class AccueilServlet extends HttpServlet {
 		
 		
 		
-		if(request.getParameter("rechercher")!=null) {
+		if(request.getParameter("Rechercher")!=null) {
 			
-			nextScreen ="ListeEncheresServlet";
+			switch (request.getParameter("categorie")) {
+			case "toutes":
+				try {
+					model.setLstArticles(ArticleManager.getInstance().getAllArticle());
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+				
+			case "ameublement":
+				
+				try {
+					
+					model.setLstArticlesParCategorie(null);
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				break;
+				
+			case "informatique":
+				
+				try {
+					System.out.println("comprend le menu deroule");
+					request.setAttribute("lstInfo", ArticleManager.getInstance().getArticleByCategorie(2)); 
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				break;
+				
+			case "sportEtLoisir":
+				
+				try {
+					ArticleManager.getInstance().getArticleByCategorie(3);
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				break;
+				
+			case "vetement":
+				
+				try {
+					ArticleManager.getInstance().getArticleByCategorie(4);
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				break;
+
+			default:
+				break;
 			}
+			
+			
+			nextScreen ="/WEB-INF/Accueil.jsp";
+			}
+		
+		
+		
 		
 		request.getRequestDispatcher(nextScreen).forward(request, response);
 	}
