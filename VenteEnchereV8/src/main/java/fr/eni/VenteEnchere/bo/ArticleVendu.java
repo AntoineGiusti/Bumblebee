@@ -59,6 +59,22 @@ public class ArticleVendu {
 
 
 
+	/**
+	 * @param nomArticle
+	 * @param description
+	 * @param dateDebutEncheres
+	 * @param dateFinEncheres
+	 * @param miseAPrix
+	 * @param prixVente
+	 * @param utilisateur
+	 * @param categorie
+	 * @param retrait
+	 */
+	
+	
+
+
+
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, Integer miseAPrix, Integer prixVente) {
 		super();
@@ -67,14 +83,51 @@ public class ArticleVendu {
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
+		
+		this.miseAPrix = miseAPrix;
+		if (prixVente == 0 || prixVente == null) {
+			this.prixVente = miseAPrix;
+		}
+		
 		this.prixVente = prixVente;
 	}
+
+	/**
+	 * @param nomArticle
+	 * @param description
+	 * @param dateDebutEncheres
+	 * @param dateFinEncheres
+	 * @param miseAPrix
+	 * @param prixVente
+	 * @param utilisateur
+	 * @param categorie
+	 */
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
+			Integer miseAPrix, Integer prixVente, Utilisateur utilisateur, Categorie categorie) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+	}
+
+
 
 	public ArticleVendu(String nomArticle, String description, Integer miseAPrix, Integer prixVente, String etatVente) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.miseAPrix = miseAPrix;
+		
+		this.miseAPrix = miseAPrix;
+		if (prixVente == 0 || prixVente == null) {
+			this.prixVente = miseAPrix;
+		}
+		
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 	}
@@ -92,7 +145,7 @@ public class ArticleVendu {
 	 * @param retrait
 	 */
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEnchere,
-			LocalDate dateFinEnchere, Integer miseAPrix, Utilisateur utilisateur, Categorie categorie,
+			LocalDate dateFinEnchere, Integer miseAPrix, Integer prixDeVente, Utilisateur utilisateur, Categorie categorie,
 			Retrait retrait) {
 		super();
 		this.nomArticle = nomArticle;
@@ -100,6 +153,7 @@ public class ArticleVendu {
 		this.dateDebutEncheres = dateDebutEnchere;
 		this.dateFinEncheres = dateFinEnchere;
 		this.miseAPrix = miseAPrix;
+		this.prixVente = prixDeVente;
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
 		this.retrait = retrait;
@@ -126,6 +180,12 @@ public class ArticleVendu {
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
+		
+		this.miseAPrix = miseAPrix;
+		if (prixVente == 0 || prixVente == null) {
+			this.prixVente = miseAPrix;
+		}
+		
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 	}
@@ -152,6 +212,10 @@ public class ArticleVendu {
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
+		
+		if (prixVente == 0 || prixVente == null) {
+			this.prixVente = miseAPrix;
+		}
 		this.prixVente = prixVente;
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;

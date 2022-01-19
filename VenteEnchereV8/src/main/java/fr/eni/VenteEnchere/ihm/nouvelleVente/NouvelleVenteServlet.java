@@ -51,41 +51,19 @@ public class NouvelleVenteServlet extends HttpServlet {
 		if (request.getParameter("enregistrer") != null) {
 			String nomArticle = request.getParameter("nomArticle");
 			String description = request.getParameter("description");
-
 			String debutEnchere = request.getParameter("dateDebutEnchere");
-			System.out.println(debutEnchere);
 			String finEnchere = request.getParameter("dateFinEnchere");
-			System.out.println(finEnchere);
-			// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			LocalDate dateDebutEnchere = null;
 			LocalDate dateFinEnchere = null;
 
-//			try {
-//				dateDebutEnchere = sdf.parse(debutEnchere);
-//			} catch (ParseException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-
-			// "dd/MM/yyyy"
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			// convert String to LocalDate
 			dateDebutEnchere = LocalDate.parse(debutEnchere, formatter);
 
-//			try {
-//				dateFinEnchere = sdf.parse(finEnchere);
-//			} catch (Exception e) {
-//				// TODO: handle exception
-//				e.printStackTrace();
-//			}
-
 			dateFinEnchere = LocalDate.parse(finEnchere, formatter);
-
-//			LocalDateTime dateDebutEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));		
-//			LocalDateTime dateFinEnchere = LocalDateTime.parse(request.getParameter("dateDebutEnchere"), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));			
 			Integer miseAPrix = Integer.parseInt(request.getParameter("miseAPrix"));
-
+			Integer prixDeVente = miseAPrix;
 			String libelleCategorie = request.getParameter("categorie");
 			Integer noCategorie = 0;
 
@@ -121,7 +99,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");			
 
-			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEnchere, dateFinEnchere, miseAPrix, utilisateurConnecte, categorieArticle);
+			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEnchere, dateFinEnchere, miseAPrix, prixDeVente, utilisateurConnecte, categorieArticle);
 
 			
 

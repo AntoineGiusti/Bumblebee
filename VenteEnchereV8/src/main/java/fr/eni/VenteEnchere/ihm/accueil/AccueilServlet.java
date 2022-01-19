@@ -36,23 +36,13 @@ public class AccueilServlet extends HttpServlet {
 		AccueilModel model = new AccueilModel();
 		
 		
-		try {
-			model.setLstArticles(ArticleManager.getInstance().getAllArticle());
-		} catch (BLLException e) {
-		
-			e.printStackTrace();
-		}
-		
-		request.setAttribute("model", model);
-		
-		
-		
 		if(request.getParameter("Rechercher")!=null) {
 			
 			switch (request.getParameter("categorie")) {
 			case "toutes":
 				try {
 					model.setLstArticles(ArticleManager.getInstance().getAllArticle());
+					request.setAttribute("model", model);
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -64,6 +54,7 @@ public class AccueilServlet extends HttpServlet {
 				try {
 					
 					model.setLstArticlesParCategorie(ArticleManager.getInstance().getArticleByCategorie(1));
+					request.setAttribute("model", model);
 				} catch (BLLException e) {
 				
 					e.printStackTrace();
@@ -75,6 +66,7 @@ public class AccueilServlet extends HttpServlet {
 				
 				try {
 					model.setLstArticlesParCategorie(ArticleManager.getInstance().getArticleByCategorie(2));
+					request.setAttribute("model", model);
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -86,6 +78,7 @@ public class AccueilServlet extends HttpServlet {
 				
 				try {
 					model.setLstArticlesParCategorie(ArticleManager.getInstance().getArticleByCategorie(3));
+					request.setAttribute("model", model);
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -97,6 +90,7 @@ public class AccueilServlet extends HttpServlet {
 				
 				try {
 					model.setLstArticlesParCategorie(ArticleManager.getInstance().getArticleByCategorie(4));
+					request.setAttribute("model", model);
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -110,6 +104,17 @@ public class AccueilServlet extends HttpServlet {
 			
 			
 			nextScreen ="/WEB-INF/Accueil.jsp";
+			}
+		
+		
+			else {
+				try {
+					model.setLstArticles(ArticleManager.getInstance().getAllArticle());
+					request.setAttribute("model", model);
+				} catch (BLLException e) {
+				
+					e.printStackTrace();
+				}
 			}
 		
 		
