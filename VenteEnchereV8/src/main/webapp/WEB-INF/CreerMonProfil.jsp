@@ -6,6 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Creer Mon Profil</title>
+<link rel="stylesheet" href="VenteEnchereV8/CSS/MaPage.css" >
 </head>
 
 <body>
