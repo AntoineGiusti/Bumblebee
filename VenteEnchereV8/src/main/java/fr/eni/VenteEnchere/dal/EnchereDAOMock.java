@@ -109,4 +109,10 @@ public class EnchereDAOMock implements MethodDAO {
 		return null;
 	}
 
+	@Override
+	public List<ArticleVendu> getArticleByMotClef(String motClef) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

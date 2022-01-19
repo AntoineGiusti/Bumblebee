@@ -16,10 +16,11 @@
 	<h2>Liste des enchères</h2>
 	<div>
 		<h3>Filtres:</h3>
-  		<input type="text" id="filtre" name="filtre" placeholder="Le nom de l'article contient">
+  			
 	</div>
 	<div class ="formulaire">
 		<form action="AccueilServlet" method="POST">
+			<input type="text" id="filtre" name="filtre" placeholder="Le nom de l'article contient">
 			<p><select name = "categorie">
 				<option value = "toutes">Toutes</option>
 				<option value = "ameublement">Ameublement</option>
@@ -42,11 +43,18 @@
 	 vendeur : ${art.utilisateur.pseudo}</p>
 	</c:forEach>
 
-	<c:forEach items="${model.lstArticlesParCategorie}" var="artBy">
-	<p>${artBy.nomArticle}<br>
-	 prix de vente : ${artBy.prixVente}<br>
-	 date de fin enchere : ${artBy.dateFinEncheres}<br>
-	 vendeur : ${artBy.utilisateur.pseudo}</p>
+	<c:forEach items="${model.lstArticlesParCategorie}" var="artByCat">
+	<p>${artByCat.nomArticle}<br>
+	 prix de vente : ${artByCat.prixVente}<br>
+	 date de fin enchere : ${artByCat.dateFinEncheres}<br>
+	 vendeur : ${artByCat.utilisateur.pseudo}</p>
+	</c:forEach>
+	
+	<c:forEach items="${model.lstArticlesParMotClef}" var="artByMot">
+	<p>${artByMot.nomArticle}<br>
+	 prix de vente : ${artByMot.prixVente}<br>
+	 date de fin enchere : ${artByMot.dateFinEncheres}<br>
+	 vendeur : ${artByMot.utilisateur.pseudo}</p>
 	</c:forEach>
 <br>
 
