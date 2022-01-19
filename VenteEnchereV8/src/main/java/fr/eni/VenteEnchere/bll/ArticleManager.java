@@ -58,5 +58,16 @@ import fr.eni.VenteEnchere.dal.DAOFact;
 		}
 	}
 	
+	public List<ArticleVendu> getArticleByMotClef(String motClef) throws BLLException {
+		try {
+			return DAOFact.getInstance().getArticleByMotClef(motClef);
+		} catch (DALException e) {
+			e.printStackTrace();
+			throw new BLLException();
+			
+		}
+	}
+	
+	
 	
 }

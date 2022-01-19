@@ -60,7 +60,6 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			+ " ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie";
 	
 
-	
 	private final String UPDATE_ENCHERE = "UPDATE INTO ENCHERE SET montant_enchere = ? WHERE no_enchere = ?";
 
 	private final String SELECT_ARTICLES_VENDUS_BYCATEGORIES = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres,"
@@ -70,12 +69,14 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			+ " ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie"
 			+ " WHERE ARTICLES_VENDUS.no_categorie = ?";
 	
-
-//	SELECT id, prenom, nom, date_achat, num_facture, prix_total
-//	FROM utilisateur
-//	INNER JOIN commande ON utilisateur.id = commande.utilisateur_id
+	private final static String SELECT_ART_BY_MOTCLE = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres,"
+			+ " prix_initial, prix_vente, no_utilisateur, ARTICLES_VENDUS.no_categorie, libelle"
+			+ " FROM ARTICLES_VENDUS"
+			+ " INNER JOIN CATEGORIES"
+			+ " ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie"
+			+ " WHERE nom_article LIKE ?";
 	
-	
+		
 	/** requete enchere **/
 
 	private final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_enchere,date_enchere,montant_enchere,no_article_no_utilisateur) VALUES (?,?,?,?,?)";
@@ -369,6 +370,52 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		
 		return lstArticlesByCat;
 	}
+	
+	
+	@Override
+	public List<ArticleVendu> getArticleByMotClef(String motClef) throws DALException {
+		
+		List<ArticleVendu> lstArticlesByMotClef = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection();) {
+			
+			PreparedStatement pStmt = cnx.prepareStatement(SELECT_ART_BY_MOTCLE);
+			pStmt.setString(1,'%'+motClef+'%');
+			ResultSet rs = pStmt.executeQuery();
+			
+			
+			
+			while (rs.next()) {
+				
+				Integer noArticle = rs.getInt("no_article");	
+				String nomArticle = rs.getString("nom_article");
+				String description = rs.getString("description");
+				LocalDate dateDebutVente = rs.getDate("date_debut_encheres").toLocalDate();
+				LocalDate dateFinVente = rs.getDate("date_fin_encheres").toLocalDate();
+				Integer miseInitial = rs.getInt("prix_initial");
+				Integer prixVente = rs.getInt("prix_vente");
+				Integer noUtilisateur = rs.getInt("no_utilisateur");
+				Integer noCategorie = rs.getInt("no_categorie");
+				
+				Utilisateur utilisateur = selectById(noUtilisateur);
+		
+				String libelleCat = rs.getString("libelle");
+				Categorie categorie = new Categorie(noCategorie, libelleCat);
+				
+				ArticleVendu articleVendu = new ArticleVendu(noArticle, nomArticle, description, 
+						dateDebutVente, dateFinVente, miseInitial, prixVente, utilisateur, categorie);
+						
+				lstArticlesByMotClef.add(articleVendu);
+				
+			}
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new DALException("Impossible de lire la base de donnee");
+			}
+		
+		
+		return lstArticlesByMotClef;
+	}
 
 	/**
 	 * method de mise a jour des article
@@ -480,6 +527,8 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 	
 
