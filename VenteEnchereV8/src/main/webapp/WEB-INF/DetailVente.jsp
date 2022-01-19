@@ -17,7 +17,7 @@
 	<div class = "formulaire">	
 		<form action="DetailVenteServlet" method="POST">
 			<p>${articleVendu.nomArticle}</p>
-			<p>Description : ${lstCategorie.categorie}</P><br>	
+			<p>Description : ${lstCategorie.categorie}</p><br>	
 			<p>Catégorie : ${categorie.libelle}</p><br>
 			<p>Meilleure offre : ${utilisateur.credit}par ${utilisateur.prenom}</p><br>				
 			<p>Mise à prix : ${enchere.montantEnchere}</p><br>				

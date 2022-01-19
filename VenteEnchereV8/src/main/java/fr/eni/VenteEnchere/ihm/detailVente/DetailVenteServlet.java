@@ -27,11 +27,21 @@ public class DetailVenteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		
+		
+		
 		String nextScreen = "WEB-INF/DetailVente.jsp";
 		if(request.getParameter("encherir")!=null) {
 			
 			
 			nextScreen = "DetailVenteServlet";
+			
+			
+			
+			
+			
+			
 			
 			
 			
