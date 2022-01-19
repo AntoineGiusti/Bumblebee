@@ -521,9 +521,8 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	}
 
 
-
 	@Override
-	public void update(String nomModifier) {
+	public void insertEnchere(Enchere enchere) {
 		// TODO Auto-generated method stub
 		
 	}

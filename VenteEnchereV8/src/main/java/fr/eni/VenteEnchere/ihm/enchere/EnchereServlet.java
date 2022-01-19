@@ -1,6 +1,9 @@
 package fr.eni.VenteEnchere.ihm.enchere;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,8 +39,15 @@ public class EnchereServlet extends HttpServlet {
 		String miseAPrix = request.getParameter("miseAPrix");
 		
 		if(request.getParameter("encherir") != null) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
+			String articleVendu = request.getParameter("articleVendu");
+			String montantEnchere = request.getParameter("montantEnchere");
+			String utilisateur = request.getParameter("utilisateur");
+			LocalDate dateEnchere = null;
+			
 			try {
-				manager.ajouterEnchere();
+				manager.ajouterEnchere(articleVendu, dateEnchere, montantEnchere, utilisateur);
 			} catch (BLLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -48,9 +58,8 @@ public class EnchereServlet extends HttpServlet {
 			
 		}
 		
-		request.getRequestDispatcher("WEB-INF/DetailVente.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/DetailVente.jsp").forward(request, response);		
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

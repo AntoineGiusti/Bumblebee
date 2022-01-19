@@ -4,6 +4,7 @@
 package fr.eni.VenteEnchere.bll;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import fr.eni.VenteEnchere.bo.ArticleVendu;
 import fr.eni.VenteEnchere.bo.Enchere;
@@ -31,7 +32,7 @@ public class EnchereManager {
 
 	////////////////////singleton//////////////////
 
-	public void ajouterEnchere() throws BLLException, DALException {
+	public void ajouterEnchere(String articleVendu, LocalDate dateEnchere, String montantEnchere, String utilisateur) throws BLLException, DALException {
 			Enchere enchere = new Enchere();
 		DAOFact.getInstance().insertEnchere(enchere);
 
