@@ -2,26 +2,28 @@
 
 /* projet Enchere-Eni
 auteur Antoine Giusti*/
-body {
+
+
+body{
 	background-color: #DCDDDD;
 	margin: 0px;
 	padding: 0px;
 	min-height: 100%;
 }
 
-p {
+p{
 	font-family: sans-serif;
 	font-size: 14px;
 	color: #666;
 }
 
-h1 {
+h1{
 	font-family: sans-serif;
 	font-size: 35px;
 	color: #000;
 }
 
-.navBar {
+.navBar{
 	text-decoration: none;
 	font-family: sans-serif;
 	font-size: 15px;
@@ -30,21 +32,21 @@ h1 {
 	box-shadow: 0 0 20px #828282;
 }
 
-a:active {
+a:active{
 	color: #91A4A2;
 }
 
-a:visited {
+a:visited{
 	color: #000
 }
 
-.logo {
+.logo{
 	font-family: cursive;
 	color: #666;
 	width: 50px;
 }
 
-.formulaire {
+.formulaire{
 	align-items: right;
 	text-align: center;
 	box-shadow: 0 0 20px #828282;
@@ -52,7 +54,7 @@ a:visited {
 	margin: 25px;
 }
 
-.rechercher {
+.rechercher{
 	width: 35px;
 	padding: 10px;
 	background-color: #DCDDDD;
