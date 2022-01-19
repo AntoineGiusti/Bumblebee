@@ -23,6 +23,7 @@
 </div>
 <br>
 <p><select name = "categorie">
+	<option value = "toutes">Toutes</option>
 	<option value = "ameublement">Ameublement</option>
 	<option value = "informatique">Informatique</option>
 	<option value = "sportEtLoisir">Sport et loisir</option>
@@ -30,10 +31,14 @@
 </select>
 </p>
 <br>
-<input type = "submit" name="Rechercher" value="rechercher"/>
+<input type = "submit" name="Rechercher" value="Rechercher"/>
 <br>
 	${model.lstArticles }
 <br>
+<br>
+	${lstInfo }
+<br>
+
 <!-- article et caractéristiques a faire -->
 </form>
 
