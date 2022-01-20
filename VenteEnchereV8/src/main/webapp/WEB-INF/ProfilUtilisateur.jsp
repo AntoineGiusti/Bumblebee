@@ -5,12 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Mon Profil</title>
+<link rel="stylesheet" href="/VenteEnchereV8/CSS/MaPage.css" >
 </head>
 <body>
 	<div class = "logo">
-		<h1><a href = "ConnexionServlet"> ENI-Encheres </a></h1>
+		<h1><a class="eni" href = "ConnexionServlet"> ENI-Encheres </a></h1>
 	</div><br>	
-	<div class = "formulaire2">
+	<div class = "formulaire">
 		<form action="ProfilUtilisateurServlet" method= "POST">	
 			<p>Pseudo : ${utilisateur.pseudo}</p><br>			
 			<p>Nom : ${utilisateur.nom}</p><br>			

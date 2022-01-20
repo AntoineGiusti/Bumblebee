@@ -8,20 +8,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Ma page utilisateur</title>
-<link rel="stylesheet" href="VenteEnchereV8/CSS/MaPage.css" >
+<link rel="stylesheet" href="/VenteEnchereV8/CSS/MaPage.css" >
 </head>
 <body>
 	<div class = "logo">
-		<h1><a href = "ConnexionServlet"> ENI-Encheres </a></h1>
+		<h1><a class = "eni" href = "ConnexionServlet"> ENI-Encheres </a></h1>
 	</div>
 	<nav class = "navBar">	
-		<a href="AccueilServlet">Enchères</a>
-		<a href="NouvelleVenteServlet">Vendre un article</a>
-		<a href="ProfilUtilisateurServlet">Mon profil</a>
+		<a href="AccueilServlet">Enchères	</a>
+		<a href="NouvelleVenteServlet">Vendre un article	</a>
+		<a href="ProfilUtilisateurServlet">Mon profil	</a>
 		<a href="MaPageUtilisateurServlet?deconnexion" >Déconnexion</a>
 	</nav>
 	<h2>Liste des enchères</h2>
-	<form action="">
+	<form class="formulaire" action="">
 		<h2>Filtres : </h2>	
 		<div class = "searchBar">
 		  <input type="text" id="filtre" name="filtre" placeholder="Le nom de l'article contient">
@@ -53,7 +53,7 @@
 			<input type="checkbox" id="nostart" >ventes non débutées<br>
 			<input type="checkbox" id="termine" >ventes terminées
 		</div>
-	</form>
+	
 	
 		<c:forEach items="${model.lstAllArticles}" var="art">
 	<p><a href = "<c:url value = "DetailVenteServlet?id=${art.noArticle}"/>">${art.nomArticle}</a><br>
@@ -76,7 +76,7 @@
 	 vendeur : ${artByMot.utilisateur.pseudo}</p>
 	</c:forEach>
 	
-	
+	</form>
 	<a href = "<c:url value = "DetailVenteServlet?id=${art.noArticle}"/>">${article.nomArticle}</a>
 	
 	

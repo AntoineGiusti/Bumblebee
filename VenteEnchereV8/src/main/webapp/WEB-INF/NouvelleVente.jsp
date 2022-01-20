@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Nouvelle Vente</title>
-<link rel="stylesheet" href="VenteEnchereV8/CSS/MaPage.css" >
+<link rel="stylesheet" href="/VenteEnchereV8/CSS/MaPage.css" >
 </head>
 <body>
 	<div class = "logo">

@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Modifier Mon Profil</title>
-<link rel="stylesheet" href="VenteEnchereV8/CSS/MaPage.css" >
+<link rel="stylesheet" href="/VenteEnchereV8/CSS/MaPage.css" >
 </head>
 <body>
 	<div class = "logo">
-		<h1><a href = "ConnexionServlet"> ENI-Encheres </a></h1>
+		<h1><a class = "eni" href = "ConnexionServlet"> ENI-Encheres </a></h1>
 	</div>
 	<h2>Modifier Mon profil</h2>	
 	<h3>${verifMp}</h3>
