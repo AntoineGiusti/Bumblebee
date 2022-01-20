@@ -33,6 +33,6 @@
 			</div>
 		</form>
 	</div>
-	<h3>${erreur}</h3>
+	<h3 class = "erreur">${erreur}</h3>
 </body>
 </html>

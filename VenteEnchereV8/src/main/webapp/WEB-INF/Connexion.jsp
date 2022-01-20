@@ -11,7 +11,7 @@
 	<div class = "logo">
 		<h1 ><a class ="eni" href = "ConnexionServlet"> ENI-Encheres </a></h1>
 	</div>
-	<h2>${erreur}</h2>	
+	<h2 class = "erreur">${erreur}</h2>	
 	<form class="formulaire" action="ConnexionServlet" method= "POST">
 		<label for="pseudo">Identifiant :</label>
 		<input type="text" name="pseudo" value="">

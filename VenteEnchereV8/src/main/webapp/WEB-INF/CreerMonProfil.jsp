@@ -30,7 +30,7 @@
 				<input type = "submit" name="valider" value="Créer"/>		
 				<input type = "submit" name="annuler" value="Annuler"/>
 			</div>
-		<h3>${erreur}</h3>		
+		<h3 class = "erreur">${erreur}</h3>		
 		</form>
 	</div>	
 	
