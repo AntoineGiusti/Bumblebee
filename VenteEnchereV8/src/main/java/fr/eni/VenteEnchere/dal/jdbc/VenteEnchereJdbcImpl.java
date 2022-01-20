@@ -33,7 +33,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			+ "rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
 	private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo=?, nom =?, prenom =?,email =?, telephone =?, rue =?, code_postal =? , ville=?,"
-			+ "mot_de_passe =? WHERE no_utilisateur =?";	
+			+ "mot_de_passe =?, credit=? WHERE no_utilisateur =?";	
 
 	private final String SELECT_BY_ID = " SELECT * FROM UTILISATEURS WHERE no_utilisateur= ?";
 
@@ -60,8 +60,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			+ " ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie";
 	
 
-	private final String UPDATE_ENCHERE = "UPDATE INTO ENCHERE SET montant_enchere = ? WHERE no_enchere = ?";
-
+	
 	private final String SELECT_ARTICLES_VENDUS_BYCATEGORIES = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres,"
 			+ " prix_initial, prix_vente, no_utilisateur, ARTICLES_VENDUS.no_categorie, libelle"
 			+ " FROM ARTICLES_VENDUS"
@@ -76,11 +75,15 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			+ " ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie"
 			+ " WHERE nom_article LIKE ?";
 	
-	private final String SELECT_ARTICLE_BY_ID = " SELECT * FROM ARTICLES_VENDUS WHERE no_article= ?";
-		
+	private final String SELECT_ARTICLE_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres,"
+			+ " prix_initial, prix_vente, no_utilisateur, ARTICLES_VENDUS.no_categorie, libelle"
+			+ " FROM ARTICLES_VENDUS"
+			+ " INNER JOIN CATEGORIES"
+			+ " ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie"
+			+ " WHERE ARTICLES_VENDUS.no_article = ?";		
 	/** requete enchere **/
 
-	private final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_enchere,date_enchere,montant_enchere,no_article_no_utilisateur) VALUES (?,?,?,?,?)";
+	private final String INSERT_ENCHERE = "INSERT INTO ENCHERES (date_enchere, montant_enchere, no_article, no_utilisateur) VALUES (?,?,?,?)";
 
 	private final String SELECT_ALL_ENCHERE = "SELECT * FROM ENCHERES "
 			+ "INNER JOIN UTILISATEURS ON ENCHERES.no_enchere = UTILISATEURS.no_utilisateur "
@@ -213,13 +216,13 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			pStmt.setString(7, utilisateur.getCodePostal());
 			pStmt.setString(8, utilisateur.getVille());
 			pStmt.setString(9, utilisateur.getMotDePasse());
-			pStmt.setInt(10, utilisateur.getNoUtilisateur());
-			System.out.println(utilisateur);
+			pStmt.setInt(10, utilisateur.getCredit());
+			pStmt.setInt(11, utilisateur.getNoUtilisateur());
 			pStmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new DALException("impossible de modifier l'utilisaeur");
+			throw new DALException("impossible de modifier l'utilisateur");
 		}
 
 	}
@@ -383,8 +386,6 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			pStmt.setString(1,'%'+motClef+'%');
 			ResultSet rs = pStmt.executeQuery();
 			
-			
-			
 			while (rs.next()) {
 				
 				Integer noArticle = rs.getInt("no_article");	
@@ -423,7 +424,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		ArticleVendu article = null;
 		
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pStmt = cnx.prepareStatement(SELECT_ARTICLES_VENDUS_BYCATEGORIES);
+			PreparedStatement pStmt = cnx.prepareStatement(SELECT_ARTICLE_BY_ID);
 			pStmt.setInt(1, IdArticle);
 			ResultSet rs = pStmt.executeQuery();
 			
@@ -501,33 +502,27 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	 * method d'insertion d'une enchere
 	 */
 	@Override
-	public void insertEnchere(Date dateEnchere, Integer montantEnchere, ArticleVendu articleVendu,
-			Utilisateur utilisateur) throws DALException {
-		try (Connection cnx = ConnectionProvider.getConnection();) {
-			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ENCHERE);
-			pStmt.setString(1, utilisateur.getPseudo());
-			pStmt.setString(2, articleVendu.getNomArticle());
-			pStmt.setString(3, articleVendu.getDescription());
-			Timestamp timeStampStart = Timestamp.valueOf(
-					articleVendu.getDateDebutEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-			pStmt.setTimestamp(4, timeStampStart);
-			Timestamp timeStampEnd = Timestamp.valueOf(
-					articleVendu.getDateFinEncheres().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-			pStmt.setTimestamp(5, timeStampEnd);
-			pStmt.setInt(6, articleVendu.getMiseAPrix());
-			pStmt.setInt(7, articleVendu.getPrixVente());
-			pStmt.setString(8, articleVendu.getEtatVente());
-			Enchere enchere = new Enchere();
-			pStmt.setInt(9, enchere.getMontantEnchere());
-			Retrait retrait = new Retrait();
-			pStmt.setString(10, utilisateur.getRue() );
-			pStmt.setString(11,utilisateur.getCodePostal());
-			pStmt.setString(12, utilisateur.getVille());
-			pStmt.executeUpdate();
+	public void insertEnchere(Enchere enchere) throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ENCHERE, PreparedStatement.RETURN_GENERATED_KEYS);
 			
-		} catch (Exception e) {
+			pStmt.setDate(1, Date.valueOf(enchere.getDateEnchere()));
+			pStmt.setInt(2, enchere.getMontantEnchere());
+			pStmt.setInt(3, enchere.getArticleVendu().getNoArticle());
+			pStmt.setInt(4, enchere.getUtilisateur().getNoUtilisateur());
+			
+			pStmt.executeUpdate();
+
+			ResultSet rs = pStmt.getGeneratedKeys();
+			if (rs.next()) {
+				int id = rs.getInt(1);
+				enchere.setNoEnchere(id);
+
+			}
+		} catch (SQLException e) {
+
 			e.printStackTrace();
-			throw new DALException("impossible d'inserer l'enchere");
+			throw new DALException("Impossible d'inserer article");
 		}
 
 	}
@@ -535,37 +530,32 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	/**
 	 * method d'affichage des encheres
 	 */
-	@Override
+
 	public List<Enchere> getAllEnchere() throws DALException {
-		List<Enchere> lstEncheres = new ArrayList<Enchere>();
-		try (Connection cnx = ConnectionProvider.getConnection();) {
-
-			Statement stmt = cnx.createStatement();
-			ResultSet rs = stmt.executeQuery(SELECT_ALL_ENCHERE);
-
-			while (rs.next()) {
-
-				LocalDateTime dateEnchere = rs.getTimestamp("date_enchere").toLocalDateTime();
-				Integer montantEnchere = rs.getInt("montant_enchere");
-
-				lstEncheres.add(new Enchere(dateEnchere, montantEnchere));
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new DALException("Impossible de lire la base de donnee");
-		}
-
-		return lstEncheres;
+		return null;
+//		List<Enchere> lstEncheres = new ArrayList<Enchere>();
+//		try (Connection cnx = ConnectionProvider.getConnection();) {
+//
+//			Statement stmt = cnx.createStatement();
+//			ResultSet rs = stmt.executeQuery(SELECT_ALL_ENCHERE);
+//
+//			while (rs.next()) {
+//
+//				LocalDateTime dateEnchere = rs.getTimestamp("date_enchere").toLocalDateTime();
+//				Integer montantEnchere = rs.getInt("montant_enchere");
+//
+//				lstEncheres.add(new Enchere(dateEnchere, montantEnchere));
+//
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			throw new DALException("Impossible de lire la base de donnee");
+//		}
+//
+//		return lstEncheres;
 	}
 
-
-	@Override
-	public void insertEnchere(Enchere enchere) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	
 

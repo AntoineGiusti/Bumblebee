@@ -14,20 +14,23 @@
 		<div class = "img">
 			<img  src="" >
 		</div>
-	<div class = "formulaire">	
-		<form action="DetailVenteServlet" method="POST">
+	 <div class = "formulaire">	 
+		<form action="DetailVenteServlet" method="POST"> 
+		
 			<p>${model.article.nomArticle}</p>
 			<p>Description : ${model.article.description}</p><br>	
 			<p>Catégorie : ${model.article.categorie.libelle}</p><br>
 			<p>Meilleure offre : </p><br>				
 			<p>Mise à prix : ${model.article.miseAPrix}</p><br>				
-			<p>Fin de l'enchère : ${model.article.dateFinEncheresl}</p><br>					
-			<p>Retrait : ${utilisateur.rue} <br>			
-			 ${utilisateur.codePostal} ${utilisateur.ville}</p><br>				
+			<p>Fin de l'enchère : ${model.article.dateFinEncheres}</p><br>					
+			<p>Retrait : ${model.article.utilisateur.rue} <br>			
+			 ${model.article.utilisateur.codePostal} ${model.article.utilisateur.ville}</p><br>				
 			<p>Vendeur : ${model.article.utilisateur.pseudo}</p><br>				
 			<p>Ma proposition : <input type = "number" name = "proposition"/></p>			
 			<input type ="submit" name="encherir" value="Enchérir"/>
-		</form>
-	</div>	
+			<input type ="hidden" name="id" value="${model.article.noArticle}"/>
+		</form> 
+		</div>
+		<h2>${erreur}</h2>
 </body>
 </html>

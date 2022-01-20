@@ -98,7 +98,7 @@ import fr.eni.VenteEnchere.dal.DAOFact;
 	}
 	
 	
-	public ArticleVendu getArticleById (Integer noArticle) throws BLLException {
+	public ArticleVendu getArticleParNo (Integer noArticle) throws BLLException {
 		ArticleVendu article = null;
 		try {
 			article = DAOFact.getInstance().getArticleById(noArticle);

@@ -24,16 +24,18 @@ public class EnchereManager {
 		private static EnchereManager instance = new EnchereManager();
 	}
 	
+	private EnchereManager() { }
+	
 	public static EnchereManager getInstance() {
 		return EnchereManagerHolder.instance;
 	}
 	
-	private EnchereManager() { }
+	
 
 	////////////////////singleton//////////////////
 
-	public void ajouterEnchere(String articleVendu, LocalDate dateEnchere, String montantEnchere, String utilisateur) throws BLLException, DALException {
-			Enchere enchere = new Enchere();
+	public void ajouterEnchere(LocalDate dateEnchere, Integer montantEnchere, ArticleVendu article, Utilisateur utilisateur) throws BLLException, DALException {
+			Enchere enchere = new Enchere(dateEnchere, montantEnchere, article, utilisateur);
 		DAOFact.getInstance().insertEnchere(enchere);
 
 	}

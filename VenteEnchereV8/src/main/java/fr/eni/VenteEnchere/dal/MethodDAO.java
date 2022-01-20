@@ -27,14 +27,10 @@ public interface MethodDAO {
 	public ArticleVendu getArticleById(Integer IdArticle) throws DALException;
 	
 	/**Method Enchere**/
-	public void insertEnchere(Date dateEnchere, Integer montant_enchere, ArticleVendu articleVendu, Utilisateur utilisateur)throws DALException;
+	public void insertEnchere(Enchere enchere)throws DALException;
+	
 	public List<Enchere> getAllEnchere()throws DALException;
 	
-	
-	/**
-	 * @param enchere
-	 */
-	public void insertEnchere(Enchere enchere);
-	
+
 	
 }

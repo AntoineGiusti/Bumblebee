@@ -182,6 +182,20 @@ public class UtilisateurManager {
 		}
 	}
 	
+	///////////////////////////////////////////
+	
+	public void enleverCreditUtilisateur(Utilisateur utilisateur, Integer offre) {
+		Utilisateur utilisateurmodifie = new Utilisateur();
+		utilisateurmodifie = utilisateur;
+		utilisateurmodifie.setCredit(utilisateurmodifie.getCredit()- offre);
+		
+		try {
+			DAOFact.getInstance().updateUser(utilisateurmodifie);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	////////////////////methode de verification////////////////
 	
