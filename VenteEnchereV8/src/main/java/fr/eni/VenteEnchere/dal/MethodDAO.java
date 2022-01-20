@@ -1,11 +1,12 @@
 package fr.eni.VenteEnchere.dal;
 
-import java.sql.Date;
+
 import java.util.List;
 
 import fr.eni.VenteEnchere.bo.ArticleVendu;
 import fr.eni.VenteEnchere.bo.Categorie;
 import fr.eni.VenteEnchere.bo.Enchere;
+import fr.eni.VenteEnchere.bo.Retrait;
 import fr.eni.VenteEnchere.bo.Utilisateur;
 
 public interface MethodDAO {
@@ -31,6 +32,7 @@ public interface MethodDAO {
 	
 	public List<Enchere> getAllEnchere()throws DALException;
 	
-
+	/**Method Retrait**/
+	public void insertRetrait(Retrait retrait) throws DALException;
 	
 }

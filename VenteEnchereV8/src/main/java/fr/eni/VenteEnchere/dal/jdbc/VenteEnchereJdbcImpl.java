@@ -90,6 +90,9 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			+ "INNER JOIN ARTICLES_VENDUS ON ENCHERES.no_enchere = ARTICLES_VENDUS.vente_utilisateur ";
 
 	
+	/** requete retrait **/
+	
+	private final String INSERT_RETRAIT = "INSERT INTO ENCHERES (no_article, rue, code_postal, ville) VALUES (?,?,?,?)";
 	
 	
 	/** Method utilisateurs **/
@@ -556,9 +559,30 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 //		return lstEncheres;
 	}
 
-
+	/** Method Encheres **/
 	
+	
+	public void insertRetrait(Retrait retrait) throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = cnx.prepareStatement(INSERT_RETRAIT);
+			
+			
+			pStmt.setInt(1, retrait.getArticleVendu().getNoArticle());
+			pStmt.setString(2, retrait.getArticleVendu().getutilisateur().getRue());
+			pStmt.setString(3, retrait.getArticleVendu().getutilisateur().getVille());
+			pStmt.setString(4, retrait.getArticleVendu().getutilisateur().getCodePostal());
+			
+			pStmt.executeUpdate();
 
+
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			throw new DALException("Impossible d'inserer article");
+		}
+
+	}
 	
 
 	

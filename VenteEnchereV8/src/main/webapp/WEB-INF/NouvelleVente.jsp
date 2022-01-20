@@ -36,9 +36,9 @@
 			<p>Fin de l'enchere : <input type = "date" name = "dateFinEnchere"/></p><br>
 		<fieldset>
 			<legend>Retrait</legend>
-				<p>Rue : <input type = "text" name= "rue" value = "${Utilisateur.rue}"/></p><br>
-				<p>Code Postal : <input type = "text" name= "codePostal" value = "${Utilisateur.codePostal}"/></p><br>
-				<p>Ville : <input type = "text" name= "ville" value = "${Utilisateur.ville}"/></p><br>
+				<p>Rue : <input type = "text" name= "rue" value = "${utilisateur.rue}"/></p><br>
+				<p>Code Postal : <input type = "text" name= "codePostal" value = "${utilisateur.codePostal}"/></p><br>
+				<p>Ville : <input type = "text" name= "ville" value = "${utilisateur.ville}"/></p><br>
 			</fieldset>
 			<div class = "bouton">
 				<input type = "submit" name = "enregistrer" value = "Enregistrer"/>

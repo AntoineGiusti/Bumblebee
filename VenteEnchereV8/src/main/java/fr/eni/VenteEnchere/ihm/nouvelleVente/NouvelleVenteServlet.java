@@ -89,19 +89,16 @@ public class NouvelleVenteServlet extends HttpServlet {
 			}
 
 
-			Retrait retrait;
-
 			
 			Categorie categorieArticle = new Categorie(noCategorie, libelleCategorie);
-
-				
+	
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
-			String ville = request.getParameter("ville");			
-
+			String ville = request.getParameter("ville");		
+			
 			ArticleVendu article = new ArticleVendu(nomArticle, description, dateDebutEnchere, dateFinEnchere, miseAPrix, prixDeVente, utilisateurConnecte, categorieArticle);
 
-			
+			Retrait retrait = new Retrait(rue,codePostal,ville,article);
 
 			ArticleManager.getInstance().ajouterArticleAVendre(article);
 
