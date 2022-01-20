@@ -21,10 +21,11 @@
 			<p>Rue : ${utilisateur.rue}</p><br>			
 			<p>Code postal : ${utilisateur.codePostal}</p><br>			
 			<p>Ville : ${utilisateur.ville}</p><br>	
-			<div class = "bouton">				
-				<input type = "submit" name="modifier" value="Modifier"/>
-			</div>
+			
 		</form>
+	</div>
+	<div class = "bouton">				
+		<input class= "btn" type = "submit" name="modifier" value="Modifier"/>
 	</div>
 </body>
 </html>

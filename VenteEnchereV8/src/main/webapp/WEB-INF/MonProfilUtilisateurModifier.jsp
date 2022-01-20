@@ -15,17 +15,17 @@
 	<h3>${verifMp}</h3>
 	<div class = "formulaire">	
 		<form action="ProfilUtilisateurModifierServlet" method="POST">
-			<p>Pseudo: <input type="text" name="pseudo" value="${model.utilisateurUdapte.pseudo}"/></p><br>			
-			<p>Nom: <input type="text" name="nom" value="${model.utilisateurUdapte.nom}"/></p><br>			
-			<p>Prenom: <input type="text" name="prenom" value="${model.utilisateurUdapte.prenom}"/></p><br>			
-			<p>Email: <input type="text" name="email" value="${model.utilisateurUdapte.email}"/></p><br>			
-			<p>Téléphone: <input type="text" name="telephone" value="${model.utilisateurUdapte.telephone}"/></p><br>			
-			<p>Rue: <input type="text" name="rue" value="${model.utilisateurUdapte.rue}"/></p><br>			
-			<p>Code postal <input type="text" name="codePostal" value="${model.utilisateurUdapte.codePostal}"/></p><br>			
-			<p>Ville <input type="text" name="ville" value="${model.utilisateurUdapte.ville}"/></p><br>			
-			<p>Mot de passe actuel <input type="text" name="motDePasseActuel" /></p><br>			
-			<p>Nouveau mot de passe <input type="text" name="NouveauMotDePasse" value="${model.utilisateurUdapte.motDePasse}"/></p><br>			
-			<p>Confirmation <input type="text" name="confirmation" value="${model.utilisateurUdapte.motDePasse}"/></p><br>			
+			<p>Pseudo: <input class = "block" type="text" name="pseudo" value="${model.utilisateurUdapte.pseudo}"/></p><br>			
+			<p>Nom: <input class = "block" type="text" name="nom" value="${model.utilisateurUdapte.nom}"/></p><br>			
+			<p>Prenom: <input class = "block" type="text" name="prenom" value="${model.utilisateurUdapte.prenom}"/></p><br>			
+			<p>Email: <input class = "block" type="text" name="email" value="${model.utilisateurUdapte.email}"/></p><br>			
+			<p>Téléphone: <input class = "block" type="text" name="telephone" value="${model.utilisateurUdapte.telephone}"/></p><br>			
+			<p>Rue: <input class = "block" type="text" name="rue" value="${model.utilisateurUdapte.rue}"/></p><br>			
+			<p>Code postal class = "block" <input type="text" name="codePostal" value="${model.utilisateurUdapte.codePostal}"/></p><br>			
+			<p>Ville <input class = "block" type="text" name="ville" value="${model.utilisateurUdapte.ville}"/></p><br>			
+			<p>Mot de passe actuel <input class = "block" type="password" name="motDePasseActuel" /></p><br>			
+			<p>Nouveau mot de passe <input class = "block" type="password" name="NouveauMotDePasse" value="${model.utilisateurUdapte.motDePasse}"/></p><br>			
+			<p>Confirmation <input class = "block" type="password" name="confirmation" value="${model.utilisateurUdapte.motDePasse}"/></p><br>			
 			<p>Crédits : ${model.utilisateurUdapte.credit}</p><br>
 			<div class = "bouton">			
 				<input type = "submit" name="enregister" value="enregister"/>			
