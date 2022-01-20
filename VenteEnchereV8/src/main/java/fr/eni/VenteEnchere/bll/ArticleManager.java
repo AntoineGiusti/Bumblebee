@@ -98,5 +98,16 @@ import fr.eni.VenteEnchere.dal.DAOFact;
 	}
 	
 	
+	public ArticleVendu getArticleById (Integer noArticle) throws BLLException {
+		ArticleVendu article = null;
+		try {
+			article = DAOFact.getInstance().getArticleById(noArticle);
+		} catch (DALException e) {	
+			e.printStackTrace();
+		}
+		return article;
+		
+	}
+	
 	
 }

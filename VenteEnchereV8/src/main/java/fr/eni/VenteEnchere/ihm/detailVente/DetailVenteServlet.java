@@ -6,6 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import fr.eni.VenteEnchere.bll.ArticleManager;
+import fr.eni.VenteEnchere.bll.BLLException;
+import fr.eni.VenteEnchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class DetailVenteServlet
@@ -28,10 +33,22 @@ public class DetailVenteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		
-		
-		
 		String nextScreen = "WEB-INF/DetailVente.jsp";
+		
+		Integer noArticle = Integer.valueOf(request.getParameter("id"));
+		DetailVenteModel model = new DetailVenteModel();
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		
+		try {
+			model.setArticle(ArticleManager.getInstance().getArticleById(noArticle));
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		request.setAttribute("model", model);
+		
 		if(request.getParameter("encherir")!=null) {
 			
 			

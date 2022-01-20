@@ -24,7 +24,7 @@ public interface MethodDAO {
 	public List<ArticleVendu> getAllArticle () throws DALException;
 	public List<ArticleVendu> getArticleByCategotie (Integer no_categorieSelect) throws DALException;
 	public List<ArticleVendu> getArticleByMotClef (String motClef) throws DALException;
-	
+	public ArticleVendu getArticleById(Integer IdArticle) throws DALException;
 	
 	/**Method Enchere**/
 	public void insertEnchere(Date dateEnchere, Integer montant_enchere, ArticleVendu articleVendu, Utilisateur utilisateur)throws DALException;

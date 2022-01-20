@@ -76,6 +76,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			+ " ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie"
 			+ " WHERE nom_article LIKE ?";
 	
+	private final String SELECT_ARTICLE_BY_ID = " SELECT * FROM ARTICLES_VENDUS WHERE no_article= ?";
 		
 	/** requete enchere **/
 
@@ -416,7 +417,46 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 		
 		return lstArticlesByMotClef;
 	}
+	
+	public ArticleVendu getArticleById(Integer IdArticle) throws DALException {
+			
+		ArticleVendu article = null;
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = cnx.prepareStatement(SELECT_ARTICLES_VENDUS_BYCATEGORIES);
+			pStmt.setInt(1, IdArticle);
+			ResultSet rs = pStmt.executeQuery();
+			
 
+			while (rs.next()) {
+				
+				Integer noArticle = rs.getInt("no_article");	
+				String nomArticle = rs.getString("nom_article");
+				String description = rs.getString("description");
+				LocalDate dateDebutVente = rs.getDate("date_debut_encheres").toLocalDate();
+				LocalDate dateFinVente = rs.getDate("date_fin_encheres").toLocalDate();
+				Integer miseInitial = rs.getInt("prix_initial");
+				Integer prixVente = rs.getInt("prix_vente");
+				Integer noUtilisateur = rs.getInt("no_utilisateur");
+				Integer noCategorie = rs.getInt("no_categorie");
+				
+				Utilisateur utilisateur = selectById(noUtilisateur);
+		
+				String libelleCat = rs.getString("libelle");
+				Categorie categorie = new Categorie(noCategorie, libelleCat);
+				
+				article = new ArticleVendu(noArticle, nomArticle, description, 
+						dateDebutVente, dateFinVente, miseInitial, prixVente, utilisateur, categorie);			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DALException("Je ne trouve pas cet article");
+		}
+
+		return article;
+	}
+	
+	
+	
 	/**
 	 * method de mise a jour des article
 	 */
