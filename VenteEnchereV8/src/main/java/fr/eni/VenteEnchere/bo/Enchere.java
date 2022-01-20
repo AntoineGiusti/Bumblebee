@@ -3,6 +3,7 @@
  */
 package fr.eni.VenteEnchere.bo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -12,8 +13,10 @@ import java.time.LocalDateTime;
  *
  */
 public class Enchere {
-
-	private LocalDateTime dateEnchere;
+	
+	
+	private Integer noEnchere;
+	private LocalDate dateEnchere;
 	private Integer montantEnchere;
 	private ArticleVendu articleVendu;
 	private Utilisateur utilisateur;
@@ -21,14 +24,39 @@ public class Enchere {
 	
 	
 	
+	
+	/**
+	 * @param noEnchere
+	 * @param dateEnchere
+	 * @param montantEnchere
+	 * @param articleVendu
+	 * @param utilisateur
+	 */
+	public Enchere(Integer noEnchere, LocalDate dateEnchere, Integer montantEnchere, ArticleVendu articleVendu,
+			Utilisateur utilisateur) {
+		super();
+		this.noEnchere = noEnchere;
+		this.dateEnchere = dateEnchere;
+		this.montantEnchere = montantEnchere;
+		this.articleVendu = articleVendu;
+		this.utilisateur = utilisateur;
+	}
+
+
+
 	//////////////////constructeurs////////////////////
+	
+	
+	
+	
+	
 	/**
 	 * @param dateEnchere
 	 * @param montant_enchere
 	 * @param articleVendu
 	 * @param utilisateur
 	 */
-	public Enchere(LocalDateTime dateEnchere, Integer montantEnchere, ArticleVendu articleVendu, Utilisateur utilisateur) {
+	public Enchere(LocalDate dateEnchere, Integer montantEnchere, ArticleVendu articleVendu, Utilisateur utilisateur) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
@@ -42,7 +70,7 @@ public class Enchere {
 	 * @param dateEnchere
 	 * @param montant_enchere
 	 */
-	public Enchere(LocalDateTime dateEnchere, Integer montantEnchere) {
+	public Enchere(LocalDate dateEnchere, Integer montantEnchere) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
@@ -69,7 +97,7 @@ public class Enchere {
 	/**
 	 * @return the dateEnchere
 	 */
-	public LocalDateTime getDateEnchere() {
+	public LocalDate getDateEnchere() {
 		return dateEnchere;
 	}
 	
@@ -77,7 +105,7 @@ public class Enchere {
 	/**
 	 * @param dateEnchere the dateEnchere to set
 	 */
-	public void setDateEnchere(LocalDateTime dateEnchere) {
+	public void setDateEnchere(LocalDate dateEnchere) {
 		this.dateEnchere = dateEnchere;
 	}
 	/**
@@ -115,6 +143,18 @@ public class Enchere {
 	 */
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
+	}
+
+
+
+	public Integer getNoEnchere() {
+		return noEnchere;
+	}
+
+
+
+	public void setNoEnchere(Integer noEnchere) {
+		this.noEnchere = noEnchere;
 	}
 	
 	
