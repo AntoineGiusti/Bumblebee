@@ -69,14 +69,14 @@
 	</c:forEach>
 
 	<c:forEach items="${model.lstArticlesParCategorie}" var="artByCat">
-	<p><a href="DetailVenteServlet">${artByCat.nomArticle}</a><br>
+	<p><a href="<c:url value = "DetailVenteServlet?id=${artByCat.noArticle}"/>">${artByCat.nomArticle}</a><br>
 	 prix de vente : ${artByCat.prixVente}<br>
 	 date de fin enchere : ${artByCat.dateFinEncheres}<br>
 	 vendeur : ${artByCat.utilisateur.pseudo}</p>
 	</c:forEach>
 	
 	<c:forEach items="${model.lstArticlesParMotClef}" var="artByMot">
-	<p><a href="DetailVenteServlet">${artByMot.nomArticle}</a><br>
+	<p><a href="<c:url value = "DetailVenteServlet?id=${artByMot.noArticle}"/>">${artByMot.nomArticle}</a><br>
 	 prix de vente : ${artByMot.prixVente}<br>
 	 date de fin enchere : ${artByMot.dateFinEncheres}<br>
 	 vendeur : ${artByMot.utilisateur.pseudo}</p>
