@@ -26,7 +26,7 @@
 			<p>Mot de passe actuel <input type="text" name="motDePasseActuel" /></p><br>			
 			<p>Nouveau mot de passe <input type="text" name="NouveauMotDePasse" value="${model.utilisateurUdapte.motDePasse}"/></p><br>			
 			<p>Confirmation <input type="text" name="confirmation" value="${model.utilisateurUdapte.motDePasse}"/></p><br>			
-			<p>Crédits : ${utilisateurUdapte.credit}</p><br>
+			<p>Crédits : ${model.utilisateurUdapte.credit}</p><br>
 			<div class = "bouton">			
 				<input type = "submit" name="enregister" value="enregister"/>			
 				<input type = "submit" name="supprimer" value="Supprimer Compte"/>

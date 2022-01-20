@@ -33,8 +33,9 @@ import fr.eni.VenteEnchere.dal.DAOFact;
 	public void ajouterArticleAVendre(ArticleVendu article) {
 		try {
 			DAOFact.getInstance().insertArticle(article);
+			DAOFact.getInstance().insertRetrait(article.getRetrait());
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
