@@ -16,16 +16,16 @@
 	<h2>Mon profil</h2>
 	<div class = "formulaire">
 		<form action="CreationProfilServlet" method="POST">
-			<p>Pseudo: <input type="text" name="pseudo" value="${model.utilisateur.pseudo}"/></p><br>		
-			<p>Nom: <input type="text" name="nom" value="${model.utilisateur.nom}"/></p><br>		
-			<p>Prenom: <input type="text" name="prenom" value="${model.utilisateur.prenom}"/></p><br>		
-			<p>Email: <input type="text" name="email" value="${model.utilisateur.email}"/></p><br>		
-			<p>Téléphone: <input type="text" name="telephone" value="${model.utilisateur.telephone}"/></p><br>		
-			<p>Rue: <input type="text" name="rue" value="${model.utilisateur.rue}"/></p><br>		
-			<p>Code postal <input type="text" name="codePostal" value="${model.utilisateur.codePostal}"/></p><br>		
-			<p>Ville <input type="text" name="ville" value="${model.utilisateur.ville}"/></p><br>		
-			<p>Mot de passe <input type="text" name="motDePasse" value="${model.utilisateur.motDePasse}"/></p><br>		
-			<p>Confirmation <input type="text" name="confirmation"/></p>
+			<p>Pseudo: <input class="block" type="text" name="pseudo" value="${model.utilisateur.pseudo}"/></p><br>		
+			<p>Nom: <input class="block" type="text" name="nom" value="${model.utilisateur.nom}"/></p><br>		
+			<p>Prenom: <input class="block" type="text" name="prenom" value="${model.utilisateur.prenom}"/></p><br>		
+			<p>Email: <input class="block" type="text" name="email" value="${model.utilisateur.email}"/></p><br>		
+			<p>Téléphone: <input class="block" type="text" name="telephone" value="${model.utilisateur.telephone}"/></p><br>		
+			<p>Rue: <input class="block" type="text" name="rue" value="${model.utilisateur.rue}"/></p><br>		
+			<p>Code postal <input class="block" type="text" name="codePostal" value="${model.utilisateur.codePostal}"/></p><br>		
+			<p>Ville <input class="block" type="text" name="ville" value="${model.utilisateur.ville}"/></p><br>		
+			<p>Mot de passe <input class="block" type="password" name="motDePasse" value="${model.utilisateur.motDePasse}"/></p><br>		
+			<p>Confirmation <input class="block" type="password" name="confirmation"/></p>
 			<div class= "bouton">
 				<input type = "submit" name="valider" value="Créer"/>		
 				<input type = "submit" name="annuler" value="Annuler"/>
@@ -33,5 +33,6 @@
 		<h3>${erreur}</h3>		
 		</form>
 	</div>	
+	
 </body>
 </html>

@@ -38,7 +38,7 @@ h3{
 
 p{
 	font-family: sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 	color: #666;
 }
 
@@ -264,5 +264,9 @@ legend {
 	font-family: sans-serif;
 	font-size: 20px;
 	color:black;
+}
+
+#margeRadio{
+	margin-bottom: 100px;
 }
 

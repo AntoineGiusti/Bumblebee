@@ -50,11 +50,11 @@
 			<input type="checkbox" id="win" >mes enchères remportées</p>
 		</div>
 		<br>
-		<div>
+		<div >
 		<p id = "radio2"><input  type="radio" name="achat" value="Mes ventes" id="vente" onclick="clickVente()">Mes ventes</p>
 		</div>
 		<br>
-		<div>
+		<div id="margeRadio">
 			<p id = "radio1"><input type="checkbox" id="ventes" >mes ventes en cours<br>
 			<input type="checkbox" id="nostart" >ventes non débutées<br>
 			<input type="checkbox" id="termine" >ventes terminées</p>
@@ -62,24 +62,30 @@
 	</div>
 	
 		<c:forEach items="${model.lstAllArticles}" var="art">
+		<div class= liste>
 	<p><a href = "<c:url value = "DetailVenteServlet?id=${art.noArticle}"/>">${art.nomArticle}</a><br>
 	 prix de vente : ${art.prixVente}<br>
 	 date de fin enchere : ${art.dateFinEncheres}<br>
 	 vendeur : ${art.utilisateur.pseudo}</p>
+	 </div>
 	</c:forEach>
 
 	<c:forEach items="${model.lstArticlesParCategorie}" var="artByCat">
+	<div class= liste>
 	<p><a href="<c:url value = "DetailVenteServlet?id=${artByCat.noArticle}"/>">${artByCat.nomArticle}</a><br>
 	 prix de vente : ${artByCat.prixVente}<br>
 	 date de fin enchere : ${artByCat.dateFinEncheres}<br>
 	 vendeur : ${artByCat.utilisateur.pseudo}</p>
+	 </div>
 	</c:forEach>
 	
 	<c:forEach items="${model.lstArticlesParMotClef}" var="artByMot">
+	<div class= liste>
 	<p><a href="<c:url value = "DetailVenteServlet?id=${artByMot.noArticle}"/>">${artByMot.nomArticle}</a><br>
 	 prix de vente : ${artByMot.prixVente}<br>
 	 date de fin enchere : ${artByMot.dateFinEncheres}<br>
 	 vendeur : ${artByMot.utilisateur.pseudo}</p>
+	 </div>
 	</c:forEach>
 	
 	</form>

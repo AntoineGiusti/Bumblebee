@@ -21,7 +21,7 @@
 			<p>Email: <input class = "block" type="text" name="email" value="${model.utilisateurUdapte.email}"/></p><br>			
 			<p>Téléphone: <input class = "block" type="text" name="telephone" value="${model.utilisateurUdapte.telephone}"/></p><br>			
 			<p>Rue: <input class = "block" type="text" name="rue" value="${model.utilisateurUdapte.rue}"/></p><br>			
-			<p>Code postal class = "block" <input type="text" name="codePostal" value="${model.utilisateurUdapte.codePostal}"/></p><br>			
+			<p>Code postal <input class = "block"  type="text" name="codePostal" value="${model.utilisateurUdapte.codePostal}"/></p><br>			
 			<p>Ville <input class = "block" type="text" name="ville" value="${model.utilisateurUdapte.ville}"/></p><br>			
 			<p>Mot de passe actuel <input class = "block" type="password" name="motDePasseActuel" /></p><br>			
 			<p>Nouveau mot de passe <input class = "block" type="password" name="NouveauMotDePasse" value="${model.utilisateurUdapte.motDePasse}"/></p><br>			
