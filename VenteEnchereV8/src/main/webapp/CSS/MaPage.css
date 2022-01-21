@@ -85,7 +85,7 @@ select{
 
 .nomArt{
 	text-align:center;
-	color : #000;
+	color : #828282;
 	font-size: 20px;
 	font-family: fantasy;
 	font:bold;
@@ -106,6 +106,7 @@ select{
 	box-shadow: 0 0 20px #828282;
 	background-color:#fff;
 	margin-left: 200px;
+	border-radius: 3px;
 }
 .liste:hover{
 	background-color: #050069;
