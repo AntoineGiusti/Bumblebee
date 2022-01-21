@@ -61,7 +61,6 @@ public class UtilisateurManager {
 		
 		try {
             DAOFact.getInstance().insertUser(utilisateur);
-            System.out.println("ca passe encore");
         } catch (DALException e) {
             e.printStackTrace();
             throw new BLLException(e);
@@ -106,7 +105,6 @@ public class UtilisateurManager {
 			
 			if (u.getPseudo().equals(pseudo) && u.getMotDePasse().equals(motDePAsse)) {
 				utilisateur = u;
-				System.out.println("log manager ok");
 			}
 			
 		}
@@ -175,7 +173,6 @@ public class UtilisateurManager {
 	
 	public void supprimerUtilisateur(Utilisateur utilisateur) {
 		try {
-			System.out.println("suppression passe par manager");
 			DAOFact.getInstance().deleteUser(utilisateur);
 		} catch (DALException e) {
 			e.printStackTrace();

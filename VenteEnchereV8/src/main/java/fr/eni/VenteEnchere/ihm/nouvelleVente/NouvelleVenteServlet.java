@@ -100,7 +100,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 
 			Retrait retrait = new Retrait(rue,codePostal,ville,article);
 
-			ArticleManager.getInstance().ajouterArticleAVendre(article);
+			ArticleManager.getInstance().ajouterArticleAVendre(article, retrait);
 
 			/////// annuler vente///////////////////////
 

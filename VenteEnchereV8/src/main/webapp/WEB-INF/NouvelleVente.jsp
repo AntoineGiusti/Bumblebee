@@ -38,14 +38,14 @@
 				<p>Code Postal : <input class ="block" type = "text" name= "codePostal" value = "${utilisateur.codePostal}"/></p><br>
 				<p>Ville : <input class ="block" type = "text" name= "ville" value = "${utilisateur.ville}"/></p><br>
 			</fieldset>
-			
+			<div class = "bouton">
+				<input class="btn" type = "submit" name = "enregistrer" value = "Enregistrer"/>
+				<input class= "btn" type = "submit" name = "annuler" value = "Annuler"/>
+			</div>
 		</form>
 		
 	</div>
-	<div class = "bouton">
-				<input class="btn" type = "submit" name = "enregistrer" value = "Enregistrer"/>
-				<input class= "btn" type = "submit" name = "annuler" value = "Annuler"/>
-		</div>
+	
 	
 </body>
 </html>

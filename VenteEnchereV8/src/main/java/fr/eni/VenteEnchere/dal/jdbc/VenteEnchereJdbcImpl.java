@@ -239,8 +239,6 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			PreparedStatement pStmt = cnx.prepareStatement(DELETE_UTILISATEUR);
 			pStmt.setInt(1, utilisateur.getNoUtilisateur());
 			pStmt.executeUpdate();
-			
-			System.out.println("suppression passe par dao");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -258,9 +256,7 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 	public void insertArticle(ArticleVendu articleVendu) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pStmt = cnx.prepareStatement(INSERT_ARTICLES_VENDUS, PreparedStatement.RETURN_GENERATED_KEYS);
-			
-			System.out.println(articleVendu);
-			
+				
 			pStmt.setString(1, articleVendu.getNomArticle());
 			pStmt.setString(2, articleVendu.getDescription());
 			pStmt.setDate(3, Date.valueOf(articleVendu.getDateDebutEncheres()));
@@ -298,7 +294,6 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			while (rs.next()) {
 				
 				Integer noArticle = rs.getInt("no_article");
-				System.out.println(noArticle);
 				
 				String nomArticle = rs.getString("nom_article");
 				String description = rs.getString("description");
@@ -319,7 +314,6 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 				ArticleVendu articleVendu = new ArticleVendu(noArticle, nomArticle, description, 
 						dateDebutVente, dateFinVente, miseInitial, prixVente, utilisateur, categorie);
 						
-				System.out.println(articleVendu);
 				lstArticles.add(articleVendu);		
 	
 			}
@@ -456,6 +450,11 @@ public class VenteEnchereJdbcImpl implements MethodDAO {
 			throw new DALException("Je ne trouve pas cet article");
 		}
 
+		
+		
+		
+		
+		
 		return article;
 	}
 	

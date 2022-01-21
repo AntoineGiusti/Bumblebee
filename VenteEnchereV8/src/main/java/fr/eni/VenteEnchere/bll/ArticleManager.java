@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.VenteEnchere.bo.ArticleVendu;
+import fr.eni.VenteEnchere.bo.Retrait;
 import fr.eni.VenteEnchere.dal.DALException;
 import fr.eni.VenteEnchere.dal.DAOFact;
 
@@ -30,10 +31,10 @@ import fr.eni.VenteEnchere.dal.DAOFact;
 	}
 	
 	
-	public void ajouterArticleAVendre(ArticleVendu article) {
+	public void ajouterArticleAVendre(ArticleVendu article, Retrait retrait) {
 		try {
 			DAOFact.getInstance().insertArticle(article);
-			DAOFact.getInstance().insertRetrait(article.getRetrait());
+			DAOFact.getInstance().insertRetrait(retrait);
 		} catch (DALException e) {
 			
 			e.printStackTrace();

@@ -85,7 +85,6 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			}
 			
 			if (!logOk) {
-				System.out.println("mot de passe errone");
 				request.setAttribute("verifMp", "mot de passe errone");
 			}
 			
@@ -134,7 +133,6 @@ public class ProfilUtilisateurModifierServlet extends HttpServlet {
 			nextScreen ="AccueilServlet";
 			
 			if (request.getSession().getAttribute("utilisateur") == null) {
-				System.out.println("vous etes deconnecte");
 			}
 			
 		}
